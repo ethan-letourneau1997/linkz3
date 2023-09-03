@@ -27,42 +27,60 @@ export function PostVoteButtons({
 
   function handleUpvote() {
     if (optomisticUserVote === 0) {
-      setOptomisticUserVote(1);
       setOptomisticPostVotes(optomisticPostVotes + 1);
     } else if (optomisticUserVote === -1) {
-      setOptomisticUserVote(1);
       setOptomisticPostVotes(optomisticPostVotes + 2);
     }
+    setOptomisticUserVote(1);
     upsertPostVote(post, 1);
   }
 
   function handleDownvote() {
     if (optomisticUserVote === 0) {
-      setOptomisticUserVote(-1);
       setOptomisticPostVotes(optomisticPostVotes - 1);
     } else if (optomisticUserVote === 1) {
-      setOptomisticUserVote(-1);
       setOptomisticPostVotes(optomisticPostVotes - 2);
     }
+    setOptomisticUserVote(-1);
     upsertPostVote(post, -1);
+  }
+
+  async function handleRemoveVote() {
+    upsertPostVote(post, 0);
+    if (optomisticUserVote === 1) {
+      setOptomisticPostVotes(optomisticPostVotes - 1);
+    }
+    if (optomisticUserVote === -1) {
+      setOptomisticPostVotes(optomisticPostVotes + 1);
+    }
+    setOptomisticUserVote(0);
   }
 
   return (
     <div className="flex flex-col items-center">
       {optomisticUserVote === 1 ? (
-        <div className="px-2 py-1 ">
-          <BiSolidUpvote className="text-teal-300" />
-        </div>
+        <button className="px-2 py-1 ">
+          <BiSolidUpvote onClick={handleRemoveVote} className="text-teal-300" />
+        </button>
       ) : (
         <button onClick={handleUpvote} className="px-2 py-1 ">
           <BiUpvote className="hover:text-teal-300" />
         </button>
       )}
-      <div>{optomisticPostVotes}</div>
+      <>
+        {optomisticPostVotes < 0 ? (
+          <div className="mr-1.5">{optomisticPostVotes}</div>
+        ) : (
+          <div>{optomisticPostVotes}</div>
+        )}
+      </>
       {optomisticUserVote === -1 ? (
-        <div className="px-2 py-1 ">
-          <BiSolidDownvote className="text-teal-300" />
-        </div>
+        <button className="px-2 py-1 ">
+          <BiSolidDownvote
+            onClick={handleRemoveVote}
+            className="text-teal-300"
+          />
+        </button>
       ) : (
         <button onClick={handleDownvote} className="px-2 py-1 ">
           <BiDownvote className="hover:text-teal-300" />
