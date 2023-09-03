@@ -57,7 +57,7 @@ export function PostVoteButtons({
   }
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center place-content-evenly">
       {optomisticUserVote === 1 ? (
         <button className="px-2 py-1 ">
           <BiSolidUpvote onClick={handleRemoveVote} className="text-teal-300" />
