@@ -13,10 +13,8 @@ export async function SpacePosts({ spaceId }: SpacePostsProps) {
     .select()
     .eq("posted_in", spaceId);
 
-  console.log(posts);
-
   return (
-    <div className="w-full max-w-3xl my-5 border divide-y">
+    <div className="w-full max-w-2xl my-5 border divide-y">
       {posts?.map((post) => <PostPreview key={post.id} post={post} />)}
     </div>
   );
