@@ -15,7 +15,9 @@ export async function Navigation() {
   return (
     <nav className="flex justify-center w-full h-16 border-b border-b-neutral-400">
       <div className="flex items-center justify-between w-full max-w-4xl p-3 text-sm text-foreground">
-        <div />
+        <div>
+          <Link href="/spaces">Spaces</Link>
+        </div>
         <div>
           {user ? (
             <div className="flex items-center gap-4">
