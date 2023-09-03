@@ -1,25 +1,36 @@
-/*eslint-env node*/
-
+/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  darkMode: ["class"],
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{ts,tsx}",
-    "./features/**/components/**/*.{ts,tsx}",
-    "./features/layout/**/*.{ts,tsx}",
-  ],
-  theme: {
-    extend: {
-      colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        btn: {
-          background: "hsl(var(--btn-background))",
-          "background-hover": "hsl(var(--btn-background-hover))",
-        },
-      },
+export const darkMode = ["class"];
+export const content = [
+  "./pages/**/*.{ts,tsx}",
+  "./components/**/*.{ts,tsx}",
+  "./app/**/*.{ts,tsx}",
+  "./src/**/*.{ts,tsx}",
+  "./features/**/*.{ts,tsx}",
+];
+export const theme = {
+  container: {
+    center: true,
+    padding: "2rem",
+    screens: {
+      "2xl": "1400px",
     },
   },
-  plugins: [],
+  extend: {
+    keyframes: {
+      "accordion-down": {
+        from: { height: 0 },
+        to: { height: "var(--radix-accordion-content-height)" },
+      },
+      "accordion-up": {
+        from: { height: "var(--radix-accordion-content-height)" },
+        to: { height: 0 },
+      },
+    },
+    animation: {
+      "accordion-down": "accordion-down 0.2s ease-out",
+      "accordion-up": "accordion-up 0.2s ease-out",
+    },
+  },
 };
+export const plugins = [require("tailwindcss-animate")];

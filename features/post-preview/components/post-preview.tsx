@@ -7,19 +7,23 @@ import { VotePlaceholer } from "@/features/post-votes/components/vote-placeholde
 import { PostPreviewPostedIn } from "./post-preview-posted-in";
 import { PostPreviewPostedBy } from "./post-preview-posted-by";
 import { PostPreviewCommentCount } from "./get-preview-comment-count";
+import { Skeleton } from "@/components/ui/skeleton";
+
+import { PostPreviewThumbnail } from "./post-preview-thumbnail";
 
 type SpacePreviewProps = {
   post: Post;
 };
 
-const SKELETON_FALLBACK = (
-  <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5" />
-);
-
 export async function PostPreview({ post }: SpacePreviewProps) {
   return (
-    <div className="grid grid-cols-12 px-2 py-3 border-neutral-500">
-      <div className="col-span-11">
+    <div className="grid grid-cols-12 gap-3 px-2 py-3 border-neutral-500">
+      <div className="col-span-2">
+        <Suspense fallback={<Skeleton className="w-full h-full" />}>
+          <PostPreviewThumbnail post={post} />
+        </Suspense>
+      </div>
+      <div className="col-span-9">
         <Link
           className=" hover:underline"
           // href={`/spaces/${post.id}/${post.title}`}
@@ -28,13 +32,13 @@ export async function PostPreview({ post }: SpacePreviewProps) {
           {post.title}
         </Link>
 
-        <Suspense fallback={SKELETON_FALLBACK}>
+        <Suspense fallback={<Skeleton className="w-1/4 h-[18px] py-[6px]" />}>
           <PostPreviewPostedIn post={post} />
         </Suspense>
-        <Suspense fallback={SKELETON_FALLBACK}>
+        <Suspense fallback={<Skeleton className="w-1/3 h-[18px] py-[6px]" />}>
           <PostPreviewPostedBy post={post} />
         </Suspense>
-        <Suspense fallback={SKELETON_FALLBACK}>
+        <Suspense fallback={<Skeleton className="w-1/4 h-[18px] py-[6px]" />}>
           <PostPreviewCommentCount post={post} />
         </Suspense>
       </div>
