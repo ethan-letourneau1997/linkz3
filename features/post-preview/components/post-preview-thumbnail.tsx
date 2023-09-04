@@ -1,6 +1,8 @@
 import { Post } from "@/types";
-import { Skeleton } from "@/components/ui/skeleton";
+
 import { getPreviewThumbnail } from "../api/get-preview-thumbnail";
+import { HiOutlineLink } from "react-icons/hi";
+import { RiText } from "react-icons/ri";
 
 type PostPreviewThumbnailProps = {
   post: Post;
@@ -9,6 +11,13 @@ type PostPreviewThumbnailProps = {
 export async function PostPreviewThumbnail({
   post,
 }: PostPreviewThumbnailProps) {
+  if (post.type === "text")
+    return (
+      <div className="w-full h-full bg-neutral-800">
+        <RiText className="h-full mx-auto my-auto text-xl" />
+      </div>
+    );
+
   const thumbnailUrl = await getPreviewThumbnail(post);
 
   return (
@@ -24,7 +33,9 @@ export async function PostPreviewThumbnail({
           }}
         />
       ) : (
-        <Skeleton className="w-full h-full" />
+        <div className="w-full h-full bg-neutral-800">
+          <HiOutlineLink className="h-full mx-auto my-auto text-xl" />
+        </div>
       )}
     </>
   );
