@@ -8,9 +8,9 @@ export async function SpacesLayout() {
   const { data: spaces } = await supabase.from("community").select();
 
   return (
-    <>
-      <div className="mt-5 text-3xl font-medium">Spaces</div>
+    <div className="w-full max-w-3xl">
+      <h1 className="mt-5 text-3xl font-medium text-center">Spaces</h1>
       {spaces?.map((space) => <SpacePreview key={space.id} space={space} />)}
-    </>
+    </div>
   );
 }
