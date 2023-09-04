@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ProseMirror:focus {
+  outline: none;
+}
+
+#TiptapMenu button {
+  @apply w-8 h-8 text-xl hover:bg-neutral-700;
+}
+#TiptapMenu svg {
+  @apply mx-auto;
+}
+
+.is-active {
+  @apply dark:text-teal-400;
+}
+
+.is-inactive {
+  @apply text-neutral-400 hover:text-neutral-100;
+}
+
+.no-activity {
+  @apply text-neutral-400 hover:text-neutral-100;
+}
+
+.tiptap {
+  @apply min-h-[150px] pt-2;
+}
+
+.tiptap h3,
+blockquote,
+li::marker,
+strong {
+  @apply dark:text-neutral-200;
+}
+
+.tiptap h3 {
+  @apply mt-3 mb-0;
+}
+
+.tiptap p {
+  @apply my-1.5;
+}
+
+.tiptap a {
+  @apply dark:text-blue-300;
+}
