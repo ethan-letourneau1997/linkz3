@@ -1,27 +1,26 @@
 "use client";
 
 import { EditorContent, useEditor } from "@tiptap/react";
-
-import StarterKit from "@tiptap/starter-kit";
-import Link from "@tiptap/extension-link";
-
 import {
-  FaStrikethrough,
   FaBold,
-  FaItalic,
   FaCode,
-  FaListUl,
-  FaListOl,
-  FaRedoAlt,
-  FaUndoAlt,
   FaHeading,
-  FaRemoveFormat,
+  FaItalic,
   FaLink,
+  FaListOl,
+  FaListUl,
+  FaRedoAlt,
+  FaRemoveFormat,
+  FaStrikethrough,
+  FaUndoAlt,
   FaUnlink,
 } from "react-icons/fa";
+
+import { EditorTooltip } from "./editor-tooltip";
+import Link from "@tiptap/extension-link";
+import StarterKit from "@tiptap/starter-kit";
 import { TbBlockquote } from "react-icons/tb";
 import { useCallback } from "react";
-import { EditorTooltip } from "./editor-tooltip";
 
 const Tiptap = () => {
   const editor = useEditor({
@@ -32,6 +31,11 @@ const Tiptap = () => {
       }),
     ],
     content: "<p>Hello World! 🌎️</p>",
+  });
+
+  editor?.on("update", () => {
+    const updatedHTML = editor?.getHTML();
+    console.log(updatedHTML);
   });
 
   const setLink = useCallback(() => {
@@ -65,7 +69,7 @@ const Tiptap = () => {
 
   if (editor)
     return (
-      <div className="text-lg border dark:border-neutral-600 dark:bg-neutral-900 ">
+      <div className="text-lg border dark:border-neutral-700 dark:bg-neutral-900 ">
         <div
           id="TiptapMenu"
           className="flex py-1 divide-x-2 divide-neutral-700 dark:bg-neutral-800"

@@ -1,5 +1,5 @@
-import { TextEditor } from "@/features/text-editor";
+import { NewPostForm } from "@/features/new-post-form";
 
 export function Playground() {
-  return <TextEditor />;
+  return <NewPostForm />;
 }

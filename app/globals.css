@@ -6,6 +6,13 @@
   outline: none;
 }
 
+input {
+  @apply ring-offset-0 ring-0;
+}
+.input:focus {
+  @apply outline-none ring-0;
+}
+
 #TiptapMenu button {
   @apply w-8 h-8 text-xl hover:bg-neutral-700;
 }
