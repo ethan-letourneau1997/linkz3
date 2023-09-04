@@ -18,6 +18,7 @@ export async function Navigation() {
         <div className="space-x-3">
           <Link href="/">Home</Link>
           <Link href="/spaces">Spaces</Link>
+          <Link href="/subscriptions">Subscriptions</Link>
         </div>
         <div>
           {user ? (
