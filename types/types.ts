@@ -5,6 +5,7 @@ export type Post = Database["public"]["Tables"]["post"]["Row"];
 export type PostVote = Database["public"]["Tables"]["post_vote"]["Row"];
 export type CommentVote = Database["public"]["Tables"]["comment_vote"]["Row"];
 export type PostImage = Database["public"]["Tables"]["post_image"]["Row"];
+export type Comment = Database["public"]["Tables"]["comment"]["Row"];
 
 export type LinkPreview = {
   url: string;

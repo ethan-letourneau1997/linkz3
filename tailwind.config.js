@@ -7,6 +7,7 @@ export const content = [
   "./app/**/*.{ts,tsx}",
   "./src/**/*.{ts,tsx}",
   "./features/**/*.{ts,tsx}",
+  "./node_modules/flowbite-react/**/*.js",
 ];
 export const theme = {
   container: {
@@ -36,4 +37,5 @@ export const theme = {
 export const plugins = [
   require("tailwindcss-animate"),
   require("@tailwindcss/typography"),
+  require("flowbite/plugin"),
 ];

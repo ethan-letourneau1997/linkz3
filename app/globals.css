@@ -18,7 +18,7 @@ input {
 }
 
 #TiptapMenu button {
-  @apply w-8 h-8 text-xl hover:bg-neutral-700;
+  @apply w-8 h-8 text-base hover:bg-neutral-700;
 }
 #TiptapMenu svg {
   @apply mx-auto;

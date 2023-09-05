@@ -11,6 +11,7 @@ import { LinkPostContent } from "./link-post-content";
 import { PostVotes } from "@/features/post-votes";
 import { TextPostContent } from "./text-post-content";
 import { ImagePostContent } from "./image-post-content";
+import { PostFooter } from "./post-footer";
 
 type PostProps = {
   params: PostRouterParams;
@@ -26,7 +27,7 @@ export async function Post({ params }: PostProps) {
     .single();
 
   return (
-    <div className="w-full max-w-2xl px-5 py-5 mt-5 space-y-3 dark:bg-neutral-900">
+    <div className="w-full px-5 py-5 mt-5 space-y-3 dark:bg-neutral-900">
       <PostUser post={post} />
       <PostCommunity post={post} />
       <h1 className="py-3 text-xl font-semibold ">{post.title}</h1>
@@ -35,10 +36,11 @@ export async function Post({ params }: PostProps) {
       {post.type === "link" && <LinkPostContent post={post} />}
 
       {post.type === "image" && <ImagePostContent post={post} />}
-      <div className="flex gap-3 ">
+
+      <PostFooter params={params}>
         <PostVotes post={post} horizontal />
         <PostCommentCount post={post} />
-      </div>
+      </PostFooter>
     </div>
   );
 }
