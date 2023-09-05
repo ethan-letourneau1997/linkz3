@@ -6,9 +6,10 @@ import { getTotalVotes } from "@/lib/get-total-votes";
 
 type PostVotesProps = {
   post: Post;
+  horizontal?: boolean;
 };
 
-export async function PostVotes({ post }: PostVotesProps) {
+export async function PostVotes({ post, horizontal }: PostVotesProps) {
   const supabase = createServerComponentClient({ cookies });
 
   const { data: post_votes } = await supabase
@@ -31,6 +32,7 @@ export async function PostVotes({ post }: PostVotesProps) {
       post={post}
       postVotes={totalVotes || 0}
       userVote={user_vote?.vote || 0}
+      horizontal={horizontal}
     />
   );
 }

@@ -1,25 +1,28 @@
 "use client";
 
-import { Post } from "@/types";
-import { experimental_useOptimistic as useOptimistic } from "react";
 import {
-  BiUpvote,
   BiDownvote,
-  BiSolidUpvote,
   BiSolidDownvote,
+  BiSolidUpvote,
+  BiUpvote,
 } from "react-icons/bi";
+
+import { Post } from "@/types";
 import { upsertPostVote } from "../api/upsert-post-vote";
+import { experimental_useOptimistic as useOptimistic } from "react";
 
 type PostVoteButtonsProps = {
   userVote: number;
   postVotes: number;
   post: Post;
+  horizontal?: boolean;
 };
 
 export function PostVoteButtons({
   userVote,
   postVotes,
   post,
+  horizontal,
 }: PostVoteButtonsProps) {
   const [optomisticUserVote, setOptomisticUserVote] = useOptimistic(userVote);
   const [optomisticPostVotes, setOptomisticPostVotes] =
@@ -57,7 +60,11 @@ export function PostVoteButtons({
   }
 
   return (
-    <div className="flex flex-col items-center place-content-evenly">
+    <div
+      className={`flex ${
+        horizontal ? "" : "flex-col"
+      } items-center place-content-evenly`}
+    >
       {optomisticUserVote === 1 ? (
         <button className="px-2 py-1 ">
           <BiSolidUpvote onClick={handleRemoveVote} className="text-teal-300" />
