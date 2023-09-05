@@ -16,41 +16,22 @@ type NewPostFormProps = {
   params: NewPostRouterParams;
 };
 
-export function NewPostForm({ params }: NewPostFormProps) {
+export function NewLinkForm({ params }: NewPostFormProps) {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [editorContent, setEditorContent] = useState("");
   const [images, setImages] = useState<FilePondFile[]>([]);
 
-  const { spaceId, spaceName } = params;
-
   function handleCreateTextPost() {
-    createPost({
-      communityId: spaceId,
-      communityName: spaceName,
-      title: title,
-      content: editorContent,
-      type: "text",
-    });
+    createPost("Webdev", "text", title, editorContent);
   }
 
   function handleCreateLinkPost() {
-    createPost({
-      communityId: spaceId,
-      communityName: spaceName,
-      title: title,
-      content: link,
-      type: "link",
-    });
+    createPost("Webdev", "link", title, link);
   }
 
   async function handleCreateImagePost() {
-    const postId = await createPost({
-      communityId: spaceId,
-      communityName: spaceName,
-      title: title,
-      type: "image",
-    });
+    const postId = await createPost("Webdev", "image", title);
 
     await uploadImages(images as unknown as File[], postId);
   }
@@ -58,7 +39,7 @@ export function NewPostForm({ params }: NewPostFormProps) {
   return (
     <>
       <div className="w-full max-w-3xl p-5 mt-5 rounded-md bg-neutral-900">
-        <Tabs defaultValue="text" className="w-full max-w-3xl">
+        <Tabs defaultValue="image" className="w-full max-w-3xl">
           <TabsList className="w-full">
             <TabsTrigger className="w-1/3" value="text">
               Text
@@ -86,7 +67,12 @@ export function NewPostForm({ params }: NewPostFormProps) {
           <TabsContent className="py-3 space-y-5" value="image">
             <PostTitleInput setTitle={setTitle} title={title} />
             <ImageInput files={images} setFiles={setImages} />
-            <button onClick={handleCreateImagePost}>upload images</button>
+            <button
+              onClick={handleCreateImagePost}
+              // onClick={uploadPostImages}
+            >
+              upload images
+            </button>
           </TabsContent>
         </Tabs>
       </div>

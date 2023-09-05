@@ -4,43 +4,33 @@ import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 
-// type NewPost = {
-//   title: string;
-//   community_name: string;
-//   content?: string;
-//   type: string;
-// };
+type createPostParams = {
+  title: string;
+  communityName: string;
+  communityId: string;
+  type: string;
+  content?: string;
+};
 
-export async function createPost(
-  community_name: string,
-  type: string,
-  title: string,
-  content?: string
-) {
+export async function createPost(params: createPostParams) {
+  const { title, communityName, communityId, content, type } = params;
+
   const supabase = createServerActionClient({ cookies });
-
-  const { data: community } = await supabase
-    .from("community")
-    .select()
-    .eq("name", community_name)
-    .single();
 
   const { data } = await supabase
     .from("post")
     .insert({
       title: title,
       content: content,
-      posted_in: community.id,
+      posted_in: communityId,
       type,
     })
     .select()
     .single();
 
   if (data) {
-    revalidatePath(`/spaces/${community_name}`);
-    // redirect(
-    //   `/community/${community_name}/post/${data.id}/${slugify(data.title)}`
-    // );
+    revalidatePath(`/spaces/${communityName}/${communityId}`);
+
     return data.id;
   }
 }
