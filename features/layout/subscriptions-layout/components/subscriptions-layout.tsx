@@ -1,6 +1,6 @@
+import { SpacePreview } from "@/features/space-preview";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { SpacePreview } from "@/features/space-preview";
 
 export async function SubscriptionsLayout() {
   const supabase = createServerComponentClient({ cookies });
@@ -11,8 +11,6 @@ export async function SubscriptionsLayout() {
     .from("user_community")
     .select("*, community_id(*)")
     .eq("user_id", data.session?.user.id);
-
-  console.log(user_subscriptions);
 
   return (
     <div className="w-full max-w-3xl">

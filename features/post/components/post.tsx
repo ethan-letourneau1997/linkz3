@@ -9,6 +9,8 @@ import { Post } from "@/types";
 import { getPostCommentCount } from "@/helpers/post-helpers";
 import { LinkPostContent } from "./link-post-content";
 import { PostVotes } from "@/features/post-votes";
+import { TextPostContent } from "./text-post-content";
+import { ImagePostContent } from "./image-post-content";
 
 type PostProps = {
   params: PostRouterParams;
@@ -28,14 +30,11 @@ export async function Post({ params }: PostProps) {
       <PostUser post={post} />
       <PostCommunity post={post} />
       <h1 className="py-3 text-xl font-semibold ">{post.title}</h1>
-      {post.type === "text" && (
-        <div
-          className="max-w-full prose "
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
-      )}
+      {post.type === "text" && <TextPostContent post={post} />}
 
       {post.type === "link" && <LinkPostContent post={post} />}
+
+      {post.type === "image" && <ImagePostContent post={post} />}
       <div className="flex gap-3 ">
         <PostVotes post={post} horizontal />
         <PostCommentCount post={post} />
