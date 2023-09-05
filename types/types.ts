@@ -18,3 +18,8 @@ export type LinkPreview = {
   }[];
   favicons: string[];
 };
+
+export type ImageDataProps = {
+  file: File;
+  fileName: string;
+};

@@ -6,6 +6,10 @@
   outline: none;
 }
 
+.filepond--item {
+  width: calc(50% - 0.5em);
+}
+
 input {
   @apply ring-offset-0 ring-0;
 }
