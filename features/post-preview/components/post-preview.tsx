@@ -1,21 +1,20 @@
-import Link from "next/link";
 import { Post } from "@/types";
+import { PostPreviewCommentCount } from "./get-preview-comment-count";
+import { PostPreviewPostedBy } from "./post-preview-posted-by";
+import { PostPreviewPostedIn } from "./post-preview-posted-in";
+import { PostPreviewThumbnail } from "./post-preview-thumbnail";
+import { PostPreviewTitle } from "./post-preview-title";
 import { PostVotes } from "@/features/post-votes";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
 import { VotePlaceholer } from "@/features/post-votes/components/vote-placeholder";
 
-import { PostPreviewPostedIn } from "./post-preview-posted-in";
-import { PostPreviewPostedBy } from "./post-preview-posted-by";
-import { PostPreviewCommentCount } from "./get-preview-comment-count";
-import { Skeleton } from "@/components/ui/skeleton";
-
-import { PostPreviewThumbnail } from "./post-preview-thumbnail";
-
-type SpacePreviewProps = {
+type PostPreviewProps = {
   post: Post;
+  communityName?: string;
 };
 
-export async function PostPreview({ post }: SpacePreviewProps) {
+export async function PostPreview({ post, communityName }: PostPreviewProps) {
   return (
     <div className="grid grid-cols-12 gap-3 px-2 py-3 border-neutral-500">
       <div className="col-span-2">
@@ -24,13 +23,9 @@ export async function PostPreview({ post }: SpacePreviewProps) {
         </Suspense>
       </div>
       <div className="col-span-9">
-        <Link
-          className=" hover:underline"
-          // href={`/spaces/${post.id}/${post.title}`}
-          href="#"
-        >
-          {post.title}
-        </Link>
+        <Suspense fallback={<div> {post.title}</div>}>
+          <PostPreviewTitle post={post} communityName={communityName} />
+        </Suspense>
 
         <Suspense fallback={<Skeleton className="w-1/4 h-[18px] py-[6px]" />}>
           <PostPreviewPostedIn post={post} />

@@ -1,8 +1,8 @@
 import { NewPostForm } from "@/features/new-post-form";
-import { NewPostRouterParams } from "../types";
+import { SpaceRouterParams } from "@/types";
 
 type NewPostLayoutProps = {
-  params: NewPostRouterParams;
+  params: SpaceRouterParams;
 };
 
 export function NewPostLayout({ params }: NewPostLayoutProps) {

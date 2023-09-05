@@ -1,10 +1,10 @@
 import { NewPostLayout } from "@/features/layout/new-post-layout";
-import { NewPostRouterParams } from "@/features/layout/new-post-layout/types";
+import { SpaceRouterParams } from "@/types";
 
 export const dynamic = "force-dynamic";
 
 type IndexProps = {
-  params: NewPostRouterParams;
+  params: SpaceRouterParams;
 };
 
 export default async function Index({ params }: IndexProps) {

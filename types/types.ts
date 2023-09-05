@@ -23,3 +23,13 @@ export type ImageDataProps = {
   file: File;
   fileName: string;
 };
+
+export type SpaceRouterParams = {
+  spaceName: string;
+  spaceId: string;
+};
+export type PostRouterParams = {
+  spaceName: string;
+  spaceId: string;
+  postId: string;
+};

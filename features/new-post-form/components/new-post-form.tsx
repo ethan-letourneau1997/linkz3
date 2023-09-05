@@ -4,16 +4,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { FilePondFile } from "filepond";
 import { ImageInput } from "./image-input";
-import { NewPostRouterParams } from "@/features/layout/new-post-layout/types";
 import { PostLinkInput } from "./post-link-input";
 import { PostTitleInput } from "./post-title-input";
+import { SpaceRouterParams } from "@/types";
 import { TextEditor } from "@/features/text-editor";
 import { createPost } from "../api/create-post";
 import { uploadImages } from "../api/upload-images";
 import { useState } from "react";
 
 type NewPostFormProps = {
-  params: NewPostRouterParams;
+  params: SpaceRouterParams;
 };
 
 export function NewPostForm({ params }: NewPostFormProps) {
