@@ -26,7 +26,9 @@ export async function Navigation() {
           {user && (
             <>
               <Link href="/subscriptions">Subscriptions</Link>
-              <Link href={`/profile/${user?.id}`}>My Profile</Link>
+              <Link href={`/profile/${public_profile?.username}`}>
+                My Profile
+              </Link>
             </>
           )}
         </div>

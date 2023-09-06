@@ -32,8 +32,6 @@ export async function TopPosts() {
 
   const subscriptionPosts = await getSubscriptionPosts();
 
-  console.log(subscriptionPosts);
-
   return (
     <Suspense fallback={<SpaceSkeleton count={10} />}>
       {subscriptionPosts?.map((post) => (
