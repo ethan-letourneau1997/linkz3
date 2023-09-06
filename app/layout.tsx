@@ -1,5 +1,6 @@
-import { Navigation } from "@/features/navigation";
 import "./globals.css";
+
+import { Navigation } from "@/features/navigation";
 
 export const metadata = {
   title: "Create Next App",
@@ -16,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body>
-        <main className="flex flex-col items-center min-h-screen dark:bg-neutral-950 dark:text-neutral-200">
+        <main className="flex flex-col items-center min-h-screen pb-16 dark:bg-neutral-950 dark:text-neutral-200">
           <Navigation />
           {children}
         </main>
