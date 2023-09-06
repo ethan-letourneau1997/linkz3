@@ -1,9 +1,8 @@
+import { GoogleLogin } from "@/components/google-login";
 import Link from "next/link";
-
+import LogoutButton from "@/components/LogoutButton";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import LogoutButton from "@/components/LogoutButton";
-import { GoogleLogin } from "@/components/google-login";
 
 export async function Navigation() {
   const supabase = createServerComponentClient({ cookies });
@@ -11,6 +10,12 @@ export async function Navigation() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  const { data: public_profile } = await supabase
+    .from("public_profile")
+    .select()
+    .eq("id", user?.id)
+    .single();
 
   return (
     <nav className="flex justify-center w-full h-16 border-b border-b-neutral-400">
@@ -23,7 +28,7 @@ export async function Navigation() {
         <div>
           {user ? (
             <div className="flex items-center gap-4">
-              Hey, {user.email}!
+              Hello, {public_profile.username}!
               <LogoutButton />
             </div>
           ) : (
