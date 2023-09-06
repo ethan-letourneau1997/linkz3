@@ -23,7 +23,12 @@ export async function Navigation() {
         <div className="space-x-3">
           <Link href="/">Home</Link>
           <Link href="/spaces">Spaces</Link>
-          <Link href="/subscriptions">Subscriptions</Link>
+          {user && (
+            <>
+              <Link href="/subscriptions">Subscriptions</Link>
+              <Link href={`/profile/${user?.id}`}>My Profile</Link>
+            </>
+          )}
         </div>
         <div>
           {user ? (
