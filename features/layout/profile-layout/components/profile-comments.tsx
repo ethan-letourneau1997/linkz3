@@ -21,17 +21,14 @@ export async function ProfileComments({ username }: ProfilePostsProps) {
     .eq("posted_by", public_profile.id);
 
   return (
-    <div>
-      <h1>Comments</h1>
-      <div className="w-full max-w-3xl my-5 space-y-5">
-        {comments?.map((comment) => (
-          <CommentPreview
-            key={comment.id}
-            comment={comment}
-            username={username}
-          />
-        ))}
-      </div>
+    <div className="w-full max-w-3xl my-5 space-y-5">
+      {comments?.map((comment) => (
+        <CommentPreview
+          key={comment.id}
+          comment={comment}
+          username={username}
+        />
+      ))}
     </div>
   );
 }

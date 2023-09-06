@@ -21,11 +21,8 @@ export async function ProfilePosts({ username }: ProfilePostsProps) {
     .eq("created_by", public_profile.id);
 
   return (
-    <div>
-      <h1>Posts</h1>
-      <div className="w-full max-w-3xl my-5 border divide-y dark:border-neutral-500">
-        {posts?.map((post) => <PostPreview key={post.id} post={post} />)}
-      </div>
+    <div className="w-full max-w-3xl my-5 border divide-y dark:border-neutral-500">
+      {posts?.map((post) => <PostPreview key={post.id} post={post} />)}
     </div>
   );
 }

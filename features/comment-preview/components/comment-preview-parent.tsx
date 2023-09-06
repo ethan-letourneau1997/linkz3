@@ -5,10 +5,12 @@ import { getTimeSinceNow } from "@/lib/get-time-since-now";
 
 type CommentPreviewParentProps = {
   comment: Comment;
+  children: JSX.Element;
 };
 
 export async function CommentPreviewParent({
   comment,
+  children,
 }: CommentPreviewParentProps) {
   const supabase = createServerComponentClient({ cookies });
 
@@ -18,21 +20,32 @@ export async function CommentPreviewParent({
     .eq("id", comment.parent_comment)
     .single();
 
-  const { data: public_profile } = await supabase
-    .from("public_profile")
-    .select()
-    .eq("id", comment.posted_by)
-    .single();
+  async function getPostedByUsername() {
+    if (parent_comment) {
+      const { data: public_profile } = await supabase
+        .from("public_profile")
+        .select()
+        .eq("id", comment.posted_by)
+        .single();
+
+      return public_profile.username;
+    }
+  }
+
+  const username = await getPostedByUsername();
 
   return (
-    <div className="p-4 mt-3 text-sm bg-neutral-800">
-      <div>
-        {public_profile.username} - {getTimeSinceNow(comment.created_at)}
+    <div className="pl-5 mt-3 text-sm border-l border-dashed dark:border-neutral-400">
+      <div className="px-3 py-2 dark:bg-neutral-900">
+        <div className="text-xs">
+          {username} - {getTimeSinceNow(comment.created_at, true)}
+        </div>
+        <div
+          className="w-full text-sm prose dark:text-neutral-200 line-clamp-1"
+          dangerouslySetInnerHTML={{ __html: parent_comment.content || "" }}
+        />
       </div>
-      <div
-        className="w-full text-sm prose dark:text-neutral-200 line-clamp-1"
-        dangerouslySetInnerHTML={{ __html: parent_comment.content || "" }}
-      />
+      {children}
     </div>
   );
 }

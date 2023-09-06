@@ -12,24 +12,33 @@ export async function CommentPreview({
   comment,
   username,
 }: CommentPreviewProps) {
-  return (
-    <div className="px-4 py-3 text-sm border dark:border-neutral-600 bg-neutral-900">
-      <CommentPreviewPost comment={comment} />
-      {comment.parent_comment && <CommentPreviewParent comment={comment} />}
-
-      <div
-        className={`${
-          comment.parent_comment ? "ml-5" : ""
-        } bg-neutral-700 px-3 py-2 mt-3`}
-      >
-        <div>
-          {username} - {getTimeSinceNow(comment.created_at, true)}
+  const profileComment = (
+    <div className="pl-5 mt-3 border-l border-dashed dark:border-neutral-400">
+      <div className="px-3 py-2 rounded dark:bg-neutral-800">
+        <div className="text-xs">
+          {username} -{" "}
+          <span className="text-neutral-400">
+            {getTimeSinceNow(comment.created_at, true)}
+          </span>
         </div>
         <div
           className="w-full text-sm prose dark:text-neutral-200 "
           dangerouslySetInnerHTML={{ __html: comment.content || "" }}
         />
       </div>
+    </div>
+  );
+  return (
+    <div className="px-4 py-3 text-sm border dark:border-neutral-600 dark:bg-neutral-900">
+      <CommentPreviewPost comment={comment} />
+      {/* {comment.parent_comment && <CommentPreviewParent comment={comment} />} */}
+      {comment.parent_comment ? (
+        <CommentPreviewParent comment={comment}>
+          {profileComment}
+        </CommentPreviewParent>
+      ) : (
+        <>{profileComment}</>
+      )}
     </div>
   );
 }
