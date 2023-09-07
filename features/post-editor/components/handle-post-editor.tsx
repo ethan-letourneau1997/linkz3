@@ -4,6 +4,7 @@ import { Post, PostRouterParams } from "@/types";
 import { useState, useTransition } from "react";
 
 import { Button } from "flowbite-react";
+import Link from "next/link";
 import { TextEditor } from "@/features/text-editor";
 import { updatePost } from "../api/update-post";
 
@@ -25,7 +26,12 @@ export function HandlePostEditor({ post, params }: HandlePostEditorProps) {
 
   const updatePostButton = (
     <div className="flex gap-2 mb-2">
-      <button className="px-3 hover:text-red-500">Cancel</button>
+      <Link
+        href={`/spaces/${params.spaceId}/${params.spaceName}/post/${post.id}`}
+        className="px-3 my-auto no-underline hover:text-red-500 text-neutral-200"
+      >
+        Cancel
+      </Link>
       <Button
         color="success"
         onClick={handleUpdatePost}
