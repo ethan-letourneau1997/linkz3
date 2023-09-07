@@ -3,6 +3,7 @@ import { PostRouterParams } from "@/types";
 import { PostTextEditor } from "./post-text-editor";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { redirect } from "next/navigation";
 
 type HandlePostEditorProps = {
   params: PostRouterParams;
@@ -10,11 +11,24 @@ type HandlePostEditorProps = {
 
 export async function PostEditor({ params }: HandlePostEditorProps) {
   const supabase = createServerComponentClient({ cookies });
+  const { data } = await supabase.auth.getSession();
+
   const { data: post } = await supabase
     .from("post")
     .select()
     .eq("id", params.postId)
     .single();
+
+  // prevent post edit access form url
+  if (
+    !data.session?.user.id ||
+    (data.session?.user.id && data.session?.user.id !== post.created_by)
+  ) {
+    redirect(
+      `/spaces/${params.spaceId}/${params.spaceName}/post/${params.postId}`
+    );
+  }
+
   if (post.type === "text")
     return (
       <div className="w-full max-w-3xl mt-5">

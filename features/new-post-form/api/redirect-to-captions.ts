@@ -2,13 +2,13 @@
 
 import { redirect } from "next/navigation";
 
-type createPostParams = {
+type redirectToCaptionsParams = {
   communityName: string;
   communityId: string;
   postId: string;
 };
 
-export async function redirectToCaptions(params: createPostParams) {
+export async function redirectToCaptions(params: redirectToCaptionsParams) {
   const { communityName, communityId, postId } = params;
 
   redirect(
