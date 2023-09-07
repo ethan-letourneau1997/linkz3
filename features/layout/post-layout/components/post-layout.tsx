@@ -10,7 +10,6 @@ export async function PostLayout({ params }: PostLayoutProps) {
   return (
     <div className="w-full max-w-3xl">
       <Post params={params} />
-
       <Comments params={params} />
     </div>
   );

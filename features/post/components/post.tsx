@@ -4,6 +4,7 @@ import { PostCommentCount } from "./post-comment-count";
 import { PostCommunity } from "./post-community";
 import { PostFooter } from "./post-footer";
 import { PostMetadata } from "./post-metadata";
+import { PostOptions } from "./post-options";
 import { PostRouterParams } from "@/types";
 import { PostVotes } from "@/features/post-votes";
 import { TextPostContent } from "./text-post-content";
@@ -23,21 +24,27 @@ export async function Post({ params }: PostProps) {
     .eq("id", params.postId)
     .single();
 
-  return (
-    <div className="w-full px-5 py-5 mt-5 space-y-3 dark:bg-neutral-900">
-      <PostMetadata post={post} />
-      <PostCommunity post={post} />
-      <h1 className="py-3 text-xl font-semibold ">{post.title}</h1>
-      {post.type === "text" && <TextPostContent post={post} />}
+  if (post)
+    return (
+      <div className="w-full px-5 py-5 mt-5 space-y-3 dark:bg-neutral-900">
+        <PostOptions post={post} params={params} />
+        <PostMetadata post={post} />
+        <PostCommunity post={post} />
 
-      {post.type === "link" && <LinkPostContent post={post} />}
+        <h1 className="py-3 text-xl ">{post.title}</h1>
 
-      {post.type === "image" && <ImagePostContent post={post} />}
+        {post.type === "text" && <TextPostContent post={post} />}
 
-      <PostFooter params={params}>
-        <PostVotes post={post} horizontal />
-        <PostCommentCount post={post} />
-      </PostFooter>
-    </div>
-  );
+        {post.type === "link" && <LinkPostContent post={post} />}
+
+        {post.type === "image" && <ImagePostContent post={post} />}
+
+        <PostFooter params={params}>
+          <PostVotes post={post} horizontal />
+          <PostCommentCount post={post} />
+        </PostFooter>
+      </div>
+    );
+
+  if (!post) return <div>no post available</div>;
 }

@@ -29,19 +29,20 @@ export async function Comments({ params }: CommentsProps) {
 
   const rootComments = await filterComments();
 
-  return (
-    <div className="px-3 py-5 mt-5 mb-8 space-y-3 bg-neutral-900 ">
-      {rootComments?.map((rootComment) => (
-        <Comment key={rootComment.id} comment={rootComment} params={params}>
-          <ChildComments
-            commentId={rootComment.id}
-            allComments={comments}
-            params={params}
-          />
-        </Comment>
-      ))}
-    </div>
-  );
+  if (comments && comments.length > 0)
+    return (
+      <div className="px-3 py-5 mt-5 mb-8 space-y-3 bg-neutral-900 ">
+        {rootComments?.map((rootComment) => (
+          <Comment key={rootComment.id} comment={rootComment} params={params}>
+            <ChildComments
+              commentId={rootComment.id}
+              allComments={comments}
+              params={params}
+            />
+          </Comment>
+        ))}
+      </div>
+    );
 }
 
 async function ChildComments({

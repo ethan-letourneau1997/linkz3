@@ -34,7 +34,7 @@ export async function Navigation() {
         </div>
         <div>
           {user ? (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 font-bold">
               Hello, {public_profile.username}!
               <LogoutButton />
             </div>
