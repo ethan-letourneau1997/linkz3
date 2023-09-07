@@ -18,7 +18,7 @@ export function Comment({ comment, children, params }: CommentProps) {
       <div>
         <CommentUser comment={comment} />
         <div
-          className="prose text-neutral-200"
+          className="prose dark:prose-invert"
           dangerouslySetInnerHTML={{ __html: comment.content || "" }}
         />
       </div>

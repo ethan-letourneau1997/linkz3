@@ -41,7 +41,7 @@ export async function CommentPreviewParent({
           {username} - {getTimeSinceNow(comment.created_at, true)}
         </div>
         <div
-          className="w-full text-sm prose dark:text-neutral-200 line-clamp-1"
+          className="w-full text-sm prose  dark:prose-invert line-clamp-1"
           dangerouslySetInnerHTML={{ __html: parent_comment.content || "" }}
         />
       </div>

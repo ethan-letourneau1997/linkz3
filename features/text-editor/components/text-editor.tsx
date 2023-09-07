@@ -234,7 +234,7 @@ export function TextEditor({
             </button>
           </EditorTooltip>
         </div>
-        <div className="w-full px-3 space-y-3 prose max-w-none dark:bg-neutral-900 dark:text-neutral-200">
+        <div className="w-full px-3 space-y-3 prose max-w-none dark:bg-neutral-900 dark:prose-invert">
           <ScrollArea className="max-h-full ">
             <EditorContent editor={editor} />
           </ScrollArea>

@@ -22,7 +22,7 @@ export async function CommentPreview({
           </span>
         </div>
         <div
-          className="w-full text-sm prose dark:text-neutral-200 "
+          className="w-full text-sm prose dark:prose-invert  "
           dangerouslySetInnerHTML={{ __html: comment.content || "" }}
         />
       </div>
