@@ -20,14 +20,17 @@ export async function PostImageEditor({ params }: ImageCaptionsProps) {
   return (
     <div className="w-full max-w-2xl mt-5 text-center">
       <h2 className="text-xl font-semibold ">
-        Add captions to your images (optional).
+        Change an image caption and click save!
       </h2>
-      <Link
-        className="text-sm text-blue-500 hover:cursor-pointer"
-        href={`/spaces/${params.spaceId}/${params.spaceName}/post/${params.postId}`}
-      >
-        Continue to post
-      </Link>
+      <div className="mt-1 text-sm">
+        when you&apos;re done,&nbsp;
+        <Link
+          className="text-blue-500 hover:cursor-pointer"
+          href={`/spaces/${params.spaceId}/${params.spaceName}/post/${params.postId}`}
+        >
+          return to post
+        </Link>
+      </div>
       <div className="mt-5 space-y-5">
         {post_images?.map((image) => (
           <div key={image.id} className="grid grid-cols-2 gap-5">
