@@ -18,6 +18,7 @@ import {
 
 import { EditorTooltip } from "./editor-tooltip";
 import Link from "@tiptap/extension-link";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import StarterKit from "@tiptap/starter-kit";
 import { TbBlockquote } from "react-icons/tb";
 import { useCallback } from "react";
@@ -79,8 +80,8 @@ export function TextEditor({
 
   if (editor)
     return (
-      <div className="text-base border dark:border-neutral-700 dark:bg-neutral-900 ">
-        <div id="TiptapMenu" className="py-1 dark:bg-neutral-800">
+      <div className="max-h-full overflow-scroll text-base border dark:border-neutral-700 dark:bg-neutral-900">
+        <div id="TiptapMenu" className="py-1 dark:bg-neutral-800 ">
           <EditorTooltip text="Bold">
             <button
               onClick={() => editor.chain().focus().toggleBold().run()}
@@ -234,7 +235,10 @@ export function TextEditor({
           </EditorTooltip>
         </div>
         <div className="w-full px-3 space-y-3 prose max-w-none dark:bg-neutral-900 dark:text-neutral-200">
-          <EditorContent editor={editor} />
+          <ScrollArea className="max-h-full ">
+            <EditorContent editor={editor} />
+          </ScrollArea>
+
           <div className="flex justify-end pb-1 pr-3">{replyButton}</div>
         </div>
       </div>

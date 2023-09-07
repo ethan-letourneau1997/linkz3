@@ -27,8 +27,10 @@ export async function Post({ params }: PostProps) {
   if (post)
     return (
       <div className="w-full px-5 py-5 mt-5 space-y-3 dark:bg-neutral-900">
-        <PostOptions post={post} params={params} />
-        <PostMetadata post={post} />
+        <div className="flex justify-between">
+          <PostMetadata post={post} />
+          <PostOptions post={post} params={params} />
+        </div>
         <PostCommunity post={post} />
 
         <h1 className="py-3 text-xl ">{post.title}</h1>

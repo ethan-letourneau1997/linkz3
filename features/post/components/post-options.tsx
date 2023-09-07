@@ -1,9 +1,11 @@
 "use client";
 
-import { Button, Modal } from "flowbite-react";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { Button, Modal, Tooltip } from "flowbite-react";
 import { Post, PostRouterParams } from "@/types";
 
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import Link from "next/link";
 import { deletePost } from "../api/delete-post";
 import { useState } from "react";
 
@@ -14,9 +16,16 @@ type PostOptionsProps = {
 
 export function PostOptions({ post, params }: PostOptionsProps) {
   return (
-    <>
-      <DeletePost post={post} params={params} />
-    </>
+    <div className="flex gap-2">
+      <Tooltip content="Delete Post" style="dark">
+        <DeletePost post={post} params={params} />
+      </Tooltip>
+      <Tooltip content="Edit Post" style="dark">
+        <Link href={`${post.id}/edit`}>
+          <AiOutlineEdit className="text-xl" />
+        </Link>
+      </Tooltip>
+    </div>
   );
 }
 
@@ -26,21 +35,23 @@ type DeletePostProps = {
 };
 
 export function DeletePost({ post, params }: DeletePostProps) {
-  const [openModal, setOpenModal] = useState<string | undefined>();
+  const [openModal, setOpenModal] = useState(false);
 
   function handleDeletePost() {
     deletePost(post, params.spaceName);
-    setOpenModal(undefined);
+    setOpenModal(false);
   }
 
   return (
     <>
-      <Button onClick={() => setOpenModal("pop-up")}>Toggle modal</Button>
+      <button onClick={() => setOpenModal(true)}>
+        <AiOutlineDelete className="text-xl" />
+      </button>
       <Modal
-        show={openModal === "pop-up"}
+        show={openModal}
         size="md"
         popup
-        onClose={() => setOpenModal(undefined)}
+        onClose={() => setOpenModal(false)}
       >
         <Modal.Header />
         <Modal.Body>
@@ -53,7 +64,7 @@ export function DeletePost({ post, params }: DeletePostProps) {
               <Button color="failure" onClick={handleDeletePost}>
                 Yes, I&apos;m sure
               </Button>
-              <Button color="gray" onClick={() => setOpenModal(undefined)}>
+              <Button color="gray" onClick={() => setOpenModal(false)}>
                 No, cancel
               </Button>
             </div>
