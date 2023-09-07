@@ -2,9 +2,9 @@
 
 import { Button, Textarea } from "flowbite-react";
 import { PostImage, PostRouterParams } from "@/types";
+import { useState, useTransition } from "react";
 
 import { upsertImageCaption } from "../api/upsert-image-caption";
-import { useState } from "react";
 
 type CaptionInputProps = {
   image: PostImage;
@@ -14,8 +14,12 @@ type CaptionInputProps = {
 export function CaptionInput({ image, params }: CaptionInputProps) {
   const [caption, setCaption] = useState(image.caption || "");
 
+  const [isPending, startTransition] = useTransition();
+
   function handleSubmitCaption() {
-    upsertImageCaption({ image: image, newCaption: caption, params: params });
+    startTransition(async () => {
+      upsertImageCaption({ image: image, newCaption: caption, params: params });
+    });
   }
   return (
     <div>
@@ -24,6 +28,7 @@ export function CaptionInput({ image, params }: CaptionInputProps) {
         <Button
           onClick={handleSubmitCaption}
           disabled={caption === image.caption}
+          isProcessing={isPending}
         >
           Save
         </Button>

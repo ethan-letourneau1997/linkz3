@@ -9,6 +9,7 @@ import { PostTitleInput } from "./post-title-input";
 import { SpaceRouterParams } from "@/types";
 import { TextEditor } from "@/features/text-editor";
 import { createPost } from "../api/create-post";
+import { redirectToCaptions } from "../api/redirect-to-captions";
 import { uploadImages } from "../api/upload-images";
 import { useState } from "react";
 
@@ -24,8 +25,8 @@ export function NewPostForm({ params }: NewPostFormProps) {
 
   const { spaceId, spaceName } = params;
 
-  function handleCreateTextPost() {
-    createPost({
+  async function handleCreateTextPost() {
+    await createPost({
       communityId: spaceId,
       communityName: spaceName,
       title: title,
@@ -34,8 +35,8 @@ export function NewPostForm({ params }: NewPostFormProps) {
     });
   }
 
-  function handleCreateLinkPost() {
-    createPost({
+  async function handleCreateLinkPost() {
+    await createPost({
       communityId: spaceId,
       communityName: spaceName,
       title: title,
@@ -53,6 +54,11 @@ export function NewPostForm({ params }: NewPostFormProps) {
     });
 
     await uploadImages(images as unknown as File[], postId);
+    redirectToCaptions({
+      communityName: spaceName,
+      communityId: spaceId,
+      postId,
+    });
   }
 
   return (

@@ -7,16 +7,16 @@ type ImageDisplayProps = {
 export function ImageDisplay({ image }: ImageDisplayProps) {
   const divStyle = {
     backgroundImage: `url('${image.url}')`,
-    height: "400px",
+    height: "300px",
+    backgroundSize: "cover",
   };
   // Add any other CSS properties here as needed
 
   return (
-    <div className="flex items-end bg-cover" style={divStyle}>
+    <div className="flex items-end" style={divStyle}>
       {image.caption && (
-        <p className="w-full py-2 bg-opacity-75 bg-neutral-800 ">
-          {" "}
-          {image.caption}{" "}
+        <p className="w-full py-2 bg-opacity-75 bg-contain bg-neutral-800">
+          {image.caption}
         </p>
       )}
     </div>

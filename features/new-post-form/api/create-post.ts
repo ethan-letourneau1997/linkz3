@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
+import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 type createPostParams = {
@@ -30,6 +31,10 @@ export async function createPost(params: createPostParams) {
 
   if (data) {
     revalidatePath(`/spaces/${communityName}/${communityId}`);
+
+    if (type !== "image") {
+      redirect(`/spaces/${communityName}/${communityId}/post/${data.id}`);
+    }
 
     return data.id;
   }
