@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Modal } from "flowbite-react";
+import { Button, Modal, Tooltip } from "flowbite-react";
 import { Post, PostRouterParams } from "@/types";
 
 import { AiOutlineDelete } from "react-icons/ai";
@@ -24,7 +24,9 @@ export function PostDeleteButton({ post, params }: DeletePostProps) {
   return (
     <>
       <button onClick={() => setOpenModal(true)}>
-        <AiOutlineDelete className="text-xl" />
+        <Tooltip content="Delete Post" style="dark">
+          <AiOutlineDelete className="text-xl" />
+        </Tooltip>
       </button>
       <Modal
         show={openModal}

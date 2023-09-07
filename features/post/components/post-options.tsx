@@ -1,28 +1,26 @@
-"use client";
-
 import { Post, PostRouterParams } from "@/types";
 
-import { AiOutlineEdit } from "react-icons/ai";
-import Link from "next/link";
 import { PostDeleteButton } from "./post-delete-button";
-import { Tooltip } from "flowbite-react";
+import { PostEditButton } from "./post-edit-button";
+import { cookies } from "next/headers";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 type PostOptionsProps = {
   post: Post;
   params: PostRouterParams;
 };
 
-export function PostOptions({ post, params }: PostOptionsProps) {
-  return (
-    <div className="flex gap-2">
-      <Tooltip content="Delete Post" style="dark">
+export async function PostOptions({ post, params }: PostOptionsProps) {
+  const supabase = createServerComponentClient({ cookies });
+
+  const { data } = await supabase.auth.getSession();
+
+  if (data.session?.user.id && data.session?.user.id)
+    return (
+      <div className="flex items-center gap-2">
         <PostDeleteButton post={post} params={params} />
-      </Tooltip>
-      <Tooltip content="Edit Post" style="dark">
-        <Link href={`${post.id}/edit`}>
-          <AiOutlineEdit className="text-xl" />
-        </Link>
-      </Tooltip>
-    </div>
-  );
+
+        <PostEditButton post={post} />
+      </div>
+    );
 }
