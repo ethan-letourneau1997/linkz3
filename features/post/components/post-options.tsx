@@ -19,7 +19,6 @@ export async function PostOptions({ post, params }: PostOptionsProps) {
     return (
       <div className="flex items-center gap-2">
         <PostDeleteButton post={post} params={params} />
-
         <PostEditButton post={post} />
       </div>
     );

@@ -33,7 +33,7 @@ export async function createPost(params: createPostParams) {
     revalidatePath(`/spaces/${communityName}/${communityId}`);
 
     if (type !== "image") {
-      redirect(`/spaces/${communityName}/${communityId}/post/${data.id}`);
+      redirect(`/spaces/${communityId}/${communityName}/post/${data.id}`);
     }
 
     return data.id;

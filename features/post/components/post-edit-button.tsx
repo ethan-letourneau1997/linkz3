@@ -10,11 +10,12 @@ type PostEditButtonProps = {
 };
 
 export function PostEditButton({ post }: PostEditButtonProps) {
-  return (
-    <Tooltip content="Edit Post" style="dark">
-      <Link href={`${post.id}/edit`}>
-        <AiOutlineEdit className="text-xl" />
-      </Link>
-    </Tooltip>
-  );
+  if (post.type !== "link")
+    return (
+      <Tooltip content="Edit Post" style="dark">
+        <Link href={`${post.id}/edit`}>
+          <AiOutlineEdit className="text-xl" />
+        </Link>
+      </Tooltip>
+    );
 }
