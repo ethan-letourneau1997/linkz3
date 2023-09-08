@@ -9,7 +9,7 @@ type ProfileTabsProps = {
 
 export function ProfileTabs({ posts, comments }: ProfileTabsProps) {
   return (
-    <Tabs defaultValue="comments" className="w-full">
+    <Tabs defaultValue="posts" className="w-full">
       <TabsList className="w-full">
         <TabsTrigger className="w-1/2" value="posts">
           Posts

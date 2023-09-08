@@ -6,6 +6,8 @@ import { HiOutlineLink } from "react-icons/hi";
 import Link from "next/link";
 import { PostPreviewThumbnail } from "./post-preview-thumbnail";
 import { PostVotes } from "@/features/post-votes";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Suspense } from "react";
 import { getLinkPreview } from "link-preview-js";
 import { getPostCommentCount } from "@/helpers/post-helpers";
 import { getTimeSinceNow } from "@/lib/get-time-since-now";
@@ -22,18 +24,22 @@ export async function PostPreview({ post }: PostPreviewProps) {
 
   return (
     <>
-      <div className="hidden grid-cols-12 gap-3 px-4 py-3 border rounded-md sm:grid border-neutral-800 bg-neutral-900">
+      <div className="hidden grid-cols-12 gap-3 px-4 py-3 mt-2 border rounded-md sm:grid dark:border-neutral-800 dark:bg-neutral-900">
         <div className="col-span-2 aspect-[4/3]">
           {post.type === "link" ? (
-            <LinkThumbnail post={post} />
+            <Suspense fallback={<Skeleton className="w-full h-full" />}>
+              <LinkThumbnail post={post} />
+            </Suspense>
           ) : (
-            <PostPreviewThumbnail post={post} />
+            <Suspense fallback={<Skeleton className="w-full h-full" />}>
+              <PostPreviewThumbnail post={post} />
+            </Suspense>
           )}
         </div>
         <div className="flex flex-col justify-between col-span-10">
           <div>
             <div className="text-sm ">
-              <Link className="font-semibold dark:text-neutral-200" href="">
+              <Link className="font-semibold dark:text-neutral-200" href="#">
                 {communityName}
               </Link>
               <span className="dark:text-neutral-400">
@@ -57,10 +63,11 @@ export async function PostPreview({ post }: PostPreviewProps) {
         </div>
       </div>
       {/* Mobile Display */}
-      <div className="grid grid-cols-12 gap-2 px-2 py-3 sm:hidden">
+
+      <div className="grid grid-cols-12 gap-2 px-2 pt-3 pb-1 border-t sm:hidden dark:border-neutral-800 ">
         <div className="col-span-9 ">
           <div className="text-xs ">
-            <Link className="dark:text-neutral-200" href="">
+            <Link className="dark:text-neutral-200" href="#">
               {communityName}
             </Link>
             <span className="dark:text-neutral-400">
@@ -76,9 +83,13 @@ export async function PostPreview({ post }: PostPreviewProps) {
         </div>
         <div className="col-span-3 aspect-[4/3]  ">
           {post.type === "link" ? (
-            <LinkThumbnail post={post} />
+            <Suspense fallback={<Skeleton className="w-full h-full" />}>
+              <LinkThumbnail post={post} />
+            </Suspense>
           ) : (
-            <PostPreviewThumbnail post={post} />
+            <Suspense fallback={<Skeleton className="w-full h-full" />}>
+              <PostPreviewThumbnail post={post} />
+            </Suspense>
           )}
         </div>
         <div className="flex items-center col-span-12 gap-2 mt-2 text-sm text-neutral-400 ">

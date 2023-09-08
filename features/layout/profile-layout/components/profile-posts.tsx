@@ -1,4 +1,4 @@
-import { PostPreview } from "@/features/post-preview";
+import { PostPreviews } from "@/features/post-preview/components/post-previews";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
@@ -20,9 +20,7 @@ export async function ProfilePosts({ username }: ProfilePostsProps) {
     .select()
     .eq("created_by", public_profile.id);
 
-  return (
-    <div className="w-full max-w-3xl my-5 border divide-y dark:border-neutral-500">
-      {posts?.map((post) => <PostPreview key={post.id} post={post} />)}
-    </div>
-  );
+  if (posts) return <PostPreviews posts={posts} />;
+
+  if (!posts) return <div>No posts</div>;
 }

@@ -1,7 +1,5 @@
-import { PostPreview, SpaceSkeleton } from "@/features/post-preview";
-
 import { Post } from "@/types";
-import { Suspense } from "react";
+import { PostPreviews } from "@/features/post-preview/components/post-previews";
 import { getSortedSubscriptionPosts } from "../api/get-sorted-subscription-posts";
 
 type DisplayPostProps = {
@@ -11,11 +9,5 @@ type DisplayPostProps = {
 export async function DisplayPosts({ sortBy }: DisplayPostProps) {
   const posts: Post[] = await getSortedSubscriptionPosts(sortBy);
 
-  return (
-    <div className="space-y-2">
-      <Suspense fallback={<SpaceSkeleton count={10} />}>
-        {posts?.map((post) => <PostPreview key={post.id} post={post} />)}
-      </Suspense>
-    </div>
-  );
+  return <PostPreviews posts={posts} />;
 }

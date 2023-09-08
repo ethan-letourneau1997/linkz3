@@ -10,5 +10,5 @@ export async function PostPreviewCommunity({
   post,
 }: PostPreviewCommunityProps) {
   const communityName = await getPostCommunityName(post.posted_in);
-  return <Link href="">{communityName}</Link>;
+  return <Link href="#">{communityName}</Link>;
 }
