@@ -6,6 +6,8 @@ export type PostVote = Database["public"]["Tables"]["post_vote"]["Row"];
 export type CommentVote = Database["public"]["Tables"]["comment_vote"]["Row"];
 export type PostImage = Database["public"]["Tables"]["post_image"]["Row"];
 export type Comment = Database["public"]["Tables"]["comment"]["Row"];
+export type PublicProfile =
+  Database["public"]["Tables"]["public_profile"]["Row"];
 export type PostWithVotes =
   Database["public"]["Views"]["post_with_votes"]["Row"];
 
