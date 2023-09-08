@@ -11,7 +11,7 @@ export function PostTitleInput({ setTitle, title }: PostTitleInputProps) {
         onChange={(e) => setTitle(e.target.value)}
         value={title}
         type="text"
-        className="w-full h-8 border bg-neutral-900 border-neutral-700"
+        className="w-full h-8 border dark:bg-neutral-900 dark:border-neutral-700"
       />
     </div>
   );

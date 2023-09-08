@@ -21,7 +21,7 @@ export function HomeSort({ newPosts, oldPosts, topPosts }: HomeSortType) {
   return (
     <>
       <Select value={sortBy} onValueChange={setSortBy}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="md:w-[180px] w-[80px]">
           <SelectValue placeholder="Sort by" />
         </SelectTrigger>
         <SelectContent>
@@ -31,9 +31,11 @@ export function HomeSort({ newPosts, oldPosts, topPosts }: HomeSortType) {
         </SelectContent>
       </Select>
 
-      {sortBy === "new" && newPosts}
-      {sortBy === "old" && oldPosts}
-      {sortBy === "top" && topPosts}
+      <div className="mt-3">
+        {sortBy === "new" && newPosts}
+        {sortBy === "old" && oldPosts}
+        {sortBy === "top" && topPosts}
+      </div>
     </>
   );
 }

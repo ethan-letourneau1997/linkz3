@@ -66,30 +66,32 @@ export function PostVoteButtons({
       } items-center place-content-evenly`}
     >
       {optomisticUserVote === 1 ? (
-        <button className="px-2 py-1 ">
+        <button className="px-1 py-1 md:px-2">
           <BiSolidUpvote onClick={handleRemoveVote} className="text-teal-300" />
         </button>
       ) : (
-        <button onClick={handleUpvote} className="px-2 py-1 ">
+        <button onClick={handleUpvote} className="px-1 py-1 md:px-2">
           <BiUpvote className="hover:text-teal-300" />
         </button>
       )}
       <>
         {optomisticPostVotes < 0 ? (
-          <div className="mr-1.5">{optomisticPostVotes}</div>
+          <div className="mr-1.5 text-sm md:text-base">
+            {optomisticPostVotes}
+          </div>
         ) : (
-          <div>{optomisticPostVotes}</div>
+          <div className="text-sm md:text-base">{optomisticPostVotes}</div>
         )}
       </>
       {optomisticUserVote === -1 ? (
-        <button className="px-2 py-1 ">
+        <button className="px-1 py-1 md:px-2">
           <BiSolidDownvote
             onClick={handleRemoveVote}
             className="text-teal-300"
           />
         </button>
       ) : (
-        <button onClick={handleDownvote} className="px-2 py-1 ">
+        <button onClick={handleDownvote} className="px-1 py-1 md:px-2">
           <BiDownvote className="hover:text-teal-300" />
         </button>
       )}

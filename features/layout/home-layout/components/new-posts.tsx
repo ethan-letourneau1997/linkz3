@@ -32,10 +32,12 @@ export async function NewPosts() {
   const subscriptionPosts = await getSubscriptionPosts();
 
   return (
-    <Suspense fallback={<SpaceSkeleton count={10} />}>
-      {subscriptionPosts?.map((post) => (
-        <PostPreview key={post.id} post={post} />
-      ))}
-    </Suspense>
+    <div className="divide-y divide-neutral-600">
+      <Suspense fallback={<SpaceSkeleton count={10} />}>
+        {subscriptionPosts?.map((post) => (
+          <PostPreview key={post.id} post={post} />
+        ))}
+      </Suspense>
+    </div>
   );
 }

@@ -11,7 +11,7 @@ export async function PostPreviewPostedBy({ post }: PostPreviewPostedByProps) {
   const timeSincePost = getTimeSinceNow(post.created_at, true);
 
   return (
-    <div>
+    <div className="text-xs text-neutral-500">
       posted by {postedby} - {timeSincePost}
     </div>
   );

@@ -27,7 +27,7 @@ export async function getPostCommunityName(postedIn: Post["posted_in"]) {
     .eq("id", postedIn)
     .single();
 
-  return community.name;
+  if (community) return community.name;
 }
 
 export async function getPostCommentCount(postId: Post["id"]) {
