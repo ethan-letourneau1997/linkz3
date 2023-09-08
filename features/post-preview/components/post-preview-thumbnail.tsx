@@ -36,8 +36,8 @@ export async function PostPreviewThumbnail({
           )}
         </div>
       ) : (
-        <div className="w-full h-full bg-neutral-800">
-          <HiOutlineLink className="h-full mx-auto my-auto text-xl" />
+        <div className="flex items-center justify-center w-full h-full rounded dark:bg-neutral-700 ">
+          <HiOutlineLink />
         </div>
       )}
     </>
