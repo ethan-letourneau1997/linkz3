@@ -1,62 +1,132 @@
-import { Post } from "@/types";
-import { PostMobileImage } from "./post-mobile-image";
-import { PostPreviewCommentCount } from "./get-preview-comment-count";
-import { PostPreviewPostedBy } from "./post-preview-posted-by";
-import { PostPreviewPostedIn } from "./post-preview-posted-in";
+import { LinkPreview, Post } from "@/types";
+import { getPostCommunityName, getPostPostedBy } from "@/helpers/post-helpers";
+
+import { GoComment } from "react-icons/go";
+import { HiOutlineLink } from "react-icons/hi";
+import Link from "next/link";
 import { PostPreviewThumbnail } from "./post-preview-thumbnail";
-import { PostPreviewTitle } from "./post-preview-title";
 import { PostVotes } from "@/features/post-votes";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Suspense } from "react";
-import { VotePlaceholer } from "@/features/post-votes/components/vote-placeholder";
+import { getLinkPreview } from "link-preview-js";
+import { getPostCommentCount } from "@/helpers/post-helpers";
+import { getTimeSinceNow } from "@/lib/get-time-since-now";
 
 type PostPreviewProps = {
   post: Post;
-  communityName?: string;
 };
 
-export async function PostPreview({ post, communityName }: PostPreviewProps) {
+export async function PostPreview({ post }: PostPreviewProps) {
+  const timeSincePost = getTimeSinceNow(post.created_at, true);
+  const communityName = await getPostCommunityName(post.posted_in);
+  const commentCount = await getPostCommentCount(post.id);
+  const postedBy = await getPostPostedBy(post.created_by);
+
   return (
-    <div className="grid grid-cols-12 gap-3 px-2 py-3 ">
-      <div className="hidden md:block md:col-span-2">
-        <Suspense fallback={<Skeleton className="w-full h-full" />}>
-          <PostPreviewThumbnail post={post} />
-        </Suspense>
-      </div>
-      <div className="col-span-12 space-y-1 md:col-span-9">
-        <div className="flex items-center gap-1 md:block">
-          <Suspense fallback={<Skeleton className="w-1/4 h-[18px] py-[6px]" />}>
-            <PostPreviewPostedIn post={post} />
-          </Suspense>
-          <span className="md:hidden text-neutral-500">-</span>
-          <Suspense fallback={<Skeleton className="w-1/3 h-[18px] py-[6px]" />}>
-            <PostPreviewPostedBy post={post} />
-          </Suspense>
+    <>
+      <div className="hidden grid-cols-12 gap-3 px-4 py-3 border rounded-md sm:grid border-neutral-800 bg-neutral-900">
+        <div className="col-span-2 aspect-[4/3]">
+          {post.type === "link" ? (
+            <LinkThumbnail post={post} />
+          ) : (
+            <PostPreviewThumbnail post={post} />
+          )}
         </div>
-        <Suspense fallback={<div> {post.title}</div>}>
-          <PostPreviewTitle post={post} communityName={communityName} />
-        </Suspense>
-
-        {post.type === "image" && (
-          <div className="col-span-12 md:hidden md:col-span-2">
-            <Suspense fallback={<Skeleton className="w-full h-full" />}>
-              <PostMobileImage post={post} />
-            </Suspense>
+        <div className="flex flex-col justify-between col-span-10">
+          <div>
+            <div className="text-sm ">
+              <Link className="font-semibold dark:text-neutral-200" href="">
+                {communityName}
+              </Link>
+              <span className="dark:text-neutral-400">
+                &nbsp;posted by&nbsp;
+                <Link href={`/profile/${postedBy}`}>{postedBy}</Link>
+                &nbsp;-&nbsp;{timeSincePost}
+              </span>
+            </div>
+            <div className="mt-1 font-bold ">{post.title}</div>
           </div>
-        )}
 
-        <Suspense fallback={<Skeleton className="w-1/4 h-[18px] py-[6px]" />}>
-          <div className="flex gap-2 md:block">
+          <div className="flex items-center gap-2 mt-2 text-sm text-neutral-400">
+            <div className="w-fit">
+              <PostVotes post={post} horizontal />
+            </div>
+            <div className="flex items-center gap-2">
+              <GoComment />
+              {commentCount} comments
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Mobile Display */}
+      <div className="grid grid-cols-12 gap-2 px-2 py-3 sm:hidden">
+        <div className="col-span-9 ">
+          <div className="text-xs ">
+            <Link className="dark:text-neutral-200" href="">
+              {communityName}
+            </Link>
+            <span className="dark:text-neutral-400">
+              &nbsp;posted by&nbsp;
+              <Link href={`/profile/${postedBy}`}>{postedBy}</Link>
+              &nbsp;-&nbsp;{timeSincePost}
+            </span>
+          </div>
+
+          <div className="mt-1 text-sm font-bold sm:text-base">
+            {post.title}
+          </div>
+        </div>
+        <div className="col-span-3 aspect-[4/3]  ">
+          {post.type === "link" ? (
+            <LinkThumbnail post={post} />
+          ) : (
+            <PostPreviewThumbnail post={post} />
+          )}
+        </div>
+        <div className="flex items-center col-span-12 gap-2 mt-2 text-sm text-neutral-400 ">
+          <div className="w-fit">
             <PostVotes post={post} horizontal />
-            <PostPreviewCommentCount post={post} />
           </div>
-        </Suspense>
+          <div className="flex items-center gap-2">
+            <GoComment />
+            {commentCount} comments
+          </div>
+        </div>
       </div>
-      <div className="justify-end hidden col-span-1 md:flex">
-        <Suspense fallback={<VotePlaceholer />}>
-          <PostVotes post={post} />
-        </Suspense>
-      </div>
-    </div>
+    </>
+  );
+}
+
+type LinkThumbnailProps = {
+  post: Post;
+};
+
+async function LinkThumbnail({ post }: LinkThumbnailProps) {
+  if (!post.content) return <></>;
+
+  const link: LinkPreview = await getLinkPreview(post.content);
+
+  const previewLink = link.images && link.images[0];
+
+  return (
+    <>
+      {previewLink ? (
+        <div
+          className="flex items-end w-full h-full rounded "
+          style={{
+            backgroundImage: `url(${link.images && link.images[0]})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <div className="w-full text-xs text-center truncate rounded-b dark:bg-neutral-900/70 dark:text-neutral-400">
+            {link.siteName}
+          </div>
+        </div>
+      ) : (
+        <div className="flex items-center justify-center w-full h-full rounded dark:bg-neutral-700 ">
+          <HiOutlineLink />
+        </div>
+      )}
+    </>
   );
 }

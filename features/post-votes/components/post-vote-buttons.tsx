@@ -76,11 +76,9 @@ export function PostVoteButtons({
       )}
       <>
         {optomisticPostVotes < 0 ? (
-          <div className="mr-1.5 text-sm md:text-base">
-            {optomisticPostVotes}
-          </div>
+          <div className="mr-1.5 text-sm ">{optomisticPostVotes}</div>
         ) : (
-          <div className="text-sm md:text-base">{optomisticPostVotes}</div>
+          <div className="text-sm ">{optomisticPostVotes}</div>
         )}
       </>
       {optomisticUserVote === -1 ? (

@@ -1,18 +1,20 @@
+import Link from "next/link";
 import { Post } from "@/types";
 import { getPostPostedBy } from "@/helpers/post-helpers";
 import { getTimeSinceNow } from "@/lib/get-time-since-now";
 
-type PostPreviewPostedByProps = {
+type PostPreviewUserProps = {
   post: Post;
 };
 
-export async function PostPreviewPostedBy({ post }: PostPreviewPostedByProps) {
+export async function PostPreviewUser({ post }: PostPreviewUserProps) {
   const postedby = await getPostPostedBy(post.created_by);
   const timeSincePost = getTimeSinceNow(post.created_at, true);
 
   return (
-    <div className="text-xs text-neutral-500">
-      posted by {postedby} - {timeSincePost}
+    <div>
+      posted by <Link href={`/profile/${postedby.username}`}>{postedby}</Link> -{" "}
+      {timeSincePost}
     </div>
   );
 }

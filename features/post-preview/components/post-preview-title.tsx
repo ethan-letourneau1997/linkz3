@@ -23,7 +23,7 @@ export async function PostPreviewTitle({
 
   return (
     <Link
-      className="block font-semibold hover:underline"
+      className="block hover:underline"
       href={`/spaces/${post.posted_in}/${spaceName}/post/${post.id}`}
     >
       {post.title}

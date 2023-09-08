@@ -18,6 +18,7 @@ type HomeSortType = {
 
 export function HomeSort({ newPosts, oldPosts, topPosts }: HomeSortType) {
   const [sortBy, setSortBy] = useState("new");
+
   return (
     <>
       <Select value={sortBy} onValueChange={setSortBy}>
