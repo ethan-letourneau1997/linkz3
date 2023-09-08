@@ -9,7 +9,7 @@ type PostPreviewsProps = {
 
 export async function PostPreviews({ posts }: PostPreviewsProps) {
   return (
-    <div className="">
+    <div className="w-full max-w-3xl">
       <Suspense fallback={<PreviewSkeleton count={10} />}>
         {posts?.map((post) => <PostPreview key={post.id} post={post} />)}
       </Suspense>

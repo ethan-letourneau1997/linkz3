@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 type SpaceLinkProps = {
-  spaceId: string;
+  spaceId: number;
   spaceName: string;
   text: string | null;
   className?: string;
