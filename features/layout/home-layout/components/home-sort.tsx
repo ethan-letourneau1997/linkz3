@@ -34,7 +34,6 @@ export function HomeSort({ newPosts, oldPosts, topPosts }: HomeSortType) {
       {sortBy === "new" && newPosts}
       {sortBy === "old" && oldPosts}
       {sortBy === "top" && topPosts}
-      <div className="w-full">{sortBy}</div>
     </>
   );
 }
