@@ -14,12 +14,11 @@ export async function SpacePagePosts({ params }: SpacePagePostsProps) {
   const supabase = createServerComponentClient({ cookies });
 
   const currentPage = parseInt(params.page, 10);
-  const upperLimit = currentPage * 10;
-  const lowerLimit = upperLimit - 10;
+  const postsPerPage = 10;
+  const lowerLimit = (currentPage - 1) * postsPerPage;
 
-  console.log("lower" + lowerLimit);
-
-  console.log("upper" + upperLimit);
+  // Calculate the upper limit based on the lower limit and the number of postsPerPage
+  const upperLimit = lowerLimit + postsPerPage - 1;
 
   const { data: posts } = await supabase
     .from("post")
