@@ -7,21 +7,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useParams, useRouter } from "next/navigation";
 
 import { useState } from "react";
 
-type SortType = {
-  newPosts: JSX.Element;
-  oldPosts: JSX.Element;
-  topPosts?: JSX.Element;
-};
+export function SortPosts() {
+  const params = useParams();
+  const router = useRouter();
 
-export function Sort({ newPosts, oldPosts, topPosts }: SortType) {
-  const [sortBy, setSortBy] = useState("new");
+  const [sortBy, setSortBy] = useState(params.sortBy as string);
+
+  const handleSortBy = (value: string) => {
+    router.push(`/spaces/${params.spaceId}/${params.spaceName}/${value}/1`);
+    setSortBy(value);
+  };
 
   return (
     <>
-      <Select value={sortBy} onValueChange={setSortBy}>
+      <Select value={sortBy} onValueChange={(value) => handleSortBy(value)}>
         <SelectTrigger className="md:w-[180px] w-[80px]">
           <SelectValue placeholder="Sort by" />
         </SelectTrigger>
@@ -31,12 +34,6 @@ export function Sort({ newPosts, oldPosts, topPosts }: SortType) {
           <SelectItem value="top">Top</SelectItem>
         </SelectContent>
       </Select>
-
-      <div className="mt-3">
-        {sortBy === "new" && newPosts}
-        {sortBy === "old" && oldPosts}
-        {sortBy === "top" && topPosts}
-      </div>
     </>
   );
 }
