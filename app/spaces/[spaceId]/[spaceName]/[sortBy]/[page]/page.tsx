@@ -7,6 +7,7 @@ type IndexProps = {
     spaceName: string;
     spaceId: string;
     page: string;
+    sortBy: "top" | "new" | "old";
   };
 };
 
