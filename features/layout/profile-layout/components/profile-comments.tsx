@@ -1,24 +1,21 @@
 import { CommentPreview } from "@/features/comment-preview";
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { getSortedProfileComments } from "../api/get-sorted-profile-comments";
 
 type ProfilePostsProps = {
-  username: string;
+  params: {
+    page: string;
+    sortBy: "top" | "new" | "old";
+    username: string;
+    type: "post" | "comment";
+  };
 };
 
-export async function ProfileComments({ username }: ProfilePostsProps) {
-  const supabase = createServerComponentClient({ cookies });
-
-  const { data: public_profile } = await supabase
-    .from("public_profile")
-    .select()
-    .eq("username", username)
-    .single();
-
-  const { data: comments } = await supabase
-    .from("comment")
-    .select()
-    .eq("posted_by", public_profile.id);
+export async function ProfileComments({ params }: ProfilePostsProps) {
+  const comments = await getSortedProfileComments(
+    params.sortBy,
+    params.username,
+    params.page
+  );
 
   return (
     <div className="w-full max-w-3xl my-5 space-y-5">
@@ -26,7 +23,7 @@ export async function ProfileComments({ username }: ProfilePostsProps) {
         <CommentPreview
           key={comment.id}
           comment={comment}
-          username={username}
+          username={params.username}
         />
       ))}
     </div>

@@ -1,4 +1,4 @@
-import { SpacePagination } from "@/features/layout/space-layout/components/space-pagination";
+import { ProfileDetails } from "@/features/layout/profile-layout/components/profile-details";
 
 export const dynamic = "force-dynamic";
 
@@ -8,9 +8,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="w-full max-w-3xl">
+      <ProfileDetails />
       {children}
-      <SpacePagination />
     </div>
   );
 }

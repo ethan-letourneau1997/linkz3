@@ -7,6 +7,7 @@ type SpacePageLayoutProps = {
     spaceName: string;
     spaceId: string;
     page: string;
+    sortBy: "top" | "new" | "old";
   };
 };
 

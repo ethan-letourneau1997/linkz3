@@ -1,6 +1,6 @@
 "use client";
 
-import { SortPosts } from "./sort-posts";
+import { SortPosts } from "@/features/sort-posts";
 import { useParams } from "next/navigation";
 
 export function SpaceDetails() {
@@ -11,7 +11,7 @@ export function SpaceDetails() {
       <div className="py-3 mt-2 text-2xl font-semibold text-center">
         {params.spaceName}
       </div>
-      <SortPosts />
+      <SortPosts pathname={`/spaces/${params.spaceId}/${params.spaceName}`} />
     </div>
   );
 }

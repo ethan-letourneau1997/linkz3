@@ -16,7 +16,7 @@ export function SpaceLink({
   return (
     <Link
       className={`${className} hover:underline hover:cursor-pointer`}
-      href={`/spaces/${spaceId}/${spaceName}`}
+      href={`/spaces/${spaceId}/${spaceName}/new/1`}
     >
       {text}
     </Link>

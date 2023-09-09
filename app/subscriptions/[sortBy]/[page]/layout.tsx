@@ -1,4 +1,4 @@
-import { SpacePagination } from "@/features/layout/space-layout/components/space-pagination";
+import { SubscriptionPagination } from "@/features/layout/subscriptions-layout/components/subscription-pagination";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <div>
       {children}
-      <SpacePagination />
+      <SubscriptionPagination />
     </div>
   );
 }

@@ -20,8 +20,10 @@ export function DesktopNavigation({ user, profile }: DesktopNavigationProps) {
           <Link href="/spaces">Spaces</Link>
           {user && (
             <>
-              <Link href="/subscriptions">Subscriptions</Link>
-              <Link href={`/profile/${profile?.username}`}>My Profile</Link>
+              <Link href="/subscriptions/new/1">Subscriptions</Link>
+              <Link href={`/profile/${profile?.username}/post/new/1`}>
+                My Profile
+              </Link>
             </>
           )}
         </div>

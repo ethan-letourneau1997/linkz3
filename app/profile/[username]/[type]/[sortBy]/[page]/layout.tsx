@@ -1,4 +1,4 @@
-import { SpacePagination } from "@/features/layout/space-layout/components/space-pagination";
+import { ProfilePagination } from "@/features/layout/profile-layout/components/profile-pagination";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <div>
       {children}
-      <SpacePagination />
+      <ProfilePagination />
     </div>
   );
 }

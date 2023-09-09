@@ -11,14 +11,18 @@ import { useParams, useRouter } from "next/navigation";
 
 import { useState } from "react";
 
-export function SortPosts() {
+type ProfileDisplaySelectProps = {
+  pathname: string;
+};
+
+export function ProfileDisplaySelect({ pathname }: ProfileDisplaySelectProps) {
   const params = useParams();
   const router = useRouter();
 
-  const [sortBy, setSortBy] = useState(params.sortBy as string);
+  const [sortBy, setSortBy] = useState(params.type as string);
 
   const handleSortBy = (value: string) => {
-    router.push(`/spaces/${params.spaceId}/${params.spaceName}/${value}/1`);
+    router.push(`${pathname}/${value}/${params.sortBy}/1`);
     setSortBy(value);
   };
 
@@ -29,9 +33,8 @@ export function SortPosts() {
           <SelectValue placeholder="Sort by" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="new">New</SelectItem>
-          <SelectItem value="old">Old</SelectItem>
-          <SelectItem value="top">Top</SelectItem>
+          <SelectItem value="post">Posts</SelectItem>
+          <SelectItem value="comment">Comments</SelectItem>
         </SelectContent>
       </Select>
     </>

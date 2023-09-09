@@ -6,7 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { Pagination } from "flowbite-react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-export function PageNavigation() {
+export function SpacePagination() {
   const params = useParams();
   const router = useRouter();
 

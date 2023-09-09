@@ -1,24 +1,23 @@
 import { PostPreviews } from "@/features/post-preview/components/post-previews";
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { getSortedProfilePosts } from "../api/get-sorted-profile-posts";
 
 type ProfilePostsProps = {
-  username: string;
+  params: {
+    page: string;
+    sortBy: "top" | "new" | "old";
+    username: string;
+    type: "post" | "comment";
+  };
 };
 
-export async function ProfilePosts({ username }: ProfilePostsProps) {
-  const supabase = createServerComponentClient({ cookies });
+export async function ProfilePosts({ params }: ProfilePostsProps) {
+  // const posts = await getPosts();
 
-  const { data: public_profile } = await supabase
-    .from("public_profile")
-    .select()
-    .eq("username", username)
-    .single();
-
-  const { data: posts } = await supabase
-    .from("post")
-    .select()
-    .eq("created_by", public_profile.id);
+  const posts = await getSortedProfilePosts(
+    params?.sortBy,
+    params?.username,
+    params.page
+  );
 
   if (posts) return <PostPreviews posts={posts} />;
 
