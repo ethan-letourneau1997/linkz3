@@ -1,5 +1,6 @@
 import { PostPreview } from "./client-post-preview";
 import { PostPreview as PostPreviewProps } from "@/types";
+import { Suspense } from "react";
 
 type PostsProps = {
   posts: PostPreviewProps[] | null;
@@ -11,7 +12,9 @@ export function Posts({ posts }: PostsProps) {
       {posts ? (
         <>
           {posts.map((post) => (
-            <PostPreview key={post.id} post={post} />
+            <Suspense key={post.id} fallback={<div>Loading...</div>}>
+              <PostPreview key={post.id} post={post} />
+            </Suspense>
           ))}
         </>
       ) : (

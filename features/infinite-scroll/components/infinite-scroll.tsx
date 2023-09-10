@@ -1,4 +1,3 @@
-import { InitialPosts } from "./initial-posts";
 // import { InitialPosts } from "./initial-posts";
 import { LoadMore } from "./load-more";
 import { Posts } from "./posts";
@@ -31,7 +30,6 @@ export async function NewPosts() {
 
   return (
     <>
-      <InitialPosts posts={posts} />
       <Posts posts={posts} />
       <LoadMore />
     </>
@@ -44,7 +42,6 @@ export async function OldPosts() {
 
   return (
     <>
-      <InitialPosts posts={posts} />
       <Posts posts={posts} />
       <LoadMore />
     </>
@@ -57,7 +54,6 @@ export async function TopPosts() {
 
   return (
     <>
-      <InitialPosts posts={posts} />
       <Posts posts={posts} />
       <LoadMore />
     </>

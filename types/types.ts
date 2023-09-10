@@ -12,6 +12,11 @@ export type PostWithVotes =
   Database["public"]["Views"]["post_with_votes"]["Row"];
 export type PostPreview = Database["public"]["Views"]["post_preview"]["Row"];
 
+export type UserSpace = {
+  user_id: string;
+  community_id: Space;
+};
+
 export type LinkPreview = {
   url: string;
   title?: string;

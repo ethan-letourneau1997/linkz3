@@ -1,12 +1,12 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { GoComment } from "react-icons/go";
 import { PostPreview } from "@/types";
 import { PostLink } from "@/components/links/post-link";
 import { ProfileLink } from "@/components/links/profile-link";
-import { Skeleton } from "@/components/ui/skeleton";
+
 import { SpaceLink } from "@/components/links/space-link";
 
 import { getTimeSinceNow } from "@/lib/get-time-since-now";
@@ -27,9 +27,8 @@ export function PostPreview({ post }: PostPreviewProps) {
       <div className="order-2 sm:order-1 col-span-3 sm:col-span-2 aspect-[4/3]">
         {post.type === "image" && <ImagePreviewThumbnail post={post} />}
         {post.type === "link" && <LinkPreviewThumbnail post={post} />}
-        <Suspense fallback={<Skeleton className="w-full h-full" />}>
-          {post.type === "text" && <TextPreviewThumnail />}
-        </Suspense>
+
+        {post.type === "text" && <TextPreviewThumnail />}
       </div>
       <div className="flex flex-col justify-between order-1 col-span-9 sm:order-2">
         <div>

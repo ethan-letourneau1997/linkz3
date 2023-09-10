@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 
 import { HiOutlineLink } from "react-icons/hi";
 import { RiText } from "react-icons/ri";
-import { Skeleton } from "@/components/ui/skeleton";
 import { fetchLinkPreview } from "../api/get-link-preview";
 import { getPostPreviewImageUrl } from "../api/get-post-preview-image-url";
 
@@ -116,6 +115,4 @@ export function ImagePreviewThumbnail({ post }: ImagePreviewThumbnailProps) {
         }}
       ></div>
     );
-
-  return <Skeleton className="w-full h-full" />;
 }

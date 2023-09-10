@@ -10,6 +10,8 @@ type PageNavigationProps = {
 };
 
 export function PageNavigation({ activePage, pageCount }: PageNavigationProps) {
+  if (pageCount <= 1) return null;
+
   const router = useRouter();
 
   const customTheme: CustomFlowbiteTheme["pagination"] = {
