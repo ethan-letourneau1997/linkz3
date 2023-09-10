@@ -1,11 +1,12 @@
-import { Post } from "@/types";
+import { Post, PostPreview } from "@/types";
+
 import { PostVoteButtons } from "./post-vote-buttons";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { getTotalVotes } from "@/lib/get-total-votes";
 
 type PostVotesProps = {
-  post: Post;
+  post: Post | PostPreview;
   horizontal?: boolean;
 };
 

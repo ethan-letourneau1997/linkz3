@@ -1,11 +1,12 @@
 "use server";
 
-import { Post } from "@/types";
+import { Post, PostPreview } from "@/types";
+
 import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 
-export async function upsertPostVote(post: Post, vote: number) {
+export async function upsertPostVote(post: Post | PostPreview, vote: number) {
   const supabase = createServerActionClient({ cookies });
   const { data } = await supabase.auth.getSession();
 

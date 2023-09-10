@@ -1,4 +1,4 @@
-import { LinkPreview, Post } from "@/types";
+import { LinkPreview, Post, PostPreview } from "@/types";
 
 import { HiOutlineLink } from "react-icons/hi";
 import { RiText } from "react-icons/ri";
@@ -7,7 +7,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { getLinkPreview } from "link-preview-js";
 
 type PreviewThumbnailProps = {
-  post: Post;
+  post: Post | PostPreview;
 };
 
 export async function PreviewThumbnail({ post }: PreviewThumbnailProps) {

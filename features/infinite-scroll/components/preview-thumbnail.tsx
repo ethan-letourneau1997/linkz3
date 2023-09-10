@@ -92,9 +92,13 @@ export function ImagePreviewThumbnail({ post }: ImagePreviewThumbnailProps) {
   useEffect(() => {
     async function GetPreviewImageUrl() {
       if (post.id) {
-        const imageUrl = await getPostPreviewImageUrl(post.id);
+        try {
+          const imageUrl = await getPostPreviewImageUrl(post.id);
 
-        setPreviewImage(imageUrl);
+          setPreviewImage(imageUrl);
+        } catch (e) {
+          console.log(e);
+        }
       }
     }
     GetPreviewImageUrl();

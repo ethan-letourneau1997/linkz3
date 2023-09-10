@@ -6,15 +6,15 @@ import {
   BiSolidUpvote,
   BiUpvote,
 } from "react-icons/bi";
+import { Post, PostPreview } from "@/types";
 
-import { Post } from "@/types";
 import { upsertPostVote } from "../api/upsert-post-vote";
 import { experimental_useOptimistic as useOptimistic } from "react";
 
 type PostVoteButtonsProps = {
   userVote: number;
   postVotes: number;
-  post: Post;
+  post: Post | PostPreview;
   horizontal?: boolean;
 };
 

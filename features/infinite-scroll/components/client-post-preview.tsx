@@ -15,38 +15,19 @@ import {
   LinkPreviewThumbnail,
   TextPreviewThumnail,
 } from "./preview-thumbnail";
+import { getPostCommentCount } from "../api/get-post-comment-count";
 
 type PostPreviewProps = {
   post: PostPreview;
 };
 
 export function PostPreview({ post }: PostPreviewProps) {
-  //   const timeSincePost = getTimeSinceNow(post.created_at, true);
-
-  const [commentCount, setCommentCount] = useState(0);
-
-  useEffect(() => {
-    async function getPostInformation() {
-      //   const spaceName = await getPostCommunityName(post.posted_in);
-      //   const commentCount = await getPostCommentCount(post.id);
-      //   const postedByUsername = await getPostPostedBy(post.created_by);
-
-      setCommentCount(commentCount || 0);
-    }
-
-    if (post) getPostInformation();
-  }, [post]);
-
-  //   const spaceName = await getPostCommunityName(post.posted_in);
-  //   const commentCount = await getPostCommentCount(post.id);
-  //   const postedByUsername = await getPostPostedBy(post.created_by);
-
   return (
     <div className="grid grid-cols-12 gap-3 px-2 py-3 mt-2 border-t rounded-md sm:px-4 sm:border dark:border-neutral-800 sm:dark:bg-neutral-900">
       <div className="order-2 sm:order-1 col-span-3 sm:col-span-2 aspect-[4/3]">
+        {post.type === "image" && <ImagePreviewThumbnail post={post} />}
+        {post.type === "link" && <LinkPreviewThumbnail post={post} />}
         <Suspense fallback={<Skeleton className="w-full h-full" />}>
-          {post.type === "link" && <LinkPreviewThumbnail post={post} />}
-          {post.type === "image" && <ImagePreviewThumbnail post={post} />}
           {post.type === "text" && <TextPreviewThumnail />}
         </Suspense>
       </div>
@@ -77,8 +58,7 @@ export function PostPreview({ post }: PostPreviewProps) {
         </div>
 
         <div className="items-center hidden gap-2 mt-2 text-sm sm:flex text-neutral-400">
-          <GoComment />
-          {commentCount} comments
+          <PostCommentCount post={post} />
         </div>
       </div>
       {/* <div className="order-3 hidden col-span-1 sm:block ">
@@ -96,5 +76,33 @@ export function PostPreview({ post }: PostPreviewProps) {
         </div>
       </div> */}
     </div>
+  );
+}
+
+type PostCommentCountProps = {
+  post: PostPreview;
+};
+
+export function PostCommentCount({ post }: PostCommentCountProps) {
+  const [commentCount, setCommentCount] = useState(0);
+
+  useEffect(() => {
+    async function getCommentCount() {
+      if (post.id) {
+        const count = await getPostCommentCount(post.id);
+        if (count) {
+          setCommentCount(count);
+        }
+      }
+    }
+
+    getCommentCount();
+  }, [post.id]);
+
+  return (
+    <>
+      <GoComment />
+      {commentCount} comments
+    </>
   );
 }

@@ -1,7 +1,7 @@
+import { Post, PostPreview as PostPreviewType } from "@/types";
 import { getPostCommunityName, getPostPostedBy } from "@/helpers/post-helpers";
 
 import { GoComment } from "react-icons/go";
-import { Post } from "@/types";
 import { PostLink } from "@/components/links/post-link";
 import { PostVotes } from "@/features/post-votes";
 import { PreviewThumbnail } from "./preview-thumbnail";
@@ -13,13 +13,13 @@ import { getPostCommentCount } from "@/helpers/post-helpers";
 import { getTimeSinceNow } from "@/lib/get-time-since-now";
 
 type PostPreviewProps = {
-  post: Post;
+  post: Post | PostPreviewType;
 };
 
 export async function PostPreview({ post }: PostPreviewProps) {
   const timeSincePost = getTimeSinceNow(post.created_at, true);
   const spaceName = await getPostCommunityName(post.posted_in);
-  const commentCount = await getPostCommentCount(post.id);
+  const commentCount = await getPostCommentCount(post.id!);
   const postedByUsername = await getPostPostedBy(post.created_by);
 
   return (
@@ -54,7 +54,7 @@ export async function PostPreview({ post }: PostPreviewProps) {
             className="mt-1 text-sm font-bold sm:text-base"
             spaceId={post.posted_in}
             spaceName={spaceName}
-            postId={post.id}
+            postId={post.id!}
           />
         </div>
 
