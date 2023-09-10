@@ -15,7 +15,7 @@ export async function fetchPosts(page: number) {
 
   try {
     const { data: posts } = await supabase
-      .from("post")
+      .from("post_preview")
       .select()
       .range(lowerLimit, upperLimit)
       .order("created_at", { ascending: false });

@@ -10,6 +10,7 @@ export type PublicProfile =
   Database["public"]["Tables"]["public_profile"]["Row"];
 export type PostWithVotes =
   Database["public"]["Views"]["post_with_votes"]["Row"];
+export type PostPreview = Database["public"]["Views"]["post_preview"]["Row"];
 
 export type LinkPreview = {
   url: string;

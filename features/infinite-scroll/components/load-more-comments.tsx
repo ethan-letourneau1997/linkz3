@@ -12,6 +12,7 @@ export function LoadMoreComments() {
   const [comments, setComments] = useState<Comment[]>([]);
   // Pages already loaded
   const [pagesLoaded, setPagesLoaded] = useState(1);
+  const [morePosts, setMorePosts] = useState(true);
 
   const { ref, inView } = useInView();
 
@@ -19,7 +20,10 @@ export function LoadMoreComments() {
     const nextPage = pagesLoaded + 1;
 
     const newComments = (await fetchComments(nextPage)) ?? [];
-    console.log(newComments);
+    if (newComments.length === 0) {
+      setMorePosts(false);
+    }
+
     setComments((prevComments: Comment[]) => [...prevComments, ...newComments]);
     setPagesLoaded(nextPage);
   };
@@ -27,16 +31,19 @@ export function LoadMoreComments() {
   useEffect(() => {
     if (inView) {
       loadMoreComments();
-      console.log(comments);
     }
   }, [inView]);
 
   return (
     <>
       <Comments comments={comments} />
-      <div className="flex items-center justify-center p-4" ref={ref}>
-        <Spinner />
-      </div>
+      {morePosts ? (
+        <div className="flex items-center justify-center p-4" ref={ref}>
+          <Spinner />
+        </div>
+      ) : (
+        <div>no more posts to load</div>
+      )}
     </>
   );
 }

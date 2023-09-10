@@ -48,6 +48,18 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "comment_parent_comment_fkey"
+            columns: ["parent_comment"]
+            referencedRelation: "comment_vote_count"
+            referencedColumns: ["comment_id"]
+          },
+          {
+            foreignKeyName: "comment_parent_comment_fkey"
+            columns: ["parent_comment"]
+            referencedRelation: "comment_with_votes"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "comment_posted_by_fkey"
             columns: ["posted_by"]
             referencedRelation: "users"
@@ -63,6 +75,12 @@ export interface Database {
             foreignKeyName: "comment_root_post_fkey"
             columns: ["root_post"]
             referencedRelation: "post_community"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comment_root_post_fkey"
+            columns: ["root_post"]
+            referencedRelation: "post_preview"
             referencedColumns: ["id"]
           },
           {
@@ -115,6 +133,18 @@ export interface Database {
             foreignKeyName: "comment_vote_comment_id_fkey"
             columns: ["comment_id"]
             referencedRelation: "comment_details"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comment_vote_comment_id_fkey"
+            columns: ["comment_id"]
+            referencedRelation: "comment_vote_count"
+            referencedColumns: ["comment_id"]
+          },
+          {
+            foreignKeyName: "comment_vote_comment_id_fkey"
+            columns: ["comment_id"]
+            referencedRelation: "comment_with_votes"
             referencedColumns: ["id"]
           },
           {
@@ -243,6 +273,12 @@ export interface Database {
           {
             foreignKeyName: "post_image_post_id_fkey"
             columns: ["post_id"]
+            referencedRelation: "post_preview"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_image_post_id_fkey"
+            columns: ["post_id"]
             referencedRelation: "post_vote_count"
             referencedColumns: ["post_id"]
           },
@@ -287,6 +323,12 @@ export interface Database {
             foreignKeyName: "post_vote_post_id_fkey"
             columns: ["post_id"]
             referencedRelation: "post_community"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_vote_post_id_fkey"
+            columns: ["post_id"]
+            referencedRelation: "post_preview"
             referencedColumns: ["id"]
           },
           {
@@ -392,6 +434,18 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "comment_parent_comment_fkey"
+            columns: ["parent_comment"]
+            referencedRelation: "comment_vote_count"
+            referencedColumns: ["comment_id"]
+          },
+          {
+            foreignKeyName: "comment_parent_comment_fkey"
+            columns: ["parent_comment"]
+            referencedRelation: "comment_with_votes"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "comment_posted_by_fkey"
             columns: ["posted_by"]
             referencedRelation: "users"
@@ -407,6 +461,98 @@ export interface Database {
             foreignKeyName: "comment_root_post_fkey"
             columns: ["root_post"]
             referencedRelation: "post_community"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comment_root_post_fkey"
+            columns: ["root_post"]
+            referencedRelation: "post_preview"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comment_root_post_fkey"
+            columns: ["root_post"]
+            referencedRelation: "post_vote_count"
+            referencedColumns: ["post_id"]
+          },
+          {
+            foreignKeyName: "comment_root_post_fkey"
+            columns: ["root_post"]
+            referencedRelation: "post_with_community_name"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comment_root_post_fkey"
+            columns: ["root_post"]
+            referencedRelation: "post_with_votes"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      comment_vote_count: {
+        Row: {
+          comment_id: number | null
+          total_votes: number | null
+        }
+        Relationships: []
+      }
+      comment_with_votes: {
+        Row: {
+          content: string | null
+          created_at: string | null
+          id: number | null
+          parent_comment: number | null
+          posted_by: string | null
+          root_post: number | null
+          total_votes: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comment_parent_comment_fkey"
+            columns: ["parent_comment"]
+            referencedRelation: "comment"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comment_parent_comment_fkey"
+            columns: ["parent_comment"]
+            referencedRelation: "comment_details"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comment_parent_comment_fkey"
+            columns: ["parent_comment"]
+            referencedRelation: "comment_vote_count"
+            referencedColumns: ["comment_id"]
+          },
+          {
+            foreignKeyName: "comment_parent_comment_fkey"
+            columns: ["parent_comment"]
+            referencedRelation: "comment_with_votes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comment_posted_by_fkey"
+            columns: ["posted_by"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comment_root_post_fkey"
+            columns: ["root_post"]
+            referencedRelation: "post"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comment_root_post_fkey"
+            columns: ["root_post"]
+            referencedRelation: "post_community"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comment_root_post_fkey"
+            columns: ["root_post"]
+            referencedRelation: "post_preview"
             referencedColumns: ["id"]
           },
           {
@@ -439,6 +585,34 @@ export interface Database {
           posted_in_name: string | null
           title: string | null
           type: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_created_by_fkey"
+            columns: ["created_by"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "post_posted_in_fkey"
+            columns: ["posted_in"]
+            referencedRelation: "community"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      post_preview: {
+        Row: {
+          community_name: string | null
+          content: string | null
+          created_at: string | null
+          created_by: string | null
+          id: number | null
+          post_title: string | null
+          posted_in: number | null
+          title: string | null
+          type: string | null
+          username: string | null
         }
         Relationships: [
           {

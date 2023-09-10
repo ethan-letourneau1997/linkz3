@@ -1,7 +1,8 @@
-import { Post } from "@/types";
+import { PostPreview } from "./client-post-preview";
+import { PostPreview as PostPreviewProps } from "@/types";
 
 type PostsProps = {
-  posts: Post[] | null;
+  posts: PostPreviewProps[] | null;
 };
 
 export function Posts({ posts }: PostsProps) {
@@ -10,10 +11,7 @@ export function Posts({ posts }: PostsProps) {
       {posts ? (
         <>
           {posts.map((post) => (
-            <div key={post.id} className="py-10 bg-neutral-700">
-              <div className="text-3xl font-bold">{post.id}</div>
-              <div>{post.title}</div>
-            </div>
+            <PostPreview key={post.id} post={post} />
           ))}
         </>
       ) : (
