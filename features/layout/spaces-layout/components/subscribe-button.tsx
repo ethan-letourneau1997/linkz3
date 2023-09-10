@@ -27,8 +27,6 @@ export function SubscribeButton({
     deleteSubscription(spaceId);
   }
 
-  console.log(optomisticIsSubscribed);
-
   return (
     <>
       {optomisticIsSubscribed ? (

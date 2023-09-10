@@ -1,5 +1,6 @@
+import { DesktopHeader } from "./desktop-header";
 import { DesktopNavigation } from "./desktop-navigation";
-import { MovileNavigation } from "./mobile-navigatiion";
+import { UserSpacesHandler } from "./user-spaces-handler";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
@@ -17,9 +18,16 @@ export async function Navigation() {
     .single();
 
   return (
-    <div className="w-full dark:bg-neutral-900">
+    <>
+      <DesktopHeader userId={user!.id} />
+
+      <DesktopNavigation user={user} profile={public_profile} />
+      {user && <UserSpacesHandler userId={user?.id} />}
+
+      {/* <div className="w-full dark:bg-neutral-900">
       <MovileNavigation user={user} profile={public_profile} />
       <DesktopNavigation user={user} profile={public_profile} />
-    </div>
+     </div> */}
+    </>
   );
 }

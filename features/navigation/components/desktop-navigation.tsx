@@ -1,11 +1,10 @@
-"use client";
-
 import { GoogleLogin } from "@/components/google-login";
 import Link from "next/link";
 import LogoutButton from "@/components/LogoutButton";
 import { PublicProfile } from "@/types";
-import { SpacesDropdown } from "./spaces-dropdown";
+import { Suspense } from "react";
 import { User } from "@supabase/auth-helpers-nextjs";
+import { UserSpaces } from "./user-spaces";
 
 type DesktopNavigationProps = {
   user: User | null;
@@ -14,8 +13,15 @@ type DesktopNavigationProps = {
 
 export function DesktopNavigation({ user, profile }: DesktopNavigationProps) {
   return (
-    <nav className="justify-center hidden h-16 md:flex ">
+    // <NavMenu />
+    <nav className="justify-center hidden h-14 md:flex ">
       <div className="flex items-center justify-between w-full max-w-3xl p-3 text-sm text-foreground">
+        {user && (
+          <Suspense fallback={<div>Loading...</div>}>
+            {" "}
+            <UserSpaces userId={user.id} />
+          </Suspense>
+        )}
         <div className="flex items-center gap-3">
           <Link href="/">Home</Link>
           <Link href="/spaces">Spaces</Link>
@@ -28,7 +34,6 @@ export function DesktopNavigation({ user, profile }: DesktopNavigationProps) {
               </Link>
             </>
           )}
-          {user && <SpacesDropdown userId={profile.id} />}
         </div>
         <div>
           {user ? (

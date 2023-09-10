@@ -15,10 +15,10 @@ html {
 }
 
 input {
-  @apply ring-offset-0 ring-0;
+  @apply !ring-offset-0 !ring-0 !ring-transparent !outline-none;
 }
 .input:focus {
-  @apply outline-none ring-0;
+  @apply !ring-offset-0 !ring-0 !ring-transparent !outline-none;
 }
 
 #TiptapMenu button {
