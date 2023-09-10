@@ -6,7 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { Pagination } from "flowbite-react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-export function SubscriptionPagination() {
+export function HandleSpacePagination() {
   const params = useParams();
   const router = useRouter();
 
@@ -14,31 +14,18 @@ export function SubscriptionPagination() {
   const supabase = createClientComponentClient();
   const [pageCount, setPageCount] = useState(0);
 
-  useEffect(() => {
-    async function getPostCount() {
-      const { data } = await supabase.auth.getSession();
-
-      const { data: user_subscriptions } = await supabase
-        .from("user_community")
-        .select("*, community_id(*)")
-        .eq("user_id", data.session?.user.id);
-
-      const communityIds = user_subscriptions?.map(
-        (sub) => sub.community_id.id
-      );
-
-      if (communityIds) {
-        const { count } = await supabase
-          .from("post")
-          .select("*", { count: "exact", head: true })
-          .in("posted_in", communityIds);
-
-        if (count) {
-          const pages = Math.ceil(count / 10);
-          setPageCount(pages);
-        }
-      }
+  async function getPostCount() {
+    const { count } = await supabase
+      .from("post")
+      .select("*", { count: "exact", head: true })
+      .eq("posted_in", params.spaceId);
+    if (count) {
+      const pages = Math.ceil(count / 10);
+      setPageCount(pages);
     }
+  }
+
+  useEffect(() => {
     getPostCount();
   }, [params]);
 

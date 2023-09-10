@@ -1,4 +1,4 @@
-import { ProfilePagination } from "@/features/layout/profile-layout/components/profile-pagination";
+import { HandleProfilePagination } from "@/features/page-navigation";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <div>
       {children}
-      <ProfilePagination />
+      <HandleProfilePagination />
     </div>
   );
 }

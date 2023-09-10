@@ -1,4 +1,4 @@
-import { SubscriptionPagination } from "@/features/layout/subscriptions-layout/components/subscription-pagination";
+import { HandleSubscriptionPagination } from "@/features/page-navigation";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <div>
       {children}
-      <SubscriptionPagination />
+      <HandleSubscriptionPagination />
     </div>
   );
 }
