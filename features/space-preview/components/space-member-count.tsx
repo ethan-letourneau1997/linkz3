@@ -14,5 +14,9 @@ export async function SpaceMemberCount({ space }: SpaceMemberCountProps) {
     .select("*", { count: "exact", head: true })
     .eq("community_id", space.id);
 
-  return <div>members: {count}</div>;
+  return (
+    <>
+      {count} {count === 1 ? "member" : "members"}
+    </>
+  );
 }
