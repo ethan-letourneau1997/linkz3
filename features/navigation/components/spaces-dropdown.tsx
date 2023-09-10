@@ -13,6 +13,7 @@ import Link from "next/link";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { UserSpace } from "@/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useParams } from "next/navigation";
 
 type SpacesDropdownProps = {
   userId: string;
@@ -20,6 +21,8 @@ type SpacesDropdownProps = {
 
 export function SpacesDropdown({ userId }: SpacesDropdownProps) {
   const supabase = createClientComponentClient();
+
+  const params = useParams();
 
   useEffect(() => {
     async function fetchUserSubscriptions() {
@@ -33,7 +36,7 @@ export function SpacesDropdown({ userId }: SpacesDropdownProps) {
       }
     }
     fetchUserSubscriptions();
-  }, [userId]);
+  }, [userId, params]);
 
   const [subscriptions, setSubscriptions] = useState<UserSpace[]>([]);
 
