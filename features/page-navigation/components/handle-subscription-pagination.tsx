@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
 
-import { Pagination } from "flowbite-react";
+import { PageNavigation } from "./page-navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useParams } from "next/navigation";
 
 export function HandleSubscriptionPagination() {
   const params = useParams();
-  const router = useRouter();
 
   const activePage = parseInt(params.page as string, 10);
   const supabase = createClientComponentClient();
@@ -44,13 +43,7 @@ export function HandleSubscriptionPagination() {
 
   return (
     <div className="flex justify-center mt-3">
-      <Pagination
-        currentPage={activePage}
-        onPageChange={(page) => {
-          router.push(`${page}`);
-        }}
-        totalPages={pageCount}
-      />
+      <PageNavigation activePage={activePage} pageCount={pageCount} />
     </div>
   );
 }
