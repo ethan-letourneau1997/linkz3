@@ -1,6 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import { AvatarDropdown } from "./avatar-dropdown";
 import { GoogleLogin } from "@/components/google-login";
 import Link from "next/link";
 import LogoutButton from "@/components/LogoutButton";

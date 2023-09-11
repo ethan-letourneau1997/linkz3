@@ -1,4 +1,3 @@
-import { DesktopHeader } from "./desktop-header";
 import { DesktopNavigation } from "./desktop-navigation";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";

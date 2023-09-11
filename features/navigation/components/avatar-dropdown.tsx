@@ -40,25 +40,8 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
   const [spaces, setSpaces] = useState(userSpaces);
 
   const [open, setOpen] = useState(false);
-  // const [subscriptions, setSubscriptions] = useState<UserSpace[]>([]);
 
   const supabase = createClientComponentClient();
-
-  //TODO - add realtime updates
-
-  // useEffect(() => {
-  //   async function fetchUserSubscriptions() {
-  //     const { data: user_subscriptions } = await supabase
-  //       .from("user_community")
-  //       .select("*, community_id(*)")
-  //       .eq("user_id", profile.id);
-
-  //     if (user_subscriptions) {
-  //       setSubscriptions(user_subscriptions);
-  //     }
-  //   }
-  //   fetchUserSubscriptions();
-  // }, [profile.id]);
 
   useEffect(() => {
     setSpaces(userSpaces);
