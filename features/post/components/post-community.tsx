@@ -10,7 +10,7 @@ export async function PostCommunity({ post }: PostCommunityProps) {
   const communityName = await getPostCommunityName(post.posted_in);
   return (
     <Link
-      className="hover:underline hover:cursor-pointer"
+      className="hover:underline hover:cursor-pointer "
       href={`/spaces/${post.posted_in}/${communityName}`}
     >
       {communityName}

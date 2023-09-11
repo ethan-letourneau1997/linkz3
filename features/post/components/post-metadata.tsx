@@ -11,8 +11,8 @@ export async function PostMetadata({ post }: PostMetadataProps) {
   const timeSincePost = getTimeSinceNow(post.created_at, true);
 
   return (
-    <div>
+    <>
       posted by {postedby} - {timeSincePost}
-    </div>
+    </>
   );
 }

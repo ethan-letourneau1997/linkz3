@@ -1,3 +1,12 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
 import { ImagePostContent } from "./image-post-content";
 import { LinkPostContent } from "./link-post-content";
 import { PostCommentCount } from "./post-comment-count";
@@ -27,28 +36,38 @@ export async function Post({ params }: PostProps) {
 
   if (post)
     return (
-      <div className="w-full px-5 py-5 mt-5 space-y-3 dark:bg-neutral-900">
-        <div className="flex justify-between">
-          <PostMetadata post={post} />
-          <Suspense fallback={<></>}>
-            <PostOptions post={post} params={params} />
-          </Suspense>
-        </div>
-        <PostCommunity post={post} />
+      <Card className=" dark:text-neutral-300">
+        <CardHeader>
+          <div className="flex justify-between">
+            <CardDescription className="flex text-sm ">
+              <PostCommunity post={post} />
+              &nbsp;-&nbsp;
+              <PostMetadata post={post} />
+            </CardDescription>
 
-        <h1 className="py-3 text-xl ">{post.title}</h1>
+            <Suspense fallback={<></>}>
+              <PostOptions post={post} params={params} />
+            </Suspense>
+          </div>
 
-        {post.type === "text" && <TextPostContent post={post} />}
+          <CardTitle className="text-xl font-semibold tracking-tight dark:text-neutral-200">
+            {post.title}
+          </CardTitle>
+        </CardHeader>
 
-        {post.type === "link" && <LinkPostContent post={post} />}
+        <CardContent>
+          {post.type === "text" && <TextPostContent post={post} />}
+          {post.type === "link" && <LinkPostContent post={post} />}
+          {post.type === "image" && <ImagePostContent post={post} />}
+        </CardContent>
 
-        {post.type === "image" && <ImagePostContent post={post} />}
-
-        <PostFooter params={params}>
-          <PostVotes post={post} horizontal />
-          <PostCommentCount post={post} />
-        </PostFooter>
-      </div>
+        <CardFooter>
+          <PostFooter params={params}>
+            <PostVotes post={post} horizontal />
+            <PostCommentCount post={post} />
+          </PostFooter>
+        </CardFooter>
+      </Card>
     );
 
   if (!post) return <div>no post available</div>;
