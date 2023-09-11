@@ -11,6 +11,8 @@ export type PublicProfile =
 export type PostWithVotes =
   Database["public"]["Views"]["post_with_votes"]["Row"];
 export type PostPreview = Database["public"]["Views"]["post_preview"]["Row"];
+export type UserSubscription =
+  Database["public"]["Views"]["user_subscription"]["Row"];
 
 export type UserSpace = {
   user_id: string;
