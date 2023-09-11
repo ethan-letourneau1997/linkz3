@@ -11,12 +11,7 @@ type FeedLayoutProps = {
 export async function FeedLayout({ params }: FeedLayoutProps) {
   const posts = await getSortedSubscriptionPosts(params.page, params.sortBy);
 
-  if (posts)
-    return (
-      <>
-        <PostPreviews posts={posts} />
-      </>
-    );
+  if (posts) return <PostPreviews posts={posts} />;
 
   if (!posts) return <div>No posts</div>;
 }

@@ -1,4 +1,4 @@
-import { FeedDetails } from "@/features/layout/feed-layout/components/feed-details";
+import { FeedDetails } from "@/layout/feed-layout";
 
 export const dynamic = "force-dynamic";
 

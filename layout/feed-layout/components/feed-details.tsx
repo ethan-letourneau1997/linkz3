@@ -4,10 +4,11 @@ import { SortPosts } from "@/features/sort-posts";
 
 export function FeedDetails() {
   return (
-    <div>
-      <div className="py-3 mt-2 text-2xl font-semibold text-center">
-        My Subscriptions
-      </div>
+    <div className="w-full max-w-3xl mt-5 ">
+      <h1 className="text-2xl font-bold tracking-tight text-center ">
+        My Feed
+      </h1>
+
       <SortPosts pathname={`/subscriptions/feed/`} />
     </div>
   );
