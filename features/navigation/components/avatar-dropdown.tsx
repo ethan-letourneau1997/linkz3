@@ -66,7 +66,7 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
-      <DropdownMenuTrigger className="px-4 py-2 border border-transparent rounded hover:border-neutral-800">
+      <DropdownMenuTrigger className="py-2 pr-4 border border-transparent rounded hover:border-neutral-800">
         <div className="flex items-center gap-2">
           <Avatar className="w-6 h-6">
             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
@@ -79,17 +79,27 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
       <DropdownMenuContent className="w-[200px]">
         <DropdownMenuLabel>{profile.username}</DropdownMenuLabel>
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <FaUserAstronaut className="w-4 h-4 mr-2" />
-            Profile
+          <DropdownMenuItem className="py-0 ">
+            <FaUserAstronaut className="w-4 h-4 mr-2 " />
+            <Link
+              className="w-full py-1.5"
+              href={`/profile/${profile.username}/post/new/1`}
+            >
+              Profile
+            </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="py-0 ">
             <BsFillRocketFill className="w-4 h-4 mr-2 " />
-            Feed
+
+            <Link className="w-full py-1.5" href={`/subscriptions/feed/new/1`}>
+              Feed
+            </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="py-0 ">
             <GiGalaxy className="w-4 h-4 mr-2 " />
-            Subscriptions
+            <Link href={"/subscriptions"} className="w-full py-1.5 ">
+              Subscriptions
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
 
