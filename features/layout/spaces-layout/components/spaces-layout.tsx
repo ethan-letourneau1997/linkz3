@@ -30,11 +30,6 @@ export async function SpacesLayout() {
             </CardTitle>
             <CardDescription>{space.description}</CardDescription>
           </CardHeader>
-          {/* <CardContent>
-            <p>
-              <SpaceMemberCount space={space} />
-            </p>
-          </CardContent> */}
           <CardFooter className="flex items-end">
             <HandleUserSubscription space={space} />
           </CardFooter>

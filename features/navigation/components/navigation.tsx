@@ -16,13 +16,13 @@ export async function Navigation() {
     .single();
 
   return (
-    <>
+    <nav className="w-full border-b border-neutral-800">
       <DesktopNavigation profile={public_profile} />
 
       {/* <div className="w-full dark:bg-neutral-900">
       <MovileNavigation user={user} profile={public_profile} />
       <DesktopNavigation user={user} profile={public_profile} />
      </div> */}
-    </>
+    </nav>
   );
 }

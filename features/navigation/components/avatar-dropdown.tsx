@@ -28,6 +28,7 @@ import { useEffect, useState } from "react";
 import { BsFillRocketFill } from "react-icons/bs";
 import { FaUserAstronaut } from "react-icons/fa";
 import { GiGalaxy } from "react-icons/gi";
+import { IoChevronDown } from "react-icons/io5";
 import Link from "next/link";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
@@ -65,13 +66,14 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className="px-4 py-2 border border-transparent rounded hover:border-neutral-800">
         <div className="flex items-center gap-2">
-          <Avatar className="w-7 h-7">
+          <Avatar className="w-6 h-6">
             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           {profile.username}
+          <IoChevronDown />
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[200px]">
