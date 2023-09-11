@@ -1,4 +1,4 @@
-import { SubscriptionsLayout } from "@/features/layout/subscriptions-layout";
+import { FeedLayout } from "@/features/layout/feed-layout";
 
 export const dynamic = "force-dynamic";
 
@@ -10,5 +10,5 @@ type IndexProps = {
 };
 
 export default async function Index({ params }: IndexProps) {
-  return <SubscriptionsLayout params={params} />;
+  return <FeedLayout params={params} />;
 }
