@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useEffect, useState } from "react";
 
-import { ComboboxDropdownMenu } from "./combo-dropdown";
 import Link from "next/link";
 import { UserSpace } from "@/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -41,8 +40,7 @@ export function DesktopHeader({ userId }: { userId: string }) {
 
   const [subscriptions, setSubscriptions] = useState<UserSpace[]>([]);
   return (
-    <div className="flex items-center h-14">
-      <ComboboxDropdownMenu userId={userId} />
+    <div className="flex items-center h-14 dark:text-neutral-200">
       <DropdownMenu>
         <DropdownMenuTrigger className="text-sm">Spaces</DropdownMenuTrigger>
 

@@ -24,7 +24,7 @@ export function MovileNavigation({ user, profile }: NavHeaderProps) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="block md:hidden">
+    <div className="block md:hidden dark:text-neutral-200">
       <div className="flex justify-between p-4 ">
         <div />
         <button onClick={() => setOpen(true)}>
