@@ -8,7 +8,7 @@ export function SubscriptionDetails() {
       <div className="py-3 mt-2 text-2xl font-semibold text-center">
         My Subscriptions
       </div>
-      <SortPosts pathname={`/subscriptions/`} />
+      <SortPosts pathname={`/subscriptions/feed/`} />
     </div>
   );
 }
