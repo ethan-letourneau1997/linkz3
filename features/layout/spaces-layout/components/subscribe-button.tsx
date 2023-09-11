@@ -1,30 +1,42 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Space } from "@/types";
 import { createSubscription } from "../api/create-subscriptions";
 import { deleteSubscription } from "../api/delete-subscription";
 import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 type UserSubscriptionProps = {
   isSubscribed: boolean;
-  spaceId: number;
+  space: Space;
 };
 
 export function SubscribeButton({
   isSubscribed,
-  spaceId,
+  space,
 }: UserSubscriptionProps) {
   const [optomisticIsSubscribed, setOptomisticIsSubscribed] =
     useState(isSubscribed);
 
+  const { toast } = useToast();
+
   function handleSubscribe() {
     setOptomisticIsSubscribed(true);
-    createSubscription(spaceId);
+    createSubscription(space.id);
+    toast({
+      title: "Subscribed",
+      description: `You are now a member of ${space.name}.`,
+    });
   }
 
   function handleUnsubscribe() {
     setOptomisticIsSubscribed(false);
-    deleteSubscription(spaceId);
+    deleteSubscription(space.id);
+    toast({
+      title: "Unsubscribed",
+      description: `You are no longer a member of ${space.name}.`,
+    });
   }
 
   return (

@@ -10,8 +10,6 @@ type UserSubscriptionProps = {
 export async function HandleUserSubscription({ space }: UserSubscriptionProps) {
   const supabase = createServerComponentClient({ cookies });
 
-  // data.session?.user.id
-
   const { data } = await supabase.auth.getSession();
 
   async function checkUserSubscription() {
@@ -36,6 +34,8 @@ export async function HandleUserSubscription({ space }: UserSubscriptionProps) {
   const isSubscribed = await checkUserSubscription();
 
   return (
-    <SubscribeButton spaceId={space.id} isSubscribed={isSubscribed || false} />
+    <>
+      <SubscribeButton space={space} isSubscribed={isSubscribed || false} />
+    </>
   );
 }
