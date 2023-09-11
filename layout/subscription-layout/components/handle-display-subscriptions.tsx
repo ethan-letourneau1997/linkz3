@@ -26,7 +26,13 @@ export async function HandleDisplaySubscriptions() {
 
   const spaces = await getSpaces();
 
-  if (spaces && spaces.length > 0) return <Subscriptions spaces={spaces} />;
-
-  if (spaces && spaces.length === 0) return <div>No subscriptions!</div>;
+  return (
+    <div className="mt-7">
+      {spaces && spaces.length > 0 ? (
+        <Subscriptions spaces={spaces} />
+      ) : (
+        <div>No subscriptions!</div>
+      )}
+    </div>
+  );
 }
