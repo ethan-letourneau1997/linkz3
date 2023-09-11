@@ -5,6 +5,13 @@ import { cookies } from "next/headers";
 import { getTimeSinceNow } from "../../../lib/get-time-since-now";
 import { CommentVotes } from "@/features/comment-votes";
 import { CommentReplyInput } from "./comment-reply-input";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 
 type CommentProps = {
   comment: Comment;
@@ -14,22 +21,29 @@ type CommentProps = {
 
 export function Comment({ comment, children, params }: CommentProps) {
   return (
-    <div className="p-2 mt-3 border">
-      <div>
-        <CommentUser comment={comment} />
+    <Card className="border-none">
+      <CardHeader className="pb-3">
+        <CardDescription className="text-sm">
+          <CommentUser comment={comment} />
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="pb-3">
         <div
           className="prose dark:prose-invert"
           dangerouslySetInnerHTML={{ __html: comment.content || "" }}
         />
-      </div>
-      <div>
-        <CommentVotes horizontal comment={comment} />
-      </div>
-      <div>
-        <CommentReplyInput comment={comment} params={params} />
-      </div>
+      </CardContent>
+
+      <CardFooter>
+        <div>
+          <CommentVotes horizontal comment={comment} />
+        </div>
+        <div>
+          <CommentReplyInput comment={comment} params={params} />
+        </div>
+      </CardFooter>
       {children}
-    </div>
+    </Card>
   );
 }
 
@@ -45,8 +59,8 @@ export async function CommentUser({ comment }: CommentUserProps) {
     .single();
 
   return (
-    <div className="text-sm text-neutral-400">
+    <>
       {public_profile.username} - {getTimeSinceNow(comment.created_at, true)}
-    </div>
+    </>
   );
 }

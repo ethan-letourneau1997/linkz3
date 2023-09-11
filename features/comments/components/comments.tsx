@@ -1,3 +1,4 @@
+import { Card } from "@/components/ui/card";
 import { Comment } from "./comment";
 import { Comment as CommentType } from "@/types";
 import { PostRouterParams } from "@/types";
@@ -31,7 +32,7 @@ export async function Comments({ params }: CommentsProps) {
 
   if (comments && comments.length > 0)
     return (
-      <div className="px-3 py-5 mt-5 mb-8 space-y-3 bg-neutral-900 ">
+      <Card className="mt-5 mb-8 space-y-3 ">
         {rootComments?.map((rootComment) => (
           <Comment key={rootComment.id} comment={rootComment} params={params}>
             <ChildComments
@@ -41,7 +42,7 @@ export async function Comments({ params }: CommentsProps) {
             />
           </Comment>
         ))}
-      </div>
+      </Card>
     );
 }
 

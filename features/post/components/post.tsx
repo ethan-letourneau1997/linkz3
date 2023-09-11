@@ -13,7 +13,7 @@ import { PostCommentCount } from "./post-comment-count";
 import { PostCommunity } from "./post-community";
 import { PostFooter } from "./post-footer";
 import { PostMetadata } from "./post-metadata";
-import { PostOptions } from "./post-options";
+import { PostOptionsMenu } from "./post-options-menu";
 import { PostRouterParams } from "@/types";
 import { PostVotes } from "@/features/post-votes";
 import { Suspense } from "react";
@@ -36,9 +36,9 @@ export async function Post({ params }: PostProps) {
 
   if (post)
     return (
-      <Card className=" dark:text-neutral-300">
+      <Card className="mt-5 dark:text-neutral-300">
         <CardHeader>
-          <div className="flex justify-between">
+          <div className="flex items-center justify-between">
             <CardDescription className="flex text-sm ">
               <PostCommunity post={post} />
               &nbsp;-&nbsp;
@@ -46,7 +46,8 @@ export async function Post({ params }: PostProps) {
             </CardDescription>
 
             <Suspense fallback={<></>}>
-              <PostOptions post={post} params={params} />
+              <PostOptionsMenu post={post} params={params} />
+              {/* <PostOptions post={post} params={params} /> */}
             </Suspense>
           </div>
 

@@ -28,6 +28,6 @@ export async function deletePost(post: Post, communityName: string) {
   // delete post from database
   await supabase.from("post").delete().eq("id", post.id);
 
-  revalidatePath(`/spaces/${post.posted_in}/${communityName}`);
-  redirect(`/spaces/${post.posted_in}/${communityName}`);
+  revalidatePath(`/spaces/${post.posted_in}/${communityName}/new/1`);
+  redirect(`/spaces/${post.posted_in}/${communityName}/new/1`);
 }
