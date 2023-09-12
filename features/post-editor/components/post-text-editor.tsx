@@ -3,8 +3,8 @@
 import { Post, PostRouterParams } from "@/types";
 import { useState, useTransition } from "react";
 
-import { Button } from "flowbite-react";
 import Link from "next/link";
+import { LoadingButton } from "@/components/loading-button";
 import { TextEditor } from "@/features/text-editor";
 import { updatePost } from "../api/update-post";
 
@@ -32,13 +32,9 @@ export function PostTextEditor({ post, params }: HandlePostEditorProps) {
       >
         Cancel
       </Link>
-      <Button
-        color="success"
-        onClick={handleUpdatePost}
-        isProcessing={isPending}
-      >
+      <LoadingButton onClick={handleUpdatePost} isLoading={isPending}>
         Save
-      </Button>
+      </LoadingButton>
     </div>
   );
 

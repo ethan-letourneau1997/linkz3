@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 
-import { Button } from "flowbite-react";
+import { LoadingButton } from "@/components/loading-button";
 import { PostRouterParams } from "@/types";
 import { TextEditor } from "@/features/text-editor";
 import { submitComment } from "@/features/comments/api/submit-comment";
@@ -30,9 +30,9 @@ export function RootCommentInput({ params, hideReply }: RootCommentInputProps) {
   }
 
   const replyButton = (
-    <Button size="sm" onClick={handleSubmitReply} isProcessing={isPending}>
+    <LoadingButton size="sm" onClick={handleSubmitReply} isLoading={isPending}>
       Reply
-    </Button>
+    </LoadingButton>
   );
 
   return (

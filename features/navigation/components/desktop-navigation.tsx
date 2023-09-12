@@ -1,7 +1,7 @@
 import { AuthButtons } from "./auth-buttons";
 import Link from "next/link";
 import { PublicProfile } from "@/types";
-import { ThemeToggle } from "@/components/theme-toggle.tsx";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { UserSpacesHandler } from "./user-spaces-handler";
 
 type DesktopNavigationProps = {

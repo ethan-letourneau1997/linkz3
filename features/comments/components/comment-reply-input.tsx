@@ -3,7 +3,7 @@
 import { Comment, PostRouterParams } from "@/types";
 import { useState, useTransition } from "react";
 
-import { Button } from "flowbite-react";
+import { LoadingButton } from "@/components/loading-button";
 import { TextEditor } from "@/features/text-editor";
 import { submitComment } from "../api/submit-comment";
 
@@ -31,9 +31,9 @@ export function CommentReplyInput({ comment, params }: CommentReplyInputProps) {
   }
 
   const replyButton = (
-    <Button size="sm" onClick={handleSubmitReply} isProcessing={isPending}>
+    <LoadingButton size="sm" onClick={handleSubmitReply} isLoading={isPending}>
       Reply
-    </Button>
+    </LoadingButton>
   );
 
   return (
