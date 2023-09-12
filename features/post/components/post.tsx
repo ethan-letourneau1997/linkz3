@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 
 import { ImagePostContent } from "./image-post-content";
+import Link from "next/link";
 import { LinkPostContent } from "./link-post-content";
 import { PostCommentCount } from "./post-comment-count";
 import { PostCommunity } from "./post-community";
@@ -71,5 +72,13 @@ export async function Post({ params }: PostProps) {
       </Card>
     );
 
-  if (!post) return <div>no post available</div>;
+  if (!post)
+    return (
+      <div>
+        Post does not exist or has been deleted. Return to{" "}
+        <Link href={`/spaces/${params.spaceId}/${params.spaceName}`}>
+          {params.spaceName}
+        </Link>
+      </div>
+    );
 }

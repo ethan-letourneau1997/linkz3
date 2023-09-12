@@ -21,12 +21,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal, Trash } from "lucide-react";
 import { Post, PostRouterParams } from "@/types";
+import { useState, useTransition } from "react";
 
 import { AiOutlineEdit } from "react-icons/ai";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { LoadingButton } from "@/components/loading-button";
 import { deletePost } from "../api/delete-post";
-import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 type PostOptionsMenuProps = {
   post: Post;
@@ -36,10 +38,19 @@ type PostOptionsMenuProps = {
 export function PostOptionsMenu({ post, params }: PostOptionsMenuProps) {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
+  const { toast } = useToast();
 
   function handleDeletePost() {
-    deletePost(post, params.spaceName);
-    setOpenModal(false);
+    startTransition(async () => {
+      deletePost(post, params.spaceName);
+
+      toast({
+        title: "Post Deleted",
+        description: `Your post has been permanently deleted.`,
+      });
+    });
   }
 
   return (
@@ -60,10 +71,11 @@ export function PostOptionsMenu({ post, params }: PostOptionsMenuProps) {
               Cancel
             </AlertDialogCancel>
             <AlertDialogAction
+              asChild
               className="bg-red-500 text-neutral-50 hover:bg-red-500/90 dark:bg-red-500 dark:text-neutral-50 dark:hover:bg-red-500/90"
               onClick={handleDeletePost}
             >
-              Delete
+              <LoadingButton isLoading={isPending}>Delete</LoadingButton>
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
