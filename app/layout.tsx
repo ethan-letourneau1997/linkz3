@@ -2,6 +2,7 @@ import "./globals.css";
 
 import { Inter } from "next/font/google";
 import { Navigation } from "@/features/navigation";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({
@@ -22,13 +23,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.className} dark`}>
+    <html lang="en" className={`${inter.className}`}>
       <body>
-        <main className="flex flex-col items-center min-h-screen pb-16 dark:bg-neutral-950 dark:text-neutral-200">
-          <Navigation />
-          {children}
-        </main>
-        <Toaster />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <main className="flex flex-col items-center min-h-screen pb-16 dark:bg-neutral-950 dark:text-neutral-200">
+            <Navigation />
+            {children}
+          </main>
+
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

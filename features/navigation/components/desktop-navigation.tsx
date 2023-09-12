@@ -1,6 +1,7 @@
 import { AuthButtons } from "./auth-buttons";
 import Link from "next/link";
 import { PublicProfile } from "@/types";
+import { ThemeToggle } from "@/components/theme-toggle.tsx";
 import { UserSpacesHandler } from "./user-spaces-handler";
 
 type DesktopNavigationProps = {
@@ -15,7 +16,8 @@ export function DesktopNavigation({ profile }: DesktopNavigationProps) {
         <Link href="/">Home</Link>
         <Link href="/spaces">Spaces</Link>
       </div>
-      <div>
+      <div className="flex items-center gap-2">
+        <ThemeToggle />
         <AuthButtons profile={profile} />
       </div>
     </div>
