@@ -6,6 +6,7 @@ import { useState, useTransition } from "react";
 import { LoadingButton } from "@/components/loading-button";
 import { Textarea } from "@/components/ui/textarea";
 import { upsertImageCaption } from "../api/upsert-image-caption";
+import { useToast } from "@/components/ui/use-toast";
 
 type CaptionInputProps = {
   image: PostImage;
@@ -17,9 +18,15 @@ export function CaptionInput({ image, params }: CaptionInputProps) {
 
   const [isPending, startTransition] = useTransition();
 
+  const { toast } = useToast();
+
   function handleSubmitCaption() {
     startTransition(async () => {
       upsertImageCaption({ image: image, newCaption: caption, params: params });
+      toast({
+        title: "Caption Updated",
+        description: `Your changes have been saved!.`,
+      });
     });
   }
   return (
