@@ -9,18 +9,19 @@ export async function ImageEditorHeader({ params }: ImageEditorHeaderProps) {
   return (
     <div className="w-full max-w-2xl mt-5 text-center">
       <>
-        <h2 className="text-xl font-semibold ">
+        <h1 className="text-2xl font-semibold tracking-tight scroll-m-20 ">
           Change an image caption and click save!
-        </h2>
-        <div className="mt-1 text-sm">
-          when you&apos;re done,&nbsp;
+        </h1>
+        <p className="mt-2 text-sm text-neutral-400">
+          Edit image captions. When you&apos;re done, return to the&nbsp;
           <Link
             className="text-blue-500 hover:cursor-pointer"
             href={`/spaces/${params.spaceId}/${params.spaceName}/post/${params.postId}`}
           >
-            return to post
+            post
           </Link>
-        </div>
+          .
+        </p>
       </>
     </div>
   );
