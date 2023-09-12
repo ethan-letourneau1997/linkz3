@@ -7,12 +7,17 @@ import { LoadingButton } from "@/components/loading-button";
 import { TextEditor } from "@/features/text-editor";
 import { submitComment } from "../api/submit-comment";
 
-type CommentReplyInputProps = {
+type CommentFooterProps = {
   comment: Comment;
   params: PostRouterParams;
+  children: JSX.Element;
 };
 
-export function CommentReplyInput({ comment, params }: CommentReplyInputProps) {
+export function CommentFooter({
+  comment,
+  params,
+  children,
+}: CommentFooterProps) {
   const [commentContent, setCommentContent] = useState("");
   const [showReply, setShowReply] = useState(false);
 
@@ -42,19 +47,21 @@ export function CommentReplyInput({ comment, params }: CommentReplyInputProps) {
   );
 
   return (
-    <div className="">
-      <button onClick={() => setShowReply(!showReply)}>
-        {showReply ? "Cancel" : "Reply"}
-      </button>
-
+    <div className="w-full ">
+      <div className="flex gap-1">
+        {children}
+        <button onClick={() => setShowReply(!showReply)}>
+          {showReply ? "Cancel" : "Reply"}
+        </button>
+      </div>
       {showReply && (
-        <>
+        <div className="mt-3">
           <TextEditor
             editorContent={commentContent}
             setEditorContent={setCommentContent}
             replyButton={replyButton}
           />
-        </>
+        </div>
       )}
     </div>
   );

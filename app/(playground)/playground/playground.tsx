@@ -1,3 +1,3 @@
 export function Playground() {
-  return <div></div>;
+  return <div />;
 }

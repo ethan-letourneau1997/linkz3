@@ -32,7 +32,7 @@ export async function Comments({ params }: CommentsProps) {
 
   if (comments && comments.length > 0)
     return (
-      <Card className="mt-5 mb-8 space-y-3 ">
+      <Card className="py-5 pl-5 mt-5 mb-8 space-y-3">
         {rootComments?.map((rootComment) => (
           <Comment key={rootComment.id} comment={rootComment} params={params}>
             <ChildComments
@@ -62,7 +62,7 @@ async function ChildComments({
   return (
     <div>
       {childComments?.map((childComment) => (
-        <div className="pl-6 " key={childComment.id}>
+        <div className="pl-2 " key={childComment.id}>
           <Comment comment={childComment} params={params}>
             <ChildComments
               commentId={childComment.id}
