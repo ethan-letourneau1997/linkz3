@@ -1,4 +1,4 @@
-import { FaComments } from "react-icons/fa";
+import { GoComment } from "react-icons/go";
 import { Post } from "@/types";
 import { getPostCommentCount } from "@/helpers/post-helpers";
 
@@ -11,7 +11,7 @@ export async function PostCommentCount({ post }: PostCommentCountProps) {
 
   return (
     <div className="flex items-center gap-1">
-      <FaComments />
+      <GoComment />
       {commentCount} comments
     </div>
   );

@@ -4,7 +4,6 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 
 import { ImagePostContent } from "./image-post-content";
@@ -19,6 +18,7 @@ import { PostRouterParams } from "@/types";
 import { PostVotes } from "@/features/post-votes";
 import { Suspense } from "react";
 import { TextPostContent } from "./text-post-content";
+import { Title } from "./typography";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
@@ -52,12 +52,10 @@ export async function Post({ params }: PostProps) {
             </Suspense>
           </div>
 
-          <CardTitle className="text-xl font-semibold tracking-tight dark:text-neutral-200">
-            {post.title}
-          </CardTitle>
+          <Title size="h4" as="h1" text={post.title} />
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="pb-2">
           {post.type === "text" && <TextPostContent post={post} />}
           {post.type === "link" && <LinkPostContent post={post} />}
           {post.type === "image" && <ImagePostContent post={post} />}

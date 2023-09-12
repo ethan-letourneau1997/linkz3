@@ -30,16 +30,23 @@ export function RootCommentInput({ params, hideReply }: RootCommentInputProps) {
   }
 
   const replyButton = (
-    <LoadingButton size="sm" onClick={handleSubmitReply} isLoading={isPending}>
+    <LoadingButton
+      size="sm"
+      variant="outline"
+      onClick={handleSubmitReply}
+      isLoading={isPending}
+    >
       Reply
     </LoadingButton>
   );
 
   return (
-    <TextEditor
-      editorContent={commentContent}
-      setEditorContent={setCommentContent}
-      replyButton={replyButton}
-    />
+    <div className="w-full mt-3 ">
+      <TextEditor
+        editorContent={commentContent}
+        setEditorContent={setCommentContent}
+        replyButton={replyButton}
+      />
+    </div>
   );
 }

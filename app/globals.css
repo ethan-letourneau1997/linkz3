@@ -142,12 +142,14 @@ strong {
 }
 
 .dots {
-  display: flex;
+  /*display: flex;*/
+  display: none;
   padding: 10px 0;
   justify-content: center;
 }
 
 .dot {
+  @apply dark:bg-transparent dark:bg-neutral-500;
   border: none;
   width: 10px;
   height: 10px;
@@ -163,12 +165,13 @@ strong {
 }
 
 .dot.active {
-  background: #000;
+  @apply dark:bg-neutral-100;
 }
 
 .arrow {
-  width: 30px;
-  height: 30px;
+  @apply dark:bg-neutral-700 dark:bg-opacity-50 py-3 rounded dark:border dark:border-neutral-500 dark:hover:border-neutral-300;
+  width: 40px;
+  height: 50px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -187,5 +190,6 @@ strong {
 }
 
 .arrow--disabled {
+  @apply dark:hover:border-neutral-500 hidden;
   fill: rgba(255, 255, 255, 0.5);
 }

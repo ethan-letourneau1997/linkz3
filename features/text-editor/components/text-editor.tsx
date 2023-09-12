@@ -80,8 +80,8 @@ export function TextEditor({
 
   if (editor)
     return (
-      <div className="max-h-full overflow-scroll text-base border dark:border-neutral-700 dark:bg-neutral-900">
-        <div id="TiptapMenu" className="py-1 dark:bg-neutral-800 ">
+      <div className="max-h-full pb-3 overflow-scroll text-base border rounded dark:border-neutral-800">
+        <div id="TiptapMenu" className="py-1 dark:bg-neutral-900 ">
           <EditorTooltip text="Bold">
             <button
               onClick={() => editor.chain().focus().toggleBold().run()}
@@ -234,12 +234,12 @@ export function TextEditor({
             </button>
           </EditorTooltip>
         </div>
-        <div className="w-full px-3 space-y-3 prose max-w-none dark:bg-neutral-900 dark:prose-invert">
+        <div className="w-full px-3 space-y-3 prose max-w-none dark:prose-invert">
           <ScrollArea className="max-h-full ">
             <EditorContent editor={editor} />
           </ScrollArea>
 
-          <div className="flex justify-end pb-1 pr-3">{replyButton}</div>
+          <div className="flex justify-end pr-1 ">{replyButton}</div>
         </div>
       </div>
     );

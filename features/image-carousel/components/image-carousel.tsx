@@ -2,6 +2,7 @@
 
 import "keen-slider/keen-slider.min.css";
 
+import Image from "next/image";
 import { PostImage } from "@/types";
 import { useKeenSlider } from "keen-slider/react";
 import { useState } from "react";
@@ -30,11 +31,16 @@ export function ImageCarousel({ postImages }: ImageCarouselProps) {
           <div ref={sliderRef} className="keen-slider ">
             {postImages.map((image, index) => (
               <div key={index} className="keen-slider__slide">
-                <img
-                  className="max-w-full max-h-[400px] object-cover mx-auto"
-                  src={image.url}
-                  alt=""
-                />
+                <div className="relative">
+                  <Image
+                    alt=""
+                    src={image.url}
+                    width="0"
+                    height="0"
+                    sizes="100vw"
+                    className="w-full h-auto rounded dark:opacity-90"
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -60,6 +66,7 @@ export function ImageCarousel({ postImages }: ImageCarouselProps) {
             </>
           )}
         </div>
+
         {loaded && instanceRef.current && (
           <div className="dots">
             {[

@@ -16,7 +16,7 @@ export function PostFooter({ children, params }: PostFooterProps) {
     setShowReply(false);
   }
   return (
-    <div>
+    <div className="w-full ">
       <div className="flex gap-3">
         {children}
         <button onClick={() => setShowReply(!showReply)}>
