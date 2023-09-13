@@ -28,7 +28,7 @@ export async function SettingsLayout({ children }: SettingsLayoutProps) {
     },
   ];
   return (
-    <Card className="mt-5 ">
+    <Card className="pb-5 mt-5">
       <CardHeader>
         <Title size="h3" as="h1" text="Settings" />
         <p className="pb-3 text-sm text-neutral-400">
@@ -38,8 +38,10 @@ export async function SettingsLayout({ children }: SettingsLayoutProps) {
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-4 gap-5">
-          <SidebarNav items={items} />
-          <div className="col-span-3 ">{children}</div>
+          <div className="col-span-4 lg:col-span-1">
+            <SidebarNav items={items} />
+          </div>
+          <div className="col-span-4 lg:col-span-3">{children}</div>
         </div>
       </CardContent>
     </Card>
