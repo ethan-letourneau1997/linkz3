@@ -1,4 +1,4 @@
-import { ProfileLayout } from "@/features/layout/profile-layout";
+import { ProfileLayout } from "@/layout/profile-layout";
 
 export const dynamic = "force-dynamic";
 

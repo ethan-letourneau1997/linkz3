@@ -1,4 +1,4 @@
-import { HomeLayout } from "@/features/layout/home-layout";
+import { HomeLayout } from "@/layout/home-layout";
 
 export const dynamic = "force-dynamic";
 

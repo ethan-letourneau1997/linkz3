@@ -1,4 +1,4 @@
-import { ProfileDetails } from "@/features/layout/profile-layout/components/profile-details";
+import { ProfileDetails } from "@/layout/profile-layout/components/profile-details";
 
 export const dynamic = "force-dynamic";
 
