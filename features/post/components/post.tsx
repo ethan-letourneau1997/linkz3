@@ -18,7 +18,7 @@ import { PostRouterParams } from "@/types";
 import { PostVotes } from "@/features/post-votes";
 import { Suspense } from "react";
 import { TextPostContent } from "./text-post-content";
-import { Title } from "./typography";
+import { Title } from "../../../components/typography";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
