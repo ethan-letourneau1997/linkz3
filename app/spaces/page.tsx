@@ -1,4 +1,4 @@
-import { SpacesLayout } from "@/features/layout/spaces-layout";
+import { SpacesLayout } from "@/layout/spaces-layout";
 
 export const dynamic = "force-dynamic";
 
