@@ -34,7 +34,7 @@ export async function ProfileSettings() {
         <Label className="mt-7" htmlFor="bio">
           Bio
         </Label>
-        <Textarea id="bio" defaultValue={public_profile.username} />
+        <Textarea id="bio" defaultValue={public_profile.biography} />
       </form>
     </div>
   );
