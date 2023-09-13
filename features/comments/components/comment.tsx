@@ -21,7 +21,7 @@ export function Comment({ comment, children, params }: CommentProps) {
   return (
     <>
       <CommentCollapse header={<CommentHeader comment={comment} />}>
-        <div className="w-full">
+        <div className="w-full -mt-1.5">
           <div
             className="prose dark:prose-invert"
             dangerouslySetInnerHTML={{ __html: comment.content || "" }}

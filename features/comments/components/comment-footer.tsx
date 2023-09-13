@@ -47,7 +47,7 @@ export function CommentFooter({
   );
 
   return (
-    <div className="w-full ">
+    <div className="w-full mt-2">
       <div className="flex gap-1">
         {children}
         <button onClick={() => setShowReply(!showReply)}>
