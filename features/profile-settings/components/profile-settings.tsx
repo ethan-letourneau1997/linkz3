@@ -17,9 +17,6 @@ export async function ProfileSettings() {
     .eq("id", data.session?.user.id)
     .single();
 
-  console.log(data);
-
-  console.log(public_profile);
   return (
     <div className="max-w-lg ">
       <Title size="h4" as="h2" text="Profile" />

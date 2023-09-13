@@ -130,9 +130,11 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
             </DropdownMenuSubContent>
           </DropdownMenuSub>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
+          <DropdownMenuItem className="py-0 ">
             <IoSettingsSharp className="w-4 h-4 mr-2" />
-            Settings
+            <Link href={"/settings/profile"} className="w-full py-1.5 ">
+              Settings
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
