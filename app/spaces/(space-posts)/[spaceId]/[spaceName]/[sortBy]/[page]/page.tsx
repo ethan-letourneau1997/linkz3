@@ -1,4 +1,4 @@
-import { SpacePageLayout } from "@/features/layout/space-layout/components/space-page-layout";
+import { SpacePageLayout } from "@/layout/space-layout";
 
 export const dynamic = "force-dynamic";
 

@@ -1,4 +1,4 @@
-import { NewPostLayout } from "@/features/layout/new-post-layout";
+import { NewPostLayout } from "@/layout/new-post-layout";
 import { SpaceRouterParams } from "@/types";
 
 export const dynamic = "force-dynamic";

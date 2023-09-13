@@ -13,9 +13,6 @@ export async function PostPreviews({ posts }: PostPreviewsProps) {
       <Suspense fallback={<PreviewSkeleton count={10} />}>
         {posts?.map((post) => <CardPostPreview key={post.id} post={post} />)}
       </Suspense>
-      {/* <Suspense fallback={<PreviewSkeleton count={10} />}>
-        {posts?.map((post) => <PostPreview key={post.id} post={post} />)}
-      </Suspense> */}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { PostLayout } from "@/features/layout/post-layout/components/post-layout";
+import { PostLayout } from "@/layout/post-layout";
 import { PostRouterParams } from "@/types";
 
 export const dynamic = "force-dynamic";
