@@ -3,6 +3,7 @@
 import { Comment, PostRouterParams } from "@/types";
 import { useState, useTransition } from "react";
 
+import { Button } from "@/components/ui/button";
 import { LoadingButton } from "@/components/loading-button";
 import { TextEditor } from "@/features/text-editor";
 import { submitComment } from "../api/submit-comment";
@@ -31,14 +32,17 @@ export function CommentReplyInput({ comment, params }: CommentReplyInputProps) {
   }
 
   const replyButton = (
-    <LoadingButton
-      size="sm"
-      variant="outline"
-      onClick={handleSubmitReply}
-      isLoading={isPending}
-    >
-      Reply
-    </LoadingButton>
+    <div className="flex items-center gap-2   border-l-[1px] border-neutral-600">
+      <Button variant="outline">Cancel</Button>
+      <LoadingButton
+        size="sm"
+        variant="outline"
+        onClick={handleSubmitReply}
+        isLoading={isPending}
+      >
+        Reply
+      </LoadingButton>
+    </div>
   );
 
   return (

@@ -3,6 +3,7 @@
 import { Comment, PostRouterParams } from "@/types";
 import { useState, useTransition } from "react";
 
+import { Button } from "@/components/ui/button";
 import { LoadingButton } from "@/components/loading-button";
 import { TextEditor } from "@/features/text-editor";
 import { submitComment } from "../api/submit-comment";
@@ -36,14 +37,19 @@ export function CommentFooter({
   }
 
   const replyButton = (
-    <LoadingButton
-      size="sm"
-      variant="outline"
-      onClick={handleSubmitReply}
-      isLoading={isPending}
-    >
-      Reply
-    </LoadingButton>
+    <div className="flex items-center gap-2 ">
+      <Button onClick={() => setShowReply(!showReply)} variant="ghost">
+        Cancel
+      </Button>
+      <LoadingButton
+        size="sm"
+        variant="outline"
+        onClick={handleSubmitReply}
+        isLoading={isPending}
+      >
+        Reply
+      </LoadingButton>
+    </div>
   );
 
   return (
@@ -55,7 +61,7 @@ export function CommentFooter({
         </button>
       </div>
       {showReply && (
-        <div className="mt-3">
+        <div className="pr-5 mt-3">
           <TextEditor
             editorContent={commentContent}
             setEditorContent={setCommentContent}
