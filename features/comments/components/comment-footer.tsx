@@ -39,7 +39,7 @@ export function CommentFooter({
   }
 
   const replyButton = (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 text-sm md:text-base">
       <Button onClick={() => setShowReply(!showReply)} variant="ghost">
         Cancel
       </Button>

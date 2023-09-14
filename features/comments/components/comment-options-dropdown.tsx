@@ -25,7 +25,7 @@ import { useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { LoadingButton } from "@/components/loading-button";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { deleteComment } from "./delete-comment";
+import { deleteComment } from "../api/delete-comment";
 import useSWR from "swr";
 import { useToast } from "@/components/ui/use-toast";
 
