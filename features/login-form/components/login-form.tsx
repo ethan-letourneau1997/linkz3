@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Messages from "./messages";
 
-export function Playground() {
+export function LoginForm() {
   return (
     <Tabs defaultValue="login" className="w-full max-w-3xl mt-10">
       <TabsList className="grid w-full grid-cols-2">
