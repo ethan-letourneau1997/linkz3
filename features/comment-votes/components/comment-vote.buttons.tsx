@@ -1,12 +1,6 @@
 "use client";
 
 import {
-  BiDownvote,
-  BiSolidDownvote,
-  BiSolidUpvote,
-  BiUpvote,
-} from "react-icons/bi";
-import {
   PiArrowFatDownFill,
   PiArrowFatDownLight,
   PiArrowFatUpFill,
@@ -68,13 +62,14 @@ export function CommentVoteButtons({
       {optomisticUserVote === 1 ? (
         <button className="py-1 ">
           <PiArrowFatUpFill
+            size={20}
             onClick={handleRemoveVote}
             className="text-teal-300"
           />
         </button>
       ) : (
         <button onClick={handleUpvote} className="py-1 ">
-          <PiArrowFatUpLight className="hover:text-teal-300" />
+          <PiArrowFatUpLight size={20} className="hover:text-teal-300" />
         </button>
       )}
       <>
@@ -87,13 +82,14 @@ export function CommentVoteButtons({
       {optomisticUserVote === -1 ? (
         <button className="py-1 ">
           <PiArrowFatDownFill
+            size={20}
             onClick={handleRemoveVote}
             className="text-teal-300"
           />
         </button>
       ) : (
         <button onClick={handleDownvote} className="py-1 ">
-          <PiArrowFatDownLight className="hover:text-teal-300" />
+          <PiArrowFatDownLight size={20} className="hover:text-teal-300" />
         </button>
       )}
     </div>

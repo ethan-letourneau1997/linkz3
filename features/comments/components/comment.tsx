@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CommentFooter } from "./comment-footer";
 
 import { CommentCollapse } from "./comment-collapse";
+import { CommentOptionsMenu } from "./comment-options-dropdown";
 
 type CommentProps = {
   comment: Comment;
@@ -28,7 +29,11 @@ export function Comment({ comment, children, params }: CommentProps) {
             dangerouslySetInnerHTML={{ __html: comment.content || "" }}
           />
 
-          <CommentFooter comment={comment} params={params}>
+          <CommentFooter
+            options={<CommentOptionsMenu comment={comment} params={params} />}
+            comment={comment}
+            params={params}
+          >
             <CommentVotes horizontal comment={comment} />
           </CommentFooter>
 

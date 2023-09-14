@@ -12,12 +12,14 @@ type CommentFooterProps = {
   comment: Comment;
   params: PostRouterParams;
   children: JSX.Element;
+  options: JSX.Element;
 };
 
 export function CommentFooter({
   comment,
   params,
   children,
+  options,
 }: CommentFooterProps) {
   const [commentContent, setCommentContent] = useState("");
   const [showReply, setShowReply] = useState(false);
@@ -64,6 +66,7 @@ export function CommentFooter({
         >
           {showReply ? "Cancel" : "Reply"}
         </Button>
+        <div>{options}</div>
       </div>
       {showReply && (
         <div className="pr-5 mt-3">
