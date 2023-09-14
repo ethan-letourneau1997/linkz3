@@ -10,11 +10,11 @@ type PostLayoutProps = {
 
 export async function PostLayout({ params }: PostLayoutProps) {
   return (
-    <Card className="w-full max-w-3xl mt-5 border-0 dark:bg-neutral-950 md:border">
+    <Card className="w-full max-w-3xl px-4 mt-5 border-0 dark:bg-neutral-950 md:border">
       <Post params={params} />
-      <div className="px-5">
-        <Separator />
-      </div>
+
+      <Separator className="mt-5 mb-5" />
+
       <Comments params={params} />
     </Card>
   );

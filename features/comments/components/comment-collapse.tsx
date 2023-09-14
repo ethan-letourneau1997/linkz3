@@ -24,7 +24,7 @@ export function CommentCollapse({ header, children }: CommentCollapseProps) {
     <div className="w-full max-w-3xl ">
       <div className="flex gap-2 mt-5">
         <button onClick={handleOpen} className={`${open ? "hidden" : "block"}`}>
-          <CgArrowsExpandLeft />
+          <CgArrowsExpandLeft className="text-neutral-400" />
         </button>
         {header}
       </div>
@@ -36,7 +36,7 @@ export function CommentCollapse({ header, children }: CommentCollapseProps) {
               onClick={handleClose}
               className="flex justify-center w-4 group"
             >
-              <div className="bg-neutral-600 w-[1px] group-hover:bg-neutral-300" />
+              <div className="bg-neutral-700 w-[1px] group-hover:bg-neutral-300" />
             </button>
             <div className="w-full pl-4">{children}</div>
           </div>

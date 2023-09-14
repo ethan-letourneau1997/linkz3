@@ -5,6 +5,7 @@ import { useState, useTransition } from "react";
 
 import { Button } from "@/components/ui/button";
 import { LoadingButton } from "@/components/loading-button";
+import { MobileReplyInput } from "./mobile-reply-input";
 import { TextEditor } from "@/features/text-editor";
 import { submitComment } from "../api/submit-comment";
 
@@ -56,6 +57,7 @@ export function CommentFooter({
 
   return (
     <div className="w-full mt-2">
+      <MobileReplyInput />
       <div className="flex gap-1">
         {children}
         <Button
