@@ -30,9 +30,13 @@ export async function PostVotes({ post, horizontal }: PostVotesProps) {
         .match({ user_id: data.session.user.id, post_id: post.id })
         .single();
 
-      return user_vote.vote;
+      if (user_vote) {
+        return user_vote.vote;
+      }
     }
   }
+
+  getUserVote();
 
   const userVote = await getUserVote();
 
