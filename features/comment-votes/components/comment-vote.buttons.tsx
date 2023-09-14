@@ -6,6 +6,12 @@ import {
   BiSolidUpvote,
   BiUpvote,
 } from "react-icons/bi";
+import {
+  PiArrowFatDownFill,
+  PiArrowFatDownLight,
+  PiArrowFatUpFill,
+  PiArrowFatUpLight,
+} from "react-icons/pi";
 
 import { Comment } from "@/types";
 import { upsertCommentVote } from "../api/upsert-comment-vote";
@@ -58,33 +64,36 @@ export function CommentVoteButtons({
   }
 
   return (
-    <div className="flex w-fit">
+    <div className="flex items-center w-fit gap-1.5">
       {optomisticUserVote === 1 ? (
-        <button className="px-2 py-1 ">
-          <BiSolidUpvote onClick={handleRemoveVote} className="text-teal-300" />
-        </button>
-      ) : (
-        <button onClick={handleUpvote} className="px-2 py-1 ">
-          <BiUpvote className="hover:text-teal-300" />
-        </button>
-      )}
-      <>
-        {optomisticCommentVotes < 0 ? (
-          <div className="mr-1.5">{optomisticCommentVotes}</div>
-        ) : (
-          <div>{optomisticCommentVotes}</div>
-        )}
-      </>
-      {optomisticUserVote === -1 ? (
-        <button className="px-2 py-1 ">
-          <BiSolidDownvote
+        <button className="py-1 ">
+          <PiArrowFatUpFill
             onClick={handleRemoveVote}
             className="text-teal-300"
           />
         </button>
       ) : (
-        <button onClick={handleDownvote} className="px-2 py-1 ">
-          <BiDownvote className="hover:text-teal-300" />
+        <button onClick={handleUpvote} className="py-1 ">
+          <PiArrowFatUpLight className="hover:text-teal-300" />
+        </button>
+      )}
+      <>
+        {optomisticCommentVotes < 0 ? (
+          <div className="mr-.5 text-xs">{optomisticCommentVotes}</div>
+        ) : (
+          <div className="text-xs">{optomisticCommentVotes}</div>
+        )}
+      </>
+      {optomisticUserVote === -1 ? (
+        <button className="py-1 ">
+          <PiArrowFatDownFill
+            onClick={handleRemoveVote}
+            className="text-teal-300"
+          />
+        </button>
+      ) : (
+        <button onClick={handleDownvote} className="py-1 ">
+          <PiArrowFatDownLight className="hover:text-teal-300" />
         </button>
       )}
     </div>

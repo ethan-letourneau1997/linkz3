@@ -193,3 +193,8 @@ strong {
   @apply dark:hover:border-neutral-500 hidden;
   fill: rgba(255, 255, 255, 0.5);
 }
+
+#CommentContent p {
+  font-size: 15px;
+  line-height: 18px;
+}

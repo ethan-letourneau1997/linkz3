@@ -37,7 +37,7 @@ export function CommentFooter({
   }
 
   const replyButton = (
-    <div className="flex items-center gap-2 ">
+    <div className="flex items-center gap-2">
       <Button onClick={() => setShowReply(!showReply)} variant="ghost">
         Cancel
       </Button>
@@ -56,9 +56,14 @@ export function CommentFooter({
     <div className="w-full mt-2">
       <div className="flex gap-1">
         {children}
-        <button onClick={() => setShowReply(!showReply)}>
+        <Button
+          className="text-neutral-400 hover:text-neutral-400"
+          variant="ghost"
+          size="sm"
+          onClick={() => setShowReply(!showReply)}
+        >
           {showReply ? "Cancel" : "Reply"}
-        </button>
+        </Button>
       </div>
       {showReply && (
         <div className="pr-5 mt-3">

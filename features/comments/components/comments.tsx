@@ -62,7 +62,7 @@ async function ChildComments({
   return (
     <div>
       {childComments?.map((childComment) => (
-        <div className="pl-2 " key={childComment.id}>
+        <div className="pl-1 " key={childComment.id}>
           <Comment comment={childComment} params={params}>
             <ChildComments
               commentId={childComment.id}

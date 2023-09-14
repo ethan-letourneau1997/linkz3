@@ -19,10 +19,6 @@ export const theme = {
     },
   },
   extend: {
-    // fontFamily: {
-    //   "inter-medium": "var(--font-inter)",
-    //   "poppins-medium": "var(--font-poppins)",
-    // },
     keyframes: {
       "accordion-down": {
         from: { height: 0 },
