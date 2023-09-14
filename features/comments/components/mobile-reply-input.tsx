@@ -7,6 +7,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
+import { Textarea } from "@/components/ui/textarea";
+
 export function MobileReplyInput() {
   return (
     <Sheet>
@@ -15,8 +17,7 @@ export function MobileReplyInput() {
         <SheetHeader>
           <SheetTitle>Are you sure absolutely sure?</SheetTitle>
           <SheetDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            <Textarea />
           </SheetDescription>
         </SheetHeader>
       </SheetContent>
