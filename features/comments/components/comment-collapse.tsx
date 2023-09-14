@@ -3,6 +3,7 @@
 import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 
 import { CgArrowsExpandLeft } from "react-icons/cg";
+import { MdCloseFullscreen } from "react-icons/md";
 import { useState } from "react";
 
 type CommentCollapseProps = {
@@ -26,6 +27,12 @@ export function CommentCollapse({ header, children }: CommentCollapseProps) {
         <button onClick={handleOpen} className={`${open ? "hidden" : "block"}`}>
           <CgArrowsExpandLeft className="text-neutral-400" />
         </button>
+        <button
+          onClick={handleClose}
+          className={`${open ? "block" : "hidden"} md:hidden`}
+        >
+          <MdCloseFullscreen className="rotate-90 text-neutral-400" />
+        </button>
         {header}
       </div>
 
@@ -38,7 +45,7 @@ export function CommentCollapse({ header, children }: CommentCollapseProps) {
             >
               <div className="bg-neutral-700 w-[1px] group-hover:bg-neutral-300" />
             </button>
-            <div className="w-full pl-4">{children}</div>
+            <div className="w-full md:pl-4">{children}</div>
           </div>
         </CollapsibleContent>
       </Collapsible>

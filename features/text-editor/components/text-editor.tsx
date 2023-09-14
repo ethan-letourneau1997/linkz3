@@ -81,7 +81,10 @@ export function TextEditor({
   if (editor)
     return (
       <div className="max-h-full pb-3 overflow-scroll text-base border rounded dark:border-neutral-800">
-        <div id="TiptapMenu" className="py-1 dark:bg-neutral-900 ">
+        <div
+          id="TiptapMenu"
+          className="hidden py-1 dark:bg-neutral-900 sm:block"
+        >
           <EditorTooltip text="Bold">
             <button
               onClick={() => editor.chain().focus().toggleBold().run()}

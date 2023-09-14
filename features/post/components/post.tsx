@@ -28,7 +28,7 @@ export async function Post({ params }: PostProps) {
 
   if (post)
     return (
-      <div className=" dark:text-neutral-300">
+      <div className="px-2  dark:text-neutral-300 md:px-0">
         <div>
           <div className="flex items-center justify-between">
             <div className="flex text-xs text-neutral-400 ">

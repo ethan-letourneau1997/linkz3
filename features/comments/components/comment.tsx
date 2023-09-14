@@ -25,7 +25,7 @@ export function Comment({ comment, children, params }: CommentProps) {
         <div className="w-full -mt-1.5 ">
           <div
             id="CommentContent"
-            className="pr-4 text-sm prose dark:prose-invert dark:text-neutral-300 md:text-base"
+            className="pl-2 pr-4 mt-2 text-sm prose dark:prose-invert dark:text-neutral-300 md:text-base"
             dangerouslySetInnerHTML={{ __html: comment.content || "" }}
           />
 
@@ -46,7 +46,7 @@ export function Comment({ comment, children, params }: CommentProps) {
 
 function UserAvatar() {
   return (
-    <Avatar className="w-5 h-5 md:w-7 md:h-7">
+    <Avatar className="w-5 h-5 md:w-7 md:h-7 md:block">
       <AvatarImage src="https://github.com/shadcn.png" />
       <AvatarFallback>CN</AvatarFallback>
     </Avatar>
