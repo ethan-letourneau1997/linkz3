@@ -37,7 +37,7 @@ export function CommentCollapse({ header, children }: CommentCollapseProps) {
       </div>
 
       <Collapsible open={open}>
-        <CollapsibleContent>
+        <CollapsibleContent className="CollapsibleContent">
           <div className="flex pt-2 pl-1">
             <button
               onClick={handleClose}
