@@ -7,7 +7,7 @@ type TextPostContentProps = {
 export async function TextPostContent({ post }: TextPostContentProps) {
   return (
     <div
-      className="max-w-full prose dark:prose-invert"
+      className="w-full text-sm prose dark:prose-invert md:text-base"
       dangerouslySetInnerHTML={{ __html: post.content || "" }}
     />
   );

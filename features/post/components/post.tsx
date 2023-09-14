@@ -37,7 +37,7 @@ export async function Post({ params }: PostProps) {
 
   if (post)
     return (
-      <Card className="mt-5 dark:text-neutral-300">
+      <Card className="dark:bg-transparent border-0 dark:text-neutral-300">
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardDescription className="flex text-sm ">

@@ -25,7 +25,7 @@ export function Comment({ comment, children, params }: CommentProps) {
         <div className="w-full -mt-1.5 ">
           <div
             id="CommentContent"
-            className="text-sm prose dark:prose-invert dark:text-neutral-200"
+            className="pr-4 text-sm prose dark:prose-invert dark:text-neutral-300 md:text-base"
             dangerouslySetInnerHTML={{ __html: comment.content || "" }}
           />
 
@@ -40,36 +40,13 @@ export function Comment({ comment, children, params }: CommentProps) {
           {children}
         </div>
       </CommentCollapse>
-
-      {/* <Card
-      // className="border-l border-r-0 rounded-none border-y-0 dark:border-l-neutral-800"
-      >
-        <CardHeader className="pt-0 pb-3">
-          <CardDescription className="text-sm">
-            <CommentUser comment={comment} />
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="pb-3">
-          <div
-            className="prose dark:prose-invert"
-            dangerouslySetInnerHTML={{ __html: comment.content || "" }}
-          />
-        </CardContent>
-
-        <CardFooter>
-          <CommentFooter comment={comment} params={params}>
-            <CommentVotes horizontal comment={comment} />
-          </CommentFooter>
-        </CardFooter>
-        {children}
-      </Card> */}
     </>
   );
 }
 
 function UserAvatar() {
   return (
-    <Avatar className="w-7 h-7">
+    <Avatar className="w-5 h-5 md:w-7 md:h-7">
       <AvatarImage src="https://github.com/shadcn.png" />
       <AvatarFallback>CN</AvatarFallback>
     </Avatar>
@@ -89,7 +66,7 @@ export async function CommentHeader({ comment }: CommentUserProps) {
 
   return (
     <>
-      <div className="flex items-center gap-2 text-sm text-neutral-400">
+      <div className="flex items-center gap-2 text-xs md:text-sm text-neutral-400">
         <UserAvatar />
         <span>
           {public_profile.username} -{" "}

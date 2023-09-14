@@ -10,7 +10,7 @@ export async function PostCommentCount({ post }: PostCommentCountProps) {
   const commentCount = await getPostCommentCount(post.id);
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-1 text-sm md:text-base text-neutral-400">
       <GoComment />
       {commentCount} comments
     </div>

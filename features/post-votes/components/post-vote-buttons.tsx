@@ -9,7 +9,7 @@ import {
 import { Post, PostPreview } from "@/types";
 
 import { upsertPostVote } from "../api/upsert-post-vote";
-import { experimental_useOptimistic as useOptimistic } from "react";
+import { useState } from "react";
 
 type PostVoteButtonsProps = {
   userVote: number;
@@ -24,46 +24,60 @@ export function PostVoteButtons({
   post,
   horizontal,
 }: PostVoteButtonsProps) {
-  const [optomisticUserVote, setOptomisticUserVote] = useOptimistic(userVote);
-  const [optomisticPostVotes, setOptomisticPostVotes] =
-    useOptimistic(postVotes);
+  const [optomisticUserVote, setOptomisticUserVote] = useState(userVote);
+  const [optomisticPostVotes, setOptomisticPostVotes] = useState(postVotes);
 
-  function handleUpvote() {
+  async function handleUpvote() {
+    console.log("original");
+    console.log(optomisticPostVotes);
+    setOptomisticUserVote(1);
+    console.log("new");
+    console.log(optomisticPostVotes);
     if (optomisticUserVote === 0) {
       setOptomisticPostVotes(optomisticPostVotes + 1);
     } else if (optomisticUserVote === -1) {
       setOptomisticPostVotes(optomisticPostVotes + 2);
     }
-    setOptomisticUserVote(1);
-    upsertPostVote(post, 1);
+
+    await upsertPostVote(post, 1);
   }
 
-  function handleDownvote() {
+  async function handleDownvote() {
+    console.log("original");
+    console.log(optomisticPostVotes);
+    setOptomisticUserVote(-1);
+    console.log("new");
+    console.log(optomisticPostVotes);
     if (optomisticUserVote === 0) {
       setOptomisticPostVotes(optomisticPostVotes - 1);
     } else if (optomisticUserVote === 1) {
       setOptomisticPostVotes(optomisticPostVotes - 2);
     }
-    setOptomisticUserVote(-1);
-    upsertPostVote(post, -1);
+
+    await upsertPostVote(post, -1);
   }
 
   async function handleRemoveVote() {
-    upsertPostVote(post, 0);
+    console.log("original");
+    console.log(optomisticPostVotes);
+    setOptomisticUserVote(0);
+    console.log("new");
+    console.log(optomisticPostVotes);
     if (optomisticUserVote === 1) {
       setOptomisticPostVotes(optomisticPostVotes - 1);
     }
     if (optomisticUserVote === -1) {
       setOptomisticPostVotes(optomisticPostVotes + 1);
     }
-    setOptomisticUserVote(0);
+
+    await upsertPostVote(post, 0);
   }
 
   return (
     <div
       className={`flex ${
         horizontal ? "" : "flex-col"
-      } items-center place-content-evenly`}
+      } items-center place-content-evenly text-neutral-400`}
     >
       {optomisticUserVote === 1 ? (
         <button className="px-1 py-1 md:px-2">
@@ -76,7 +90,9 @@ export function PostVoteButtons({
       )}
       <>
         {optomisticPostVotes < 0 ? (
-          <div className="mr-1.5 text-sm ">{optomisticPostVotes}</div>
+          <div className="mr-1.5 text-xs md:text-sm ">
+            {optomisticPostVotes}
+          </div>
         ) : (
           <div className="text-sm ">{optomisticPostVotes}</div>
         )}

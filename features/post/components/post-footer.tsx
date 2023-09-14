@@ -19,7 +19,10 @@ export function PostFooter({ children, params }: PostFooterProps) {
     <div className="w-full ">
       <div className="flex gap-3">
         {children}
-        <button onClick={() => setShowReply(!showReply)}>
+        <button
+          className="text-sm md:text-base text-neutral-400"
+          onClick={() => setShowReply(!showReply)}
+        >
           {showReply ? "Cancel" : "Reply"}
         </button>
       </div>

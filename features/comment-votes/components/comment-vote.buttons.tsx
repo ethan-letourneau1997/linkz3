@@ -9,7 +9,7 @@ import {
 
 import { Comment } from "@/types";
 import { upsertCommentVote } from "../api/upsert-comment-vote";
-import { experimental_useOptimistic as useOptimistic } from "react";
+import { useState } from "react";
 
 type CommentVoteButtonsProps = {
   userVote: number;
@@ -22,9 +22,9 @@ export function CommentVoteButtons({
   commentVotes,
   comment,
 }: CommentVoteButtonsProps) {
-  const [optomisticUserVote, setOptomisticUserVote] = useOptimistic(userVote);
+  const [optomisticUserVote, setOptomisticUserVote] = useState(userVote);
   const [optomisticCommentVotes, setOptomisticCommentVotes] =
-    useOptimistic(commentVotes);
+    useState(commentVotes);
 
   function handleUpvote() {
     if (optomisticUserVote === 0) {
