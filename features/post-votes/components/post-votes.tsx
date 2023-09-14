@@ -22,17 +22,25 @@ export async function PostVotes({ post, horizontal }: PostVotesProps) {
 
   const { data } = await supabase.auth.getSession();
 
-  const { data: user_vote } = await supabase
-    .from("post_vote")
-    .select()
-    .match({ user_id: data.session?.user.id, post_id: post.id })
-    .single();
+  async function getUserVote() {
+    if (data.session) {
+      const { data: user_vote } = await supabase
+        .from("post_vote")
+        .select()
+        .match({ user_id: data.session.user.id, post_id: post.id })
+        .single();
+
+      return user_vote.vote;
+    }
+  }
+
+  const userVote = await getUserVote();
 
   return (
     <PostVoteButtons
       post={post}
       postVotes={totalVotes || 0}
-      userVote={user_vote?.vote || 0}
+      userVote={userVote || 0}
       horizontal={horizontal}
     />
   );
