@@ -27,7 +27,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <main className="flex flex-col items-center min-h-screen pb-16 dark:bg-neutral-950 dark:text-neutral-200">
-            <Navigation />
+            {/* <Navigation /> */}
             {children}
           </main>
 
