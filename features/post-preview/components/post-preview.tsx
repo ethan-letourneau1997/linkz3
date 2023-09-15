@@ -3,12 +3,10 @@ import { getPostCommunityName, getPostPostedBy } from "@/helpers/post-helpers";
 
 import { Card } from "@/components/ui/card";
 import { GoComment } from "react-icons/go";
-import { PostLink } from "@/components/links/post-link";
+import Link from "next/link";
 import { PostVotes } from "@/features/post-votes";
 import { PreviewThumbnail } from "./preview-thumbnail";
-import { ProfileLink } from "@/components/links/profile-link";
 import { Skeleton } from "@/components/ui/skeleton";
-import { SpaceLink } from "@/components/links/space-link";
 import { Suspense } from "react";
 import { getPostCommentCount } from "@/helpers/post-helpers";
 import { getTimeSinceNow } from "@/lib/get-time-since-now";
@@ -23,6 +21,10 @@ export async function CardPostPreview({ post }: CardPostPreviewProps) {
   const commentCount = await getPostCommentCount(post.id!);
   const postedByUsername = await getPostPostedBy(post.created_by);
 
+  const linkToPost = `/spaces/${post.posted_in}/${spaceName}/post/${post.id}`;
+  const linkToSpace = `/spaces/${post.posted_in}/${spaceName}`;
+  const profileLink = `/profile/${postedByUsername}`;
+
   return (
     <Card className="grid grid-cols-12 gap-3 px-2 py-3 rounded-md sm:mt-2 sm:px-4 ">
       <div className="order-2 sm:order-1 col-span-3 sm:col-span-2 aspect-[4/3]">
@@ -33,35 +35,33 @@ export async function CardPostPreview({ post }: CardPostPreviewProps) {
       <div className="flex flex-col justify-between order-1 col-span-9 sm:order-2">
         <div>
           <div className="text-xs ">
-            <SpaceLink
+            <Link
               className="font-semibold dark:text-neutral-200"
-              spaceName={spaceName}
-              spaceId={post.posted_in!}
-              text={spaceName}
-            />
+              href={linkToSpace}
+            >
+              {spaceName}
+            </Link>
 
             <span className="dark:text-neutral-400">
               &nbsp;posted by&nbsp;
-              <ProfileLink
-                username={postedByUsername}
-                text={postedByUsername}
-              />
+              <Link href={profileLink}>{postedByUsername}</Link>
               &nbsp;-&nbsp;{timeSincePost}
             </span>
           </div>
 
-          <PostLink
-            text={post.title}
+          <Link
             className="mt-1 text-sm font-medium sm:text-base text-neutral-200"
-            spaceId={post.posted_in}
-            spaceName={spaceName}
-            postId={post.id!}
-          />
+            href={linkToPost}
+          >
+            {post.title}
+          </Link>
         </div>
 
         <div className="items-center hidden gap-2 mt-2 text-sm sm:flex text-neutral-400">
-          <GoComment />
-          {commentCount} comments
+          <Link href={linkToPost} className="flex items-center gap-2 ">
+            <GoComment />
+            {commentCount} comments
+          </Link>
         </div>
       </div>
       <div className="order-3 hidden col-span-1 sm:block ">
@@ -73,7 +73,8 @@ export async function CardPostPreview({ post }: CardPostPreviewProps) {
         <div className="w-fit sm:hidden">
           <PostVotes post={post} horizontal />
         </div>
-        <div className="flex items-center gap-2">
+
+        <div className="flex items-center gap-2 ">
           <GoComment />
           {commentCount} comments
         </div>

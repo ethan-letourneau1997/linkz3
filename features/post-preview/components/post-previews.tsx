@@ -1,4 +1,4 @@
-import { CardPostPreview } from "./card-post-preview";
+import { CardPostPreview } from "./post-preview";
 import { Post } from "@/types";
 import { PreviewSkeleton } from "@/features/post-preview";
 import { Suspense } from "react";

@@ -19,16 +19,6 @@ export async function PreviewThumbnail({ post }: PreviewThumbnailProps) {
 
     if (link.images && link.images[0]) {
       return (
-        // <div className="relative">
-        //   <Image
-        //     alt=""
-        //     src={link.images[0]}
-        //     width="0"
-        //     height="0"
-        //     sizes="100vw"
-        //     className="w-full h-auto rounded dark:opacity-90"
-        //   />
-        // </div>
         <div
           className="flex items-end w-full h-full rounded "
           style={{
