@@ -7,11 +7,13 @@ export function SpaceDetails() {
   const params = useParams();
 
   return (
-    <div>
-      <div className="py-3 mt-2 text-2xl font-semibold text-center">
+    <div className="mt-3 ">
+      <div className="hidden py-3 text-2xl font-semibold text-center md:block">
         {params.spaceName}
       </div>
-      <SortPosts pathname={`/spaces/${params.spaceId}/${params.spaceName}`} />
+      <div className="pl-2 md:pl-0">
+        <SortPosts pathname={`/spaces/${params.spaceId}/${params.spaceName}`} />
+      </div>
     </div>
   );
 }

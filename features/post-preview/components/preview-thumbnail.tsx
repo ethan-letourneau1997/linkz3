@@ -1,5 +1,6 @@
 import { LinkPreview, Post, PostPreview } from "@/types";
 
+import { BiLinkExternal } from "react-icons/bi";
 import { HiOutlineLink } from "react-icons/hi";
 import { RiText } from "react-icons/ri";
 import { cookies } from "next/headers";
@@ -19,8 +20,11 @@ export async function PreviewThumbnail({ post }: PreviewThumbnailProps) {
 
     if (link.images && link.images[0]) {
       return (
-        <div
-          className="flex items-end w-full h-full rounded "
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={post.content}
+          className="flex flex-col justify-between w-full h-full rounded "
           style={{
             backgroundImage: `url(${link.images && link.images[0]})`,
             backgroundSize: "cover",
@@ -28,10 +32,14 @@ export async function PreviewThumbnail({ post }: PreviewThumbnailProps) {
             backgroundRepeat: "no-repeat",
           }}
         >
+          <div className="flex justify-end pt-0.5 pr-0.5">
+            <BiLinkExternal />
+          </div>
+
           <div className="w-full text-xs text-center truncate rounded-b dark:bg-neutral-900/70 dark:text-neutral-400">
             {link.siteName}
           </div>
-        </div>
+        </a>
       );
     } else {
       return (

@@ -1,5 +1,6 @@
 import { DesktopNavigation } from "./desktop-navigation";
 import { MobileNavigation } from "./mobile-navigation";
+import { MobileSpaceName } from "./mobile-space-name";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
@@ -19,8 +20,11 @@ export async function Navigation() {
   return (
     <nav className="w-full border-b border-neutral-800">
       <DesktopNavigation profile={public_profile} />
-      <div className="flex items-center px-2 md:hidden h-14">
+      <div className="grid items-center grid-cols-3 px-2 md:hidden h-14">
         <MobileNavigation profile={public_profile} />
+        <div className="block text-center md:hidden">
+          <MobileSpaceName />
+        </div>
       </div>
 
       {/* <div className="w-full dark:bg-neutral-900">

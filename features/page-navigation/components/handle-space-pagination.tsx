@@ -23,8 +23,6 @@ export function HandleSpacePagination() {
     }
   });
 
-  console.log(pageCount);
-
   if (pageCount)
     return (
       <div className="flex justify-center mt-3">

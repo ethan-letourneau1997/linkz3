@@ -28,11 +28,6 @@ export function PostVoteButtons({
   const [optomisticPostVotes, setOptomisticPostVotes] = useState(postVotes);
 
   async function handleUpvote() {
-    console.log("original");
-    console.log(optomisticPostVotes);
-    setOptomisticUserVote(1);
-    console.log("new");
-    console.log(optomisticPostVotes);
     if (optomisticUserVote === 0) {
       setOptomisticPostVotes(optomisticPostVotes + 1);
     } else if (optomisticUserVote === -1) {
@@ -43,11 +38,7 @@ export function PostVoteButtons({
   }
 
   async function handleDownvote() {
-    console.log("original");
-    console.log(optomisticPostVotes);
     setOptomisticUserVote(-1);
-    console.log("new");
-    console.log(optomisticPostVotes);
     if (optomisticUserVote === 0) {
       setOptomisticPostVotes(optomisticPostVotes - 1);
     } else if (optomisticUserVote === 1) {
@@ -58,11 +49,7 @@ export function PostVoteButtons({
   }
 
   async function handleRemoveVote() {
-    console.log("original");
-    console.log(optomisticPostVotes);
     setOptomisticUserVote(0);
-    console.log("new");
-    console.log(optomisticPostVotes);
     if (optomisticUserVote === 1) {
       setOptomisticPostVotes(optomisticPostVotes - 1);
     }
@@ -80,11 +67,15 @@ export function PostVoteButtons({
       } items-center place-content-evenly text-neutral-400`}
     >
       {optomisticUserVote === 1 ? (
-        <button className="px-1 py-1 md:px-2">
+        <button type="button" className="px-1 py-1 md:px-2">
           <BiSolidUpvote onClick={handleRemoveVote} className="text-teal-300" />
         </button>
       ) : (
-        <button onClick={handleUpvote} className="px-1 py-1 md:px-2">
+        <button
+          type="button"
+          onClick={handleUpvote}
+          className="px-1 py-1 md:px-2"
+        >
           <BiUpvote className="hover:text-teal-300" />
         </button>
       )}
@@ -98,7 +89,7 @@ export function PostVoteButtons({
         )}
       </>
       {optomisticUserVote === -1 ? (
-        <button className="px-1 py-1 md:px-2">
+        <button type="button" className="px-1 py-1 md:px-2">
           <BiSolidDownvote
             onClick={handleRemoveVote}
             className="text-teal-300"

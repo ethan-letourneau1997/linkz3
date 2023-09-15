@@ -13,5 +13,5 @@ export async function SpaceDetails({ spaceName }: SpaceDetailsProps) {
     .eq("name", spaceName)
     .single();
 
-  return <div className="mt-2">{space.description}</div>;
+  return <div className="hidden mt-2 md:block">{space.description}</div>;
 }

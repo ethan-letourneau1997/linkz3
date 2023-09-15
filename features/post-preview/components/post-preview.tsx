@@ -11,11 +11,11 @@ import { Suspense } from "react";
 import { getPostCommentCount } from "@/helpers/post-helpers";
 import { getTimeSinceNow } from "@/lib/get-time-since-now";
 
-type CardPostPreviewProps = {
+type PostPreviewProps = {
   post: Post | PostPreviewType;
 };
 
-export async function CardPostPreview({ post }: CardPostPreviewProps) {
+export async function PostPreview({ post }: PostPreviewProps) {
   const timeSincePost = getTimeSinceNow(post.created_at, true);
   const spaceName = await getPostCommunityName(post.posted_in);
   const commentCount = await getPostCommentCount(post.id!);
@@ -26,7 +26,7 @@ export async function CardPostPreview({ post }: CardPostPreviewProps) {
   const profileLink = `/profile/${postedByUsername}`;
 
   return (
-    <Card className="grid grid-cols-12 gap-3 px-2 py-3 rounded-md sm:mt-2 sm:px-4 ">
+    <Card className="grid grid-cols-12 gap-3 px-3 py-3 border-0 border-t rounded-none md:rounded-md md:border sm:mt-2 sm:px-4">
       <div className="order-2 sm:order-1 col-span-3 sm:col-span-2 aspect-[4/3]">
         <Suspense fallback={<Skeleton className="w-full h-full" />}>
           <PreviewThumbnail post={post} />
@@ -36,19 +36,19 @@ export async function CardPostPreview({ post }: CardPostPreviewProps) {
         <div>
           <div className="text-xs ">
             <Link
-              className="font-semibold dark:text-neutral-200"
+              className="font-semibold dark:text-neutral-200 hover:underline"
               href={linkToSpace}
             >
               {spaceName}
             </Link>
-
             <span className="dark:text-neutral-400">
               &nbsp;posted by&nbsp;
-              <Link href={profileLink}>{postedByUsername}</Link>
+              <Link className="hover:underline" href={profileLink}>
+                {postedByUsername}
+              </Link>
               &nbsp;-&nbsp;{timeSincePost}
             </span>
           </div>
-
           <Link
             className="mt-1 text-sm font-medium sm:text-base text-neutral-200"
             href={linkToPost}
@@ -56,9 +56,11 @@ export async function CardPostPreview({ post }: CardPostPreviewProps) {
             {post.title}
           </Link>
         </div>
-
-        <div className="items-center hidden gap-2 mt-2 text-sm sm:flex text-neutral-400">
-          <Link href={linkToPost} className="flex items-center gap-2 ">
+        <div className="items-center hidden mt-2 text-sm sm:flex text-neutral-400 ">
+          <Link
+            href={linkToPost}
+            className="flex items-center gap-2 rounded-sm hover:dark:text-neutral-300"
+          >
             <GoComment />
             {commentCount} comments
           </Link>
@@ -73,7 +75,6 @@ export async function CardPostPreview({ post }: CardPostPreviewProps) {
         <div className="w-fit sm:hidden">
           <PostVotes post={post} horizontal />
         </div>
-
         <div className="flex items-center gap-2 ">
           <GoComment />
           {commentCount} comments
