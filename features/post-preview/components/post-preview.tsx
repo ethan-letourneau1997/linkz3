@@ -65,15 +65,21 @@ export async function PostPreview({ post }: PostPreviewProps) {
       </div>
       <div className="order-3 hidden col-span-1 sm:block ">
         <div className="flex justify-end h-full ">
-          <PostVotes post={post} />
+          <Suspense fallback={<Skeleton className="w-full h-4" />}>
+            <PostVotes post={post} />
+          </Suspense>
         </div>
       </div>
       <div className="flex items-center order-4 col-span-12 gap-2 mt-2 text-sm sm:hidden text-neutral-400 ">
         <div className="w-fit sm:hidden">
-          <PostVotes post={post} horizontal />
+          <Suspense fallback={<Skeleton className="w-full h-4" />}>
+            <PostVotes post={post} horizontal />
+          </Suspense>
         </div>
         <div className="flex items-center gap-2">
-          <GoComment />
+          <Suspense fallback={<Skeleton className="w-full h-4" />}>
+            <GoComment />
+          </Suspense>
           {commentCount} comments
         </div>
       </div>
