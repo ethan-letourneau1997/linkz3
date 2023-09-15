@@ -1,3 +1,5 @@
+import { HandleSpacePagination } from "@/features/page-navigation";
+
 export const dynamic = "force-dynamic";
 
 export default function RootLayout({
@@ -8,7 +10,7 @@ export default function RootLayout({
   return (
     <div>
       {children}
-      {/* <HandleSpacePagination /> */}
+      <HandleSpacePagination />
     </div>
   );
 }
