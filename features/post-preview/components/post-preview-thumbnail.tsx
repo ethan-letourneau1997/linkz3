@@ -1,4 +1,5 @@
 import { HiOutlineLink } from "react-icons/hi";
+import Image from "next/image";
 import { Post } from "@/types";
 import { RiText } from "react-icons/ri";
 import { getPreviewThumbnail } from "../api/get-preview-thumbnail";
@@ -22,20 +23,30 @@ export async function PostPreviewThumbnail({
   return (
     <>
       {thumbnailUrl ? (
-        <div
-          className="w-full h-full rounded"
-          style={{
-            backgroundImage: `url(${thumbnailUrl})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          {post.type === "link" && (
-            <div className="text-xs truncate">{post.content}</div>
-          )}
+        <div className="relative">
+          <Image
+            alt=""
+            src={thumbnailUrl}
+            width="0"
+            height="0"
+            sizes="100vw"
+            className="w-full h-auto rounded dark:opacity-90"
+          />
         </div>
       ) : (
+        // <div
+        //   className="w-full h-full rounded"
+        //   style={{
+        //     backgroundImage: `url(${thumbnailUrl})`,
+        //     backgroundSize: "cover",
+        //     backgroundPosition: "center",
+        //     backgroundRepeat: "no-repeat",
+        //   }}
+        // >
+        //   {post.type === "link" && (
+        //     <div className="text-xs truncate">{post.content}</div>
+        //   )}
+        // </div>
         <div className="flex items-center justify-center w-full h-full rounded dark:bg-neutral-700 ">
           <HiOutlineLink />
         </div>
