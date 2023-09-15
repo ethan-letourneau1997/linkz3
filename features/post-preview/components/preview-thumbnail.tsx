@@ -1,7 +1,6 @@
 import { LinkPreview, Post, PostPreview } from "@/types";
 
 import { HiOutlineLink } from "react-icons/hi";
-import Image from "next/image";
 import { RiText } from "react-icons/ri";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
