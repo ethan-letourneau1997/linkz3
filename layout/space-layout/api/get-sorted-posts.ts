@@ -13,39 +13,48 @@ export async function getSortedPosts(
   const lowerLimit = (currentPage - 1) * postsPerPage;
   const upperLimit = lowerLimit + postsPerPage - 1;
 
-  async function getSortedPosts() {
-    if (sortBy === "new") {
-      const { data: posts } = await supabase
-        .from("post")
-        .select()
-        .eq("posted_in", communityId)
-        .order("created_at", { ascending: false })
-        .range(lowerLimit, upperLimit);
-      return posts;
-    }
+  async function fetchPosts() {
+    try {
+      if (sortBy === "new") {
+        const { data: posts } = await supabase
+          .from("post")
+          .select()
+          .eq("posted_in", communityId)
+          .order("created_at", { ascending: false })
+          .range(lowerLimit, upperLimit);
 
-    if (sortBy === "old") {
-      const { data: posts } = await supabase
-        .from("post")
-        .select()
-        .eq("posted_in", communityId)
-        .order("created_at", { ascending: true })
-        .range(lowerLimit, upperLimit);
-      return posts;
-    }
+        return posts;
+      }
 
-    if (sortBy === "top") {
-      const { data: posts } = await supabase
-        .from("post_with_votes")
-        .select()
-        .eq("posted_in", communityId)
-        .order("total_votes", { ascending: false })
-        .range(lowerLimit, upperLimit);
+      if (sortBy === "old") {
+        const { data: posts } = await supabase
+          .from("post")
+          .select()
+          .eq("posted_in", communityId)
+          .order("created_at", { ascending: true })
+          .range(lowerLimit, upperLimit);
 
-      return posts;
+        return posts;
+      }
+
+      if (sortBy === "top") {
+        const { data: posts } = await supabase
+          .from("post_with_votes")
+          .select()
+          .eq("posted_in", communityId)
+          .order("total_votes", { ascending: false })
+          .range(lowerLimit, upperLimit);
+
+        return posts;
+      }
+    } catch (error) {
+      // Handle errors here (e.g., log or return a default value)
+      console.error("Error fetching posts:", error);
+      throw error; // Rethrow the error if needed
     }
   }
-  const posts = await getSortedPosts();
+
+  const posts = await fetchPosts();
 
   return posts || [];
 }
