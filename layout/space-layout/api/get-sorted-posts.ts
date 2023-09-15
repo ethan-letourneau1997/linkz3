@@ -20,9 +20,9 @@ export async function getSortedPosts(
           .from("post")
           .select()
           .eq("posted_in", communityId)
-          .order("created_at", { ascending: false });
-        // .range(lowerLimit, upperLimit);
-        console.log(posts);
+          .order("created_at", { ascending: false })
+          .range(lowerLimit, upperLimit);
+
         return posts;
       }
 
