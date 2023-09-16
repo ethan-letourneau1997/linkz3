@@ -26,6 +26,8 @@ export async function PostPreview({ post }: PostPreviewProps) {
   const linkToSpace = `/spaces/${post.posted_in}/${spaceName}`;
   const profileLink = `/profile/${postedByUsername}`;
 
+  
+
   return (
     <Card className="grid grid-cols-12 gap-3 px-3 py-3 border-0 border-t rounded-none dark:bg-dark-900 md:rounded-md md:border sm:mt-3 sm:px-4">
       <div className="order-2 sm:order-1 col-span-3 sm:col-span-2 aspect-[4/3]">
@@ -66,7 +68,7 @@ export async function PostPreview({ post }: PostPreviewProps) {
             {commentCount} comments
           </Link>
           <div className="flex items-center pt-0.5 ml-2 ">
-            <PostOptions post={post} refreshPath={linkToSpace} disableRedirect />
+            <PostOptions post={post} disableRedirect />
           </div>
         </div>
       </div>
@@ -83,7 +85,7 @@ export async function PostPreview({ post }: PostPreviewProps) {
           <GoComment />
           {commentCount} comments
         </div>
-        <PostOptions post={post} refreshPath={linkToSpace} disableRedirect />
+        <PostOptions post={post}  disableRedirect />
       </div>
     </Card>
   );

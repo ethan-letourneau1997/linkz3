@@ -32,12 +32,11 @@ import { useToast } from "@/components/ui/use-toast";
 
 type PostOptionsMenuProps = {
   post: Post | PostPreview;
-  refreshPath: string;
   disableRedirect?:boolean
 
 };
 
-export function PostOptions({ post, disableRedirect, refreshPath }: PostOptionsMenuProps) {
+export function PostOptions({ post, disableRedirect }: PostOptionsMenuProps) {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -49,7 +48,12 @@ export function PostOptions({ post, disableRedirect, refreshPath }: PostOptionsM
 
   function handleDeletePost() {
     startTransition(async () => {
-      deletePost(post, refreshPath);
+      const  data  = await deletePost(post);
+      if(data){
+        console.log(data)
+      
+      }
+    
 
       toast({
         title: "Post Deleted",

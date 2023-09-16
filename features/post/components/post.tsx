@@ -40,7 +40,7 @@ export async function Post({ params }: PostProps) {
             </div>
 
             <Suspense fallback={<></>}>
-              <PostOptions post={post} refreshPath={`spaces/${params.spaceId}/${params.spaceName}`}/>
+              <PostOptions post={post}/>
               {/* <PostOptions post={post} params={params} /> */}
             </Suspense>
           </div>
