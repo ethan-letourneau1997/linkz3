@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 
 import { HandleUserSubscription } from "./handle-user-subscription";
-import { SpaceLink } from "@/components/links/space-link";
+import Link from "next/link";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
@@ -22,11 +22,8 @@ export async function SpacesLayout() {
         <Card key={space.id} className="flex flex-col justify-between">
           <CardHeader>
             <CardTitle>
-              <SpaceLink
-                spaceId={space.id}
-                spaceName={space.name}
-                text={space.name}
-              />
+            <Link href={`spaces/${space.community_id}/${space.name}`}>{space.name}</Link>
+            
             </CardTitle>
             <CardDescription>{space.description}</CardDescription>
           </CardHeader>

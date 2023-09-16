@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 
 import { HandleUserSubscription } from "./handle-user-subscription";
-import { SpaceLink } from "@/components/links/space-link";
+import Link from "next/link";
 import { UserSubscription } from "@/types";
 
 type SubscriptionCardProps = {
@@ -19,11 +19,8 @@ export async function SubscriptionCard({ space }: SubscriptionCardProps) {
     <Card key={space.community_id} className="flex flex-col justify-between">
       <CardHeader>
         <CardTitle>
-          <SpaceLink
-            spaceId={space.community_id!}
-            spaceName={space.name!}
-            text={space.name}
-          />
+          <Link href={`spaces/${space.community_id}/${space.name}`}>{space.name}</Link>
+     
         </CardTitle>
         <CardDescription>{space.description}</CardDescription>
       </CardHeader>

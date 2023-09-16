@@ -5,6 +5,7 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 import { useState, useTransition } from "react";
 
@@ -12,7 +13,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LoadingButton } from "@/components/loading-button";
 import { Textarea } from "@/components/ui/textarea";
-import { Title } from "@/components/typography";
 import { createSpace } from "../api/create-space";
 
 export function NewSpace() {
@@ -29,7 +29,8 @@ export function NewSpace() {
   return (
     <Card className="w-full max-w-2xl mt-5 ">
       <CardHeader>
-        <Title size="h4" as="h1" text="New Space" />
+        <CardTitle>New Space</CardTitle>
+  
       </CardHeader>
       <CardContent>
         <form className="space-y-5 ">

@@ -8,9 +8,8 @@ import {
 } from "@/components/ui/sheet";
 
 import { GiHamburgerMenu } from "react-icons/gi";
-import { GoogleLogin } from "@/components/google-login";
 import Link from "next/link";
-import LogoutButton from "@/components/LogoutButton";
+import LogoutButton from "@/components/logout-button";
 import { PublicProfile } from "@/types";
 import { User } from "@supabase/supabase-js";
 import { useState } from "react";
@@ -65,7 +64,6 @@ export function MovileNavigation({ user, profile }: NavHeaderProps) {
                   <Link href="/login" className="block">
                     Login
                   </Link>
-                  <GoogleLogin />
                 </>
               )}
             </div>

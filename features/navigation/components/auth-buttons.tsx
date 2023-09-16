@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import LogoutButton from "@/components/LogoutButton";
+import LogoutButton from "@/components/logout-button";
 import { PublicProfile } from "@/types";
 
 type AuthButtonsProps = {
@@ -24,7 +24,6 @@ export function AuthButtons({ profile }: AuthButtonsProps) {
               Login
             </Link>
           </Button>
-          {/* <GoogleLogin /> */}
         </>
       )}
     </>
