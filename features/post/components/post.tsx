@@ -5,7 +5,7 @@ import { PostCommentCount } from "./post-comment-count";
 import { PostCommunity } from "./post-community";
 import { PostFooter } from "./post-footer";
 import { PostMetadata } from "./post-metadata";
-import { PostOptionsMenu } from "./post-options-menu";
+import { PostOptions } from "@/features/post-options";
 import { PostRouterParams } from "@/types";
 import { PostVotes } from "@/features/post-votes";
 import { Suspense } from "react";
@@ -26,6 +26,8 @@ export async function Post({ params }: PostProps) {
     .eq("id", params.postId)
     .single();
 
+  
+
   if (post)
     return (
       <div className="px-2 dark:text-neutral-300 md:px-0 ">
@@ -38,7 +40,7 @@ export async function Post({ params }: PostProps) {
             </div>
 
             <Suspense fallback={<></>}>
-              <PostOptionsMenu post={post} params={params} />
+              <PostOptions post={post} refreshPath={`spaces/${params.spaceId}/${params.spaceName}`}/>
               {/* <PostOptions post={post} params={params} /> */}
             </Suspense>
           </div>

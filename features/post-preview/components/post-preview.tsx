@@ -4,6 +4,7 @@ import { getPostCommunityName, getPostPostedBy } from "@/lib/post-helpers";
 import { Card } from "@/components/ui/card";
 import { GoComment } from "react-icons/go";
 import Link from "next/link";
+import { PostOptions } from "@/features/post-options/components/post-options";
 import { PostVotes } from "@/features/post-votes";
 import { PreviewThumbnail } from "./preview-thumbnail";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -64,6 +65,9 @@ export async function PostPreview({ post }: PostPreviewProps) {
             <GoComment />
             {commentCount} comments
           </Link>
+          <div className="flex items-center pt-0.5 ml-2 ">
+            <PostOptions post={post} refreshPath={linkToSpace} disableRedirect />
+          </div>
         </div>
       </div>
       <div className="order-3 hidden col-span-1 sm:block ">
@@ -79,6 +83,7 @@ export async function PostPreview({ post }: PostPreviewProps) {
           <GoComment />
           {commentCount} comments
         </div>
+        <PostOptions post={post} refreshPath={linkToSpace} disableRedirect />
       </div>
     </Card>
   );

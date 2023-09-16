@@ -24,7 +24,6 @@ import { Post, PostPreview } from "@/types";
 import { useState, useTransition } from "react";
 
 import { AiOutlineEdit } from "react-icons/ai";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { LoadingButton } from "@/components/loading-button";
 import { deletePost } from "../api/delete-post";
@@ -38,7 +37,7 @@ type PostOptionsMenuProps = {
 
 };
 
-export function PostOptionsMenu({ post, disableRedirect, refreshPath }: PostOptionsMenuProps) {
+export function PostOptions({ post, disableRedirect, refreshPath }: PostOptionsMenuProps) {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -93,12 +92,12 @@ export function PostOptionsMenu({ post, disableRedirect, refreshPath }: PostOpti
 
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
-          <Button
+          <button
             className="bg-transparent border-none dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-transparent hover:bg-transparent dark:bg-transparent dark:border-none"
-            size="sm"
+       
           >
             <MoreHorizontal />
-          </Button>
+          </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[200px]">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>

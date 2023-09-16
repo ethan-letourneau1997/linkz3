@@ -1,6 +1,6 @@
 "use client";
 
-import { ProfileDisplaySelect } from "../../space-layout/components/profile-display-select";
+import { ProfileDisplaySelect } from "./profile-display-select";
 import { SortPosts } from "@/features/sort-posts";
 import { useParams } from "next/navigation";
 
