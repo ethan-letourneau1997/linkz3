@@ -21,7 +21,8 @@ export async function upsertPostVote(post: Post | PostPreview, vote: number) {
       .from("post_vote")
       .upsert({ user_id: data.session.user.id, post_id: post.id, vote });
 
-    revalidatePath(`/community/${community.id}/${community.name}`);
+
     // revalidatePath(`/subscriptions/`);
   }
+  revalidatePath(`/community/${community.id}/${community.name}`);
 }

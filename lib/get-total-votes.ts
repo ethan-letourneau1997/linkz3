@@ -5,5 +5,8 @@ export function getTotalVotes(itemVotes: PostVote[] | CommentVote[] | null) {
   const voteArray = itemVotes?.map((vote) => vote.vote);
   const totalVotes = voteArray?.reduce((a, b) => a! + b!, 0);
 
-  return totalVotes;
+  if(totalVotes) return totalVotes
+
+  return 0
+
 }

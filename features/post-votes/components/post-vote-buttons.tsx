@@ -7,9 +7,9 @@ import {
   BiUpvote,
 } from "react-icons/bi";
 import { Post, PostPreview } from "@/types";
+import { experimental_useOptimistic as useOptimistic, useState } from "react";
 
 import { upsertPostVote } from "../api/upsert-post-vote";
-import { useState } from "react";
 
 type PostVoteButtonsProps = {
   userVote: number;
@@ -24,41 +24,57 @@ export function PostVoteButtons({
   post,
   horizontal,
 }: PostVoteButtonsProps) {
-  const [optomisticUserVote, setOptomisticUserVote] = useState(userVote);
-  const [optomisticPostVotes, setOptomisticPostVotes] = useState(postVotes);
+  // const [optomisticUserVote, setOptomisticUserVote] = useState(userVote);
+  // const [optomisticPostVotes, setOptomisticPostVotes] = useState(postVotes);
 
-  async function handleUpvote() {
-    if (optomisticUserVote === 0) {
-      setOptomisticPostVotes(optomisticPostVotes + 1);
-    } else if (optomisticUserVote === -1) {
-      setOptomisticPostVotes(optomisticPostVotes + 2);
-    }
+  const [optimisticUserVote, setOptimisticUserVote] = useOptimistic<number>(
+    userVote
+  );
 
-    await upsertPostVote(post, 1);
+  const [optimisticTotalVotes, setOptimisticTotalVotes] = useOptimistic<number>(
+    postVotes 
+  );
+
+  const [isUpvoted, setIsUpvoted] = useState( optimisticUserVote === 1)
+  const [isDownvoted, setIsDownvoted] = useState(optimisticUserVote === -1)
+
+ 
+
+  async function updateVotes(userVoteChange: number, totalVotesChange: number) {
+    setOptimisticUserVote(userVoteChange);
+    setOptimisticTotalVotes(optimisticTotalVotes + totalVotesChange);
+    upsertPostVote(post, userVoteChange);
   }
 
-  async function handleDownvote() {
-    setOptomisticUserVote(-1);
-    if (optomisticUserVote === 0) {
-      setOptomisticPostVotes(optomisticPostVotes - 1);
-    } else if (optomisticUserVote === 1) {
-      setOptomisticPostVotes(optomisticPostVotes - 2);
-    }
-
-    await upsertPostVote(post, -1);
+  async function removeUpvote() {
+    setIsUpvoted(false)
+    await updateVotes(0, -1);
   }
 
-  async function handleRemoveVote() {
-    setOptomisticUserVote(0);
-    if (optomisticUserVote === 1) {
-      setOptomisticPostVotes(optomisticPostVotes - 1);
-    }
-    if (optomisticUserVote === -1) {
-      setOptomisticPostVotes(optomisticPostVotes + 1);
-    }
-
-    await upsertPostVote(post, 0);
+  async function removeDownvote() {
+    setIsDownvoted(false)
+    await updateVotes(0, 1);
   }
+
+  async function addDownvote() {
+    if(optimisticUserVote === 1){
+      setIsUpvoted(false)
+    }
+    setIsDownvoted(true)
+    const totalVoteChange = isUpvoted ? -2 : -1;
+    await updateVotes(-1, totalVoteChange);
+  }
+
+  async function addUpvote() {
+    if(optimisticUserVote === -1){
+      setIsDownvoted(false)
+    }
+    setIsUpvoted(true)
+    const totalVoteChange = isDownvoted ? 2 : 1;
+    await updateVotes(1, totalVoteChange);
+  }
+
+
 
   return (
     <div
@@ -66,37 +82,37 @@ export function PostVoteButtons({
         horizontal ? "" : "flex-col"
       } items-center place-content-evenly text-neutral-400`}
     >
-      {optomisticUserVote === 1 ? (
+      {isUpvoted ? (
         <button type="button" className="px-1 py-1 md:px-2">
-          <BiSolidUpvote onClick={handleRemoveVote} className="text-indigo-400" />
+          <BiSolidUpvote onClick={removeUpvote} className="text-indigo-400" />
         </button>
       ) : (
         <button
           type="button"
-          onClick={handleUpvote}
+          onClick={addUpvote}
           className="px-1 py-1 md:px-2"
         >
           <BiUpvote className="hover:text-indigo-400" />
         </button>
       )}
       <>
-        {optomisticPostVotes < 0 ? (
+        {optimisticTotalVotes < 0 ? (
           <div className="mr-1.5 text-xs md:text-sm ">
-            {optomisticPostVotes}
+            {optimisticTotalVotes}
           </div>
         ) : (
-          <div className="text-sm ">{optomisticPostVotes}</div>
+          <div className="text-sm ">{optimisticTotalVotes}</div>
         )}
       </>
-      {optomisticUserVote === -1 ? (
+      {isDownvoted ? (
         <button type="button" className="px-1 py-1 md:px-2">
           <BiSolidDownvote
-            onClick={handleRemoveVote}
+            onClick={removeDownvote}
             className="text-indigo-400"
           />
         </button>
       ) : (
-        <button onClick={handleDownvote} className="px-1 py-1 md:px-2">
+        <button onClick={addDownvote} className="px-1 py-1 md:px-2">
           <BiDownvote className="hover:text-indigo-400" />
         </button>
       )}
