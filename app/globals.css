@@ -228,3 +228,9 @@ strong {
     height: 0;
   }
 }
+
+/* Image Drop */
+
+.filepond--drop-label {
+  @apply dark:bg-dark-900 dark:border-neutral-800 border dark:text-neutral-500;
+}

@@ -1,4 +1,5 @@
 import { FeedLayout } from "@/layout/feed-layout";
+import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -10,5 +11,9 @@ type IndexProps = {
 };
 
 export default async function Index({ params }: IndexProps) {
-  return <FeedLayout params={params} />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <FeedLayout params={params} />
+    </Suspense>
+  );
 }
