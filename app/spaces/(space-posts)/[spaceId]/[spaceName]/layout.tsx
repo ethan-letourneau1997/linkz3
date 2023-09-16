@@ -1,4 +1,5 @@
 import { SpaceDetails } from "@/layout/space-layout";
+import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -9,7 +10,10 @@ export default function RootLayout({
 }) {
   return (
     <div className="w-full max-w-3xl">
-      <SpaceDetails />
+      <Suspense fallback={<></>}>
+        <SpaceDetails />
+      </Suspense>
+
       {children}
     </div>
   );

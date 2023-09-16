@@ -1,4 +1,4 @@
-import { PostPreviews } from "@/features/post-preview/components/post-previews";
+import { PostPreviews } from "@/features/post-preview";
 import { getSortedPosts } from "../api/get-sorted-posts";
 
 type SpacePagePostsProps = {

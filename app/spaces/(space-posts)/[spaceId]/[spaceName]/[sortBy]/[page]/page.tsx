@@ -1,4 +1,4 @@
-import { SpacePageLayout } from "@/layout/space-layout";
+import { SpaceLayout } from "@/layout/space-layout";
 
 export const dynamic = "force-dynamic";
 
@@ -12,5 +12,5 @@ type IndexProps = {
 };
 
 export default async function Index({ params }: IndexProps) {
-  return <SpacePageLayout params={params} />;
+  return <SpaceLayout params={params} />;
 }

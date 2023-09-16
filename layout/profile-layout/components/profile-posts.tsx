@@ -1,4 +1,4 @@
-import { PostPreviews } from "@/features/post-preview/components/post-previews";
+import { PostPreviews } from "@/features/post-preview";
 import { getSortedProfilePosts } from "../api/get-sorted-profile-posts";
 
 type ProfilePostsProps = {

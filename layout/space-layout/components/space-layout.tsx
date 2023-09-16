@@ -2,7 +2,7 @@ import { PreviewSkeleton } from "@/features/post-preview";
 import { SpacePagePosts } from "./space-page-posts";
 import { Suspense } from "react";
 
-type SpacePageLayoutProps = {
+type SpaceLayoutProps = {
   params: {
     spaceName: string;
     spaceId: string;
@@ -11,7 +11,7 @@ type SpacePageLayoutProps = {
   };
 };
 
-export async function SpacePageLayout({ params }: SpacePageLayoutProps) {
+export async function SpaceLayout({ params }: SpaceLayoutProps) {
   return (
     <>
       <Suspense fallback={<PreviewSkeleton count={10} />}>

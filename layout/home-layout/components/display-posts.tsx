@@ -1,5 +1,5 @@
 import { Post } from "@/types";
-import { PostPreviews } from "@/features/post-preview/components/post-previews";
+import { PostPreviews } from "@/features/post-preview";
 import { getSortedSubscriptionPosts } from "../api/get-sorted-subscription-posts";
 
 type DisplayPostProps = {
