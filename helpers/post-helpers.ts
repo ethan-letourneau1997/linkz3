@@ -13,7 +13,7 @@ export async function getPostPostedBy(createdBy: Post["created_by"]) {
     .eq("id", createdBy)
     .single();
 
-  if (public_profile.username) return public_profile.username;
+  if (public_profile?.username) return public_profile.username;
 }
 
 export async function getPostCommunityName(postedIn: Post["posted_in"]) {

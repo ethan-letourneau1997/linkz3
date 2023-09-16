@@ -18,7 +18,7 @@ export async function Navigation() {
     .single();
 
   return (
-    <nav className="w-full border-b border-neutral-800">
+    <nav className="w-full border-b dark:border-dark-800 dark:bg-dark-900">
       <DesktopNavigation profile={public_profile} />
       <div className="grid items-center grid-cols-3 px-2 md:hidden h-14">
         <MobileNavigation profile={public_profile} />

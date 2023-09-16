@@ -68,7 +68,7 @@ export function PostVoteButtons({
     >
       {optomisticUserVote === 1 ? (
         <button type="button" className="px-1 py-1 md:px-2">
-          <BiSolidUpvote onClick={handleRemoveVote} className="text-teal-300" />
+          <BiSolidUpvote onClick={handleRemoveVote} className="text-indigo-400" />
         </button>
       ) : (
         <button
@@ -76,7 +76,7 @@ export function PostVoteButtons({
           onClick={handleUpvote}
           className="px-1 py-1 md:px-2"
         >
-          <BiUpvote className="hover:text-teal-300" />
+          <BiUpvote className="hover:text-indigo-400" />
         </button>
       )}
       <>
@@ -92,12 +92,12 @@ export function PostVoteButtons({
         <button type="button" className="px-1 py-1 md:px-2">
           <BiSolidDownvote
             onClick={handleRemoveVote}
-            className="text-teal-300"
+            className="text-indigo-400"
           />
         </button>
       ) : (
         <button onClick={handleDownvote} className="px-1 py-1 md:px-2">
-          <BiDownvote className="hover:text-teal-300" />
+          <BiDownvote className="hover:text-indigo-400" />
         </button>
       )}
     </div>

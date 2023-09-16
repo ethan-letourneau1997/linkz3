@@ -26,7 +26,7 @@ export async function PostPreview({ post }: PostPreviewProps) {
   const profileLink = `/profile/${postedByUsername}`;
 
   return (
-    <Card className="grid grid-cols-12 gap-3 px-3 py-3 border-0 border-t rounded-none md:rounded-md md:border sm:mt-2 sm:px-4">
+    <Card className="grid grid-cols-12 gap-3 px-3 py-3 border-0 border-t rounded-none dark:bg-dark-900 md:rounded-md md:border sm:mt-3 sm:px-4">
       <div className="order-2 sm:order-1 col-span-3 sm:col-span-2 aspect-[4/3]">
         <Suspense fallback={<Skeleton className="w-full h-full" />}>
           <PreviewThumbnail post={post} />
@@ -36,7 +36,7 @@ export async function PostPreview({ post }: PostPreviewProps) {
         <div>
           <div className="text-xs ">
             <Link
-              className="font-semibold dark:text-neutral-200 hover:underline"
+              className="text-semibold dark:text-neutral-300 hover:underline"
               href={linkToSpace}
             >
               {spaceName}

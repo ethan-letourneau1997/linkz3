@@ -11,6 +11,7 @@ export const content = [
   "./node_modules/flowbite-react/**/*.js",
 ];
 export const theme = {
+
   container: {
     center: true,
     padding: "2rem",
@@ -19,6 +20,21 @@ export const theme = {
     },
   },
   extend: {
+    colors: {
+      dark: {
+        50: '#BFBFBF',
+        100: '#B5B5B5',
+        200: '#A1A1A1',
+        300: '#8C8C8C',
+        400: '#787878',
+        500: '#646464',
+        600: '#4F4F4F',
+        700: '#3B3B3B',
+        800: '#262626',
+        900: '#121212',
+        950: '#040404'
+      },
+    },
     keyframes: {
       "accordion-down": {
         from: { height: 0 },
