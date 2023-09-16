@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
-export async function AccountSettings() {
+export async function AccountSettingsForm() {
   const supabase = createServerComponentClient({ cookies });
 
   const {

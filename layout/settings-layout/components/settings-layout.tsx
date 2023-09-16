@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { Separator } from "@/components/ui/separator";
-import { SidebarNav } from "./sidebar-nav";
+import { SettingsNav } from "./settings-nav";
 
 type SettingsLayoutProps = {
   children: React.ReactNode;
@@ -38,7 +38,7 @@ export async function SettingsLayout({ children }: SettingsLayoutProps) {
       <CardContent>
         <div className="grid grid-cols-4 gap-5">
           <div className="col-span-4 lg:col-span-1">
-            <SidebarNav items={items} />
+            <SettingsNav items={items} />
           </div>
           <div className="col-span-4 lg:col-span-3">{children}</div>
         </div>

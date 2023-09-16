@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Post } from "@/types";
-import { getPostCommunityName } from "@/helpers/post-helpers";
+import { getPostCommunityName } from "@/lib/post-helpers";
 
 type PostCommunityProps = {
   post: Post;

@@ -13,7 +13,7 @@ interface SidebarNavProps extends HTMLAttributes<HTMLElement> {
   }[];
 }
 
-export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
+export function SettingsNav({ className, items, ...props }: SidebarNavProps) {
   const pathname = usePathname();
 
   return (

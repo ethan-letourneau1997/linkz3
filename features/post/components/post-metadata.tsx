@@ -1,5 +1,5 @@
 import { Post } from "@/types";
-import { getPostPostedBy } from "@/helpers/post-helpers";
+import { getPostPostedBy } from "@/lib/post-helpers";
 import { getTimeSinceNow } from "@/lib/get-time-since-now";
 
 type PostMetadataProps = {

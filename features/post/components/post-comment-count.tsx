@@ -1,6 +1,6 @@
 import { GoComment } from "react-icons/go";
 import { Post } from "@/types";
-import { getPostCommentCount } from "@/helpers/post-helpers";
+import { getPostCommentCount } from "@/lib/post-helpers";
 
 type PostCommentCountProps = {
   post: Post;

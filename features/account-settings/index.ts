@@ -1,1 +1,1 @@
-export * from "./components/account-settings";
+export * from "./components/account-settings-form";

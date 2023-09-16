@@ -1,7 +1,7 @@
-import { AccountSettings } from "@/features/account-settings";
+import { AccountSettingsForm } from "@/features/account-settings";
 
 export const dynamic = "force-dynamic";
 
 export default async function Index() {
-  return <AccountSettings />;
+  return <AccountSettingsForm />;
 }

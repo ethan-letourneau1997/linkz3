@@ -1,5 +1,5 @@
 import { Post, PostPreview as PostPreviewType } from "@/types";
-import { getPostCommunityName, getPostPostedBy } from "@/helpers/post-helpers";
+import { getPostCommunityName, getPostPostedBy } from "@/lib/post-helpers";
 
 import { Card } from "@/components/ui/card";
 import { GoComment } from "react-icons/go";
@@ -8,7 +8,7 @@ import { PostVotes } from "@/features/post-votes";
 import { PreviewThumbnail } from "./preview-thumbnail";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
-import { getPostCommentCount } from "@/helpers/post-helpers";
+import { getPostCommentCount } from "@/lib/post-helpers";
 import { getTimeSinceNow } from "@/lib/get-time-since-now";
 
 type PostPreviewProps = {
