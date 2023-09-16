@@ -26,7 +26,7 @@ export async function HandleUserSubscription({ space }: UserSubscriptionProps) {
           return false;
         }
       } catch (error) {
-        console.log(error);
+        (error);
       }
     }
   }
