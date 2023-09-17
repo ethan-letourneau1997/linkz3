@@ -25,7 +25,7 @@ export async function PostLayout({ params }: PostLayoutProps) {
         </Card>
       </div>
       <SidebarCollapse>
-        <SpaceSidebar params={params} />
+        <SpaceSidebar spaceName={params.spaceName} spaceId={params.spaceId} />
       </SidebarCollapse>
     </div>
   );

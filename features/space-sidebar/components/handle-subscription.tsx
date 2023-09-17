@@ -1,13 +1,16 @@
-import { PostRouterParams } from "@/types";
 import { SidebarSubscriptionButton } from "./sidebar-subscribe-button";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 type HandleSubscriptionProps = {
-  params: PostRouterParams;
+  spaceName: string;
+  spaceId: string;
 };
 
-export async function HandleSubscription({ params }: HandleSubscriptionProps) {
+export async function HandleSubscription({
+  spaceId,
+  spaceName,
+}: HandleSubscriptionProps) {
   const supabase = createServerComponentClient({ cookies });
   const { data } = await supabase.auth.getSession();
 
@@ -19,7 +22,7 @@ export async function HandleSubscription({ params }: HandleSubscriptionProps) {
           .select()
           .match({
             user_id: data.session.user.id,
-            community_id: params.spaceId,
+            community_id: spaceId,
           });
 
         if (user_community && user_community.length > 0) {
@@ -38,8 +41,8 @@ export async function HandleSubscription({ params }: HandleSubscriptionProps) {
   return (
     <SidebarSubscriptionButton
       isSubscribed={isSubscribed || false}
-      spaceName={params.spaceName}
-      spaceId={params.spaceId}
+      spaceName={spaceName}
+      spaceId={spaceId}
     />
   );
 }

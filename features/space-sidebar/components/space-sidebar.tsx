@@ -1,17 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { FaUserAstronaut } from "react-icons/fa";
 import { HandleSubscription } from "./handle-subscription";
-import { PostRouterParams } from "@/types";
 import { Separator } from "@/components/ui/separator";
 import { Suspense } from "react";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 type SpaceSidebarProps = {
-  params: PostRouterParams;
+  spaceName: string;
+  spaceId: string;
 };
 
-export async function SpaceSidebar({ params }: SpaceSidebarProps) {
+export async function SpaceSidebar({ spaceName, spaceId }: SpaceSidebarProps) {
   const supabase = createServerComponentClient({ cookies });
 
   const subscriptionButtonFallback = (
@@ -23,19 +23,19 @@ export async function SpaceSidebar({ params }: SpaceSidebarProps) {
   const { data: space } = await supabase
     .from("community")
     .select()
-    .eq("name", params.spaceName)
+    .eq("name", spaceName)
     .single();
 
   return (
     <div className="px-4 pb-3 space-y-3 w-72">
-      <h2 className="text-lg font-semibold text-center">{params.spaceName}</h2>
+      <h2 className="text-lg font-semibold text-center">{spaceName}</h2>
       <p className="text-sm ">{space?.description}</p>
       <Suspense fallback={subscriptionButtonFallback}></Suspense>
       <Separator />
 
       <div className="flex gap-5">
-        <SidebarSubscriberCount spaceId={params.spaceId} />
-        <HandleSubscription params={params} />
+        <SidebarSubscriberCount spaceId={spaceId} />
+        <HandleSubscription spaceName={spaceName} spaceId={spaceId} />
       </div>
     </div>
   );
