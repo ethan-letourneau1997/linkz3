@@ -126,7 +126,6 @@ export function NewPostForm({ params }: NewPostFormProps) {
             <div className="flex justify-end">
               <LoadingButton
                 size="sm"
-                variant="outline"
                 isLoading={isPending}
                 onClick={() => handleCreatePost("link")}
                 disabled={isLinkSubmitDisabled}
@@ -146,7 +145,6 @@ export function NewPostForm({ params }: NewPostFormProps) {
             <div className="flex justify-end pt-2">
               <LoadingButton
                 size="sm"
-                variant="outline"
                 isLoading={isPending}
                 onClick={handleCreateImagePost}
                 disabled={isImageSubmitDisabled}

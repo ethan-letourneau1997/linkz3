@@ -30,10 +30,15 @@ export function CaptionInput({ image, params }: CaptionInputProps) {
     });
   }
   return (
-    <div>
-      <Textarea value={caption} onChange={(e) => setCaption(e.target.value)} />
+    <div className="mb-5 md:mb-0">
+      <Textarea
+        className="dark:bg-dark-800"
+        value={caption}
+        onChange={(e) => setCaption(e.target.value)}
+      />
       <div className="flex justify-end mt-3">
         <LoadingButton
+          size="sm"
           onClick={handleSubmitCaption}
           disabled={caption === image.caption}
           isLoading={isPending}
