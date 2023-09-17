@@ -33,7 +33,7 @@ export function CommentCollapse({ header, children }: CommentCollapseProps) {
 
         <Collapsible open={open}>
           <CollapsibleContent className=" CollapsibleContent">
-            <div className="w-full px-2 ml-2 border-l border-neutral-800">
+            <div className="w-full px-2 ml-2 border-l border-neutral-800 ">
               {children}
             </div>
           </CollapsibleContent>
@@ -45,7 +45,7 @@ export function CommentCollapse({ header, children }: CommentCollapseProps) {
             onClick={handleOpen}
             className={`${open ? "hidden" : "block"}`}
           >
-            <CgArrowsExpandLeft className="text-neutral-400" />
+            <CgArrowsExpandLeft className="text-neutral-400 dark:hover:text-neutral-300" />
           </button>
 
           {header}

@@ -1,5 +1,6 @@
 import { Comment } from "./comment";
 import { Comment as CommentType } from "@/types";
+import { FaComments } from "react-icons/fa";
 import { PostRouterParams } from "@/types";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -41,6 +42,16 @@ export async function Comments({ params }: CommentsProps) {
             />
           </Comment>
         ))}
+      </div>
+    );
+
+  if (comments && comments.length === 0)
+    return (
+      <div className="min-h-[20vh] flex justify-center items-center">
+        <div className="flex items-center gap-2 dark:text-neutral-500">
+          <FaComments size={20} />
+          <span>No comments yet</span>
+        </div>
       </div>
     );
 }

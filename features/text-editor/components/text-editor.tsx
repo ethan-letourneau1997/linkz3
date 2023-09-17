@@ -80,7 +80,7 @@ export function TextEditor({
 
   if (editor)
     return (
-      <div className="max-h-full pb-3 overflow-scroll text-base border rounded dark:bg-dark-800 dark:border-neutral-800">
+      <div className="max-h-full pb-3 overflow-scroll text-base border rounded dark:bg-dark-900 dark:border-dark-800">
         <div
           id="TiptapMenu"
           className="hidden py-1 dark:bg-neutral-900 sm:block"

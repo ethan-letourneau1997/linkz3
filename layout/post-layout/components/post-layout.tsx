@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Comments } from "@/features/comments";
 import { Post } from "@/features/post";
 import { PostRouterParams } from "@/types";
+import { RootCommentInput } from "./root-comment-input";
 import { Separator } from "@/components/ui/separator";
 
 type PostLayoutProps = {
@@ -10,12 +11,16 @@ type PostLayoutProps = {
 
 export async function PostLayout({ params }: PostLayoutProps) {
   return (
-    <Card className="w-full max-w-3xl px-2 mt-5 border-0md:border ">
+    <div className="w-full max-w-3xl ">
       <Post params={params} />
 
-      <Separator className="mt-5 mb-5" />
-
-      <Comments params={params} />
-    </Card>
+      <Card className="p-6 mt-2 border-0 rounded-none md:mt-5 md:border md:rounded">
+        <div>
+          <RootCommentInput params={params} />
+        </div>
+        <Separator className="my-10" />
+        <Comments params={params} />
+      </Card>
+    </div>
   );
 }

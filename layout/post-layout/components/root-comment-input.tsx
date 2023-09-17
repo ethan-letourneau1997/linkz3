@@ -10,7 +10,7 @@ import { submitComment } from "@/features/comments/api/submit-comment";
 type RootCommentInputProps = {
   params: PostRouterParams;
   children?: JSX.Element;
-  hideReply: () => void;
+  hideReply?: () => void;
 };
 
 export function RootCommentInput({ params, hideReply }: RootCommentInputProps) {
@@ -25,7 +25,9 @@ export function RootCommentInput({ params, hideReply }: RootCommentInputProps) {
         root_post: params.postId,
         content: commentContent,
       });
-      hideReply();
+      if (hideReply) {
+        hideReply();
+      }
     });
   }
 

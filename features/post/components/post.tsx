@@ -1,3 +1,4 @@
+import { Card } from "@/components/ui/card";
 import { ImagePostContent } from "./image-post-content";
 import Link from "next/link";
 import { LinkPostContent } from "./link-post-content";
@@ -26,41 +27,41 @@ export async function Post({ params }: PostProps) {
     .eq("id", params.postId)
     .single();
 
-  
-
   if (post)
     return (
-      <div className="px-2 dark:text-neutral-300 md:px-0 ">
-        <div>
-          <div className="flex items-center justify-between">
-            <div className="flex text-xs text-neutral-400 ">
-              <PostCommunity post={post} />
-              &nbsp;-&nbsp;
-              <PostMetadata post={post} />
+      <Card className="px-6 py-2 mt-5 border-0 rounded-none md:border md:rounded">
+        <div className="px-2 dark:text-neutral-300 md:px-0 ">
+          <div>
+            <div className="flex items-center justify-between">
+              <div className="flex text-xs text-neutral-400 ">
+                <PostCommunity post={post} />
+                &nbsp;-&nbsp;
+                <PostMetadata post={post} />
+              </div>
+
+              <Suspense fallback={<></>}>
+                <PostOptions post={post} />
+                {/* <PostOptions post={post} params={params} /> */}
+              </Suspense>
             </div>
 
-            <Suspense fallback={<></>}>
-              <PostOptions post={post}/>
-              {/* <PostOptions post={post} params={params} /> */}
-            </Suspense>
+            <h1 className="mb-3 text-lg font-semibold tracking-tight">
+              {post.title}
+            </h1>
           </div>
 
-          <h1 className="mb-3 text-lg font-semibold tracking-tight">
-            {post.title}
-          </h1>
-        </div>
+          <div className="pb-2">
+            {post.type === "text" && <TextPostContent post={post} />}
+            {post.type === "link" && <LinkPostContent post={post} />}
+            {post.type === "image" && <ImagePostContent post={post} />}
+          </div>
 
-        <div className="pb-2">
-          {post.type === "text" && <TextPostContent post={post} />}
-          {post.type === "link" && <LinkPostContent post={post} />}
-          {post.type === "image" && <ImagePostContent post={post} />}
+          <PostFooter params={params}>
+            <PostVotes post={post} horizontal />
+            <PostCommentCount post={post} />
+          </PostFooter>
         </div>
-
-        <PostFooter params={params}>
-          <PostVotes post={post} horizontal />
-          <PostCommentCount post={post} />
-        </PostFooter>
-      </div>
+      </Card>
     );
 
   if (!post)

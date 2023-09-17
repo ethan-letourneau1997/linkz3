@@ -37,7 +37,7 @@ input {
 }
 
 .tiptap {
-  @apply min-h-[150px] pt-2;
+  @apply sm:min-h-[100px] pt-2;
 }
 
 .tiptap h3,
