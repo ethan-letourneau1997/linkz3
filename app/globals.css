@@ -165,7 +165,7 @@ strong {
 }
 
 .arrow {
-  @apply dark:bg-neutral-700 dark:bg-opacity-50 py-3 rounded dark:border dark:border-neutral-500 dark:hover:border-neutral-300;
+  @apply py-3 rounded dark:bg-neutral-700 dark:bg-opacity-50 dark:border dark:border-neutral-500 dark:hover:border-neutral-300;
   width: 40px;
   height: 50px;
   position: absolute;
@@ -186,7 +186,7 @@ strong {
 }
 
 .arrow--disabled {
-  @apply dark:hover:border-neutral-500 hidden;
+  @apply hidden dark:hover:border-neutral-500;
   fill: rgba(255, 255, 255, 0.5);
 }
 
@@ -228,7 +228,7 @@ strong {
 /* Image Input */
 
 .filepond--drop-label {
-  @apply dark:bg-dark-800 dark:border-neutral-800 border dark:text-neutral-400;
+  @apply border dark:bg-dark-800 dark:border-neutral-800 dark:text-neutral-400;
 }
 
 .filepond--item {
@@ -237,4 +237,18 @@ strong {
 
 .filepond--panel-root {
   @apply dark:bg-dark-800;
+}
+
+/* Sidebar collapse */
+
+
+
+.sidebar {
+  width: 300px;
+  background-color: red;
+  transition: width 2s;
+}
+
+.sidebar:hover {
+  width: 0px;
 }

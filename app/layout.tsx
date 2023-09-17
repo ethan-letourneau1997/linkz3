@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.className}`}>
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <main className="flex flex-col items-center min-h-screen pb-16 dark:bg-dark-950 dark:text-neutral-200 bg-neutral-300">
+          <main className="flex flex-col items-center min-h-screen pb-4 dark:bg-dark-950 dark:text-neutral-200 bg-neutral-300">
             <Navigation />
             {children}
           </main>

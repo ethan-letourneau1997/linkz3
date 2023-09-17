@@ -29,7 +29,7 @@ export async function Post({ params }: PostProps) {
 
   if (post)
     return (
-      <Card className="px-6 py-2 mt-5 border-0 rounded-none md:border md:rounded">
+      <Card className="px-6 py-2 mt-5 border-0 rounded-none md:border md:rounded ">
         <div className="px-2 dark:text-neutral-300 md:px-0 ">
           <div>
             <div className="flex items-center justify-between">
@@ -45,12 +45,12 @@ export async function Post({ params }: PostProps) {
               </Suspense>
             </div>
 
-            <h1 className="mb-3 text-lg font-semibold tracking-tight">
+            <h1 className="mt-1 mb-3 text-lg font-semibold tracking-tight md:text-xl">
               {post.title}
             </h1>
           </div>
 
-          <div className="pb-2">
+          <div className="pb-2 ">
             {post.type === "text" && <TextPostContent post={post} />}
             {post.type === "link" && <LinkPostContent post={post} />}
             {post.type === "image" && <ImagePostContent post={post} />}
