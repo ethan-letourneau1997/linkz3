@@ -10,10 +10,6 @@ html {
   outline: none;
 }
 
-.filepond--item {
-  width: calc(50% - 0.5em);
-}
-
 input {
   @apply !ring-offset-0 !ring-0 !ring-transparent !outline-none;
 }
@@ -229,8 +225,16 @@ strong {
   }
 }
 
-/* Image Drop */
+/* Image Input */
 
 .filepond--drop-label {
-  @apply dark:bg-dark-900 dark:border-neutral-800 border dark:text-neutral-500;
+  @apply dark:bg-dark-800 dark:border-neutral-800 border dark:text-neutral-400;
+}
+
+.filepond--item {
+  @apply sm:w-[48.5%] mx-auto;
+}
+
+.filepond--panel-root {
+  @apply dark:bg-dark-800;
 }

@@ -6,6 +6,7 @@ import { FilePondFile, FilePondInitialFile } from "filepond";
 
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import { Label } from "@/components/ui/label";
 
 // Register filepond plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
@@ -19,6 +20,8 @@ export function ImageInput({ files, setFiles }: ImageInputProps) {
   return (
     <div className="App">
       <div className="App">
+        <Label className="text-sm dark:text-neutral-300">Images</Label>
+        <div className="pb-2" />
         <FilePond
           allowReorder
           files={
@@ -42,7 +45,7 @@ export function ImageInput({ files, setFiles }: ImageInputProps) {
           maxFiles={3}
           //   server="/api"
           name="files"
-          labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+          labelIdle='Drag & Drop your images or <span class="filepond--label-action">Browse</span>'
         />
       </div>
     </div>

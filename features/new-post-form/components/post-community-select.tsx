@@ -9,20 +9,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import { Label } from "@/components/ui/label";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import useSWR from "swr";
 
-type PostCommunityInputProps = {
+type PostCommunitySelectProps = {
   setCommunityName: (communityName: string) => void;
   communityName: string;
   setCommunityId: Dispatch<SetStateAction<string>>;
 };
 
-export function PostCommunityInput({
+export function PostCommunitySelect({
   setCommunityName,
   communityName,
   setCommunityId,
-}: PostCommunityInputProps) {
+}: PostCommunitySelectProps) {
   const supabase = createClientComponentClient();
 
   const { data: communities } = useSWR("community", async () => {
@@ -48,10 +49,10 @@ export function PostCommunityInput({
 
   return (
     <div className="space-y-1">
-      <label>Community</label>
+      <Label className="dark:text-neutral-300">Community</Label>
       <Select value={communityName} onValueChange={handleCommunityChange}>
-        <SelectTrigger className="w-[180px] dark:bg-transparent">
-          <SelectValue placeholder="Theme" />
+        <SelectTrigger className="w-[180px] dark:bg-dark-800  h-9 ">
+          <SelectValue placeholder="select a community" />
         </SelectTrigger>
         <SelectContent>
           {communities &&
