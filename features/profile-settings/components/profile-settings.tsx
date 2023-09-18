@@ -1,7 +1,10 @@
+import { AvatarUploadModal } from "./avatar-upload-modal";
+import { BioInput } from "./bio-input";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
+import { UserAvatar } from "./user-avatar";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
@@ -15,6 +18,8 @@ export async function ProfileSettings() {
     .select()
     .eq("id", data.session?.user.id)
     .single();
+
+  console.log(public_profile);
 
   return (
     <div className="max-w-lg ">
@@ -31,6 +36,14 @@ export async function ProfileSettings() {
           Bio
         </Label>
         <Textarea id="bio" defaultValue={public_profile.biography} />
+        <BioInput user={public_profile} />
+        <Label className="mt-7" htmlFor="bio">
+          Avatar
+        </Label>
+        <div className="flex items-center gap-2">
+          <UserAvatar user={public_profile} />
+          <AvatarUploadModal user={public_profile} />
+        </div>
       </form>
     </div>
   );

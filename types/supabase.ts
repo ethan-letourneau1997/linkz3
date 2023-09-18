@@ -383,14 +383,20 @@ export interface Database {
       }
       public_profile: {
         Row: {
+          avatar: string | null
+          biography: string
           id: string
           username: string
         }
         Insert: {
+          avatar?: string | null
+          biography?: string
           id?: string
           username: string
         }
         Update: {
+          avatar?: string | null
+          biography?: string
           id?: string
           username?: string
         }
