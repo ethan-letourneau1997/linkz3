@@ -2,21 +2,25 @@ import { PostPreviews } from "@/features/post-preview";
 import { getSortedProfilePosts } from "../api/get-sorted-profile-posts";
 
 type ProfilePostsProps = {
-  params: {
+  searchParams: {
     page: string;
-    sortBy: "top" | "new" | "old";
+    sort: "top" | "new" | "old";
+  };
+  params: {
     username: string;
-    type: "post" | "comment";
   };
 };
 
-export async function ProfilePosts({ params }: ProfilePostsProps) {
+export async function ProfilePosts({
+  params,
+  searchParams,
+}: ProfilePostsProps) {
   // const posts = await getPosts();
 
   const posts = await getSortedProfilePosts(
-    params?.sortBy,
+    searchParams?.sort,
     params?.username,
-    params.page
+    searchParams.page
   );
 
   if (posts) return <PostPreviews posts={posts} />;

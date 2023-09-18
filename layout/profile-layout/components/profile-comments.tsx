@@ -2,19 +2,23 @@ import { CommentPreview } from "@/features/comment-preview";
 import { getSortedProfileComments } from "../api/get-sorted-profile-comments";
 
 type ProfilePostsProps = {
-  params: {
+  searchParams: {
     page: string;
-    sortBy: "top" | "new" | "old";
+    sort: "top" | "new" | "old";
+  };
+  params: {
     username: string;
-    type: "post" | "comment";
   };
 };
 
-export async function ProfileComments({ params }: ProfilePostsProps) {
+export async function ProfileComments({
+  params,
+  searchParams,
+}: ProfilePostsProps) {
   const comments = await getSortedProfileComments(
-    params.sortBy,
+    searchParams.sort,
     params.username,
-    params.page
+    searchParams.page
   );
 
   return (
