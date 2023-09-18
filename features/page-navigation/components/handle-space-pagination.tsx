@@ -8,11 +8,9 @@ import useSWR from "swr";
 
 export function HandleSpacePagination() {
   const params = useParams();
-
   const searchParams = useSearchParams();
 
   const page = searchParams.get("page");
-
   const activePage = page ? parseInt(page, 10) : 1;
 
   const supabase = createClientComponentClient();
