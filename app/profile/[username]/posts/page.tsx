@@ -1,4 +1,4 @@
-import { ProfilePostLayout } from "@/layout/profile-layout/components/profile-post-layout";
+import { ProfilePosts } from "@/features/profile/components/profile-posts";
 
 export const dynamic = "force-dynamic";
 
@@ -13,5 +13,5 @@ type IndexProps = {
 };
 
 export default async function Index({ params, searchParams }: IndexProps) {
-  return <ProfilePostLayout searchParams={searchParams} params={params} />;
+  return <ProfilePosts searchParams={searchParams} params={params} />;
 }

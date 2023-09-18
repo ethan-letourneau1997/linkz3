@@ -1,5 +1,6 @@
 import { FeedLayout } from "@/layout/feed-layout";
 import { Suspense } from "react";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
@@ -10,6 +11,9 @@ type IndexProps = {
   };
 };
 export default async function Index({ searchParams }: IndexProps) {
+  if (!searchParams.page || !searchParams.sort) {
+    redirect(`/subscriptions/feed?page=1&sort=new`);
+  }
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <FeedLayout searchParams={searchParams} />

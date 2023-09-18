@@ -1,4 +1,4 @@
-import { FeedDetails } from "@/layout/feed-layout";
+import { FeedHeader } from "@/layout/feed-layout";
 import { HandleSubscriptionPagination } from "@/features/page-navigation";
 
 export const dynamic = "force-dynamic";
@@ -10,7 +10,7 @@ export default function RootLayout({
 }) {
   return (
     <div className="w-full max-w-3xl">
-      <FeedDetails />
+      <FeedHeader />
       {children}
       <HandleSubscriptionPagination />
     </div>

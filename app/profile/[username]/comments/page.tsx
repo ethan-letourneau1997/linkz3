@@ -1,4 +1,4 @@
-import { ProfileCommentLayout } from "@/layout/profile-layout/components/profile-comment-layout";
+import { ProfileComments } from "@/features/profile";
 
 export const dynamic = "force-dynamic";
 
@@ -13,5 +13,5 @@ type IndexProps = {
 };
 
 export default async function Index({ params, searchParams }: IndexProps) {
-  return <ProfileCommentLayout searchParams={searchParams} params={params} />;
+  return <ProfileComments searchParams={searchParams} params={params} />;
 }

@@ -1,15 +1,12 @@
 "use client";
 
-import { SortPosts } from "@/features/sort-posts";
+import { Card } from "@/components/ui/card";
+import { SortTabs } from "@/features/sort-tabs.tsx";
 
-export function FeedDetails() {
+export function FeedHeader() {
   return (
-    <div className="w-full max-w-3xl mt-5 ">
-      <h1 className="text-2xl font-bold tracking-tight text-center ">
-        My Feed
-      </h1>
-
-      <SortPosts pathname={`/subscriptions/feed/`} />
-    </div>
+    <Card className="flex items-center justify-between gap-5 px-4 py-3 mt-5">
+      <SortTabs />
+    </Card>
   );
 }
