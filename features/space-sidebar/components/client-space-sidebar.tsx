@@ -57,13 +57,16 @@ export function SidebarSubscriberCount({
   const supabase = createClientComponentClient();
 
   const { data: count } = useSWR("user_community", async () => {
-    const { count, error } = await supabase
-      .from("user_community")
-      .select("*", { count: "exact", head: true })
-      .eq("community_id", spaceId);
+    try {
+      const { count } = await supabase
+        .from("user_community")
+        .select("*", { count: "exact", head: true })
+        .eq("community_id", spaceId);
 
-    if (error) throw error.message;
-    return count;
+      return count;
+    } catch (e) {
+      console.log(e);
+    }
   });
 
   return (
