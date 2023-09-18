@@ -1,4 +1,4 @@
-import { HandleProfilePostsPagination } from "@/features/page-navigation/components/handle-profile-posts-pagination";
+import { ProfilePostPagination } from "@/features/profile/components/profile-post-pagination";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <div>
       {children}
-      <HandleProfilePostsPagination />
+      <ProfilePostPagination />
     </div>
   );
 }

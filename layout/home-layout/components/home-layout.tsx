@@ -1,8 +1,8 @@
-import { LoggedInHome } from "./logged-in-home";
 import { LoggedOutHome } from "./logged-out-home";
 import { UsernameForm } from "@/features/username-form";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { redirect } from "next/navigation";
 
 export async function HomeLayout() {
   const supabase = createServerComponentClient({ cookies });
@@ -19,5 +19,5 @@ export async function HomeLayout() {
 
   if (!public_profile) return <UsernameForm />;
 
-  if (data.session) return <LoggedInHome />;
+  if (data.session) return redirect("/subscriptions/feed?page=1&sort=new");
 }

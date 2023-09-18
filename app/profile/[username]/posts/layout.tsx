@@ -1,4 +1,4 @@
-import { HandleProfileCommentPagination } from "@/features/page-navigation/components/handle-profile-comment-pagination";
+import { ProfileCommentPagination } from "@/features/profile/components/profile-comment-pagination";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <div>
       {children}
-      <HandleProfileCommentPagination />
+      <ProfileCommentPagination />
     </div>
   );
 }

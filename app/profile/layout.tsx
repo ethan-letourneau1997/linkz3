@@ -1,3 +1,4 @@
+import { HandleProfilePagination } from "@/features/page-navigation";
 import { ProfileHeader } from "@/features/profile-header";
 import { ProfileSidebar } from "@/features/profile-sidebar";
 import { SidebarCollapse } from "@/features/sidebar-collapse";
@@ -14,6 +15,7 @@ export default function RootLayout({
       <div className="w-full max-w-3xl">
         <ProfileHeader />
         {children}
+        <HandleProfilePagination />
       </div>
       <SidebarCollapse>
         <ProfileSidebar />

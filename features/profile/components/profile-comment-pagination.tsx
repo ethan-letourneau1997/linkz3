@@ -2,11 +2,11 @@
 
 import { useParams, useSearchParams } from "next/navigation";
 
-import { PageNavigation } from "./page-navigation";
+import { PageNavigation } from "../../page-navigation/components/page-navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import useSWR from "swr";
 
-export function HandleProfileCommentPagination() {
+export function ProfileCommentPagination() {
   const searchParams = useSearchParams();
   const params = useParams();
 
