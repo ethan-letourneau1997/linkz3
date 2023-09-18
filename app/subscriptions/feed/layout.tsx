@@ -1,4 +1,4 @@
-import { FeedHeader } from "@/layout/feed-layout";
+import { FeedHeader } from "@/layout/feed";
 import { HandleSubscriptionPagination } from "@/features/page-navigation";
 
 export const dynamic = "force-dynamic";

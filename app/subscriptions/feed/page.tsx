@@ -1,4 +1,4 @@
-import { FeedLayout } from "@/layout/feed-layout";
+import { Feed } from "@/layout/feed";
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 
@@ -16,7 +16,7 @@ export default async function Index({ searchParams }: IndexProps) {
   }
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <FeedLayout searchParams={searchParams} />
+      <Feed searchParams={searchParams} />
     </Suspense>
   );
 }
