@@ -5,16 +5,21 @@ type SpacePagePostsProps = {
   params: {
     spaceName: string;
     spaceId: string;
+  };
+  searchParams: {
     page: string;
-    sortBy: "top" | "new" | "old";
+    sort: "top" | "new" | "old";
   };
 };
 
-export async function SpacePagePosts({ params }: SpacePagePostsProps) {
+export async function SpacePagePosts({
+  params,
+  searchParams,
+}: SpacePagePostsProps) {
   const posts = await getSortedPosts(
     params.spaceId,
-    params.page,
-    params.sortBy
+    searchParams.page,
+    searchParams.sort
   );
 
   if (posts)

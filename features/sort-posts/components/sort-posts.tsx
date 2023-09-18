@@ -7,37 +7,39 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useParams, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { useState } from "react";
 
-type SortPostProps = {
-  pathname: string;
-};
-
-export function SortPosts({ pathname }: SortPostProps) {
-  const params = useParams();
+export function SortPosts() {
   const router = useRouter();
 
-  const [sortBy, setSortBy] = useState(params.sortBy as string);
+  const pathname = usePathname();
+
+  const searchParams = useSearchParams();
+  const sort = searchParams.get("sort");
+  const page = searchParams.get("page");
+
+  const [sortBy, setSortBy] = useState(sort as string);
 
   const handleSortBy = (value: string) => {
-    router.push(`${pathname}/${value}/1`);
+    router.push(`${pathname}?page=${page}&sort=${value}`);
     setSortBy(value);
   };
 
-  return (
-    <>
-      <Select value={sortBy} onValueChange={(value) => handleSortBy(value)}>
-        <SelectTrigger className="md:w-[180px] w-[80px]">
-          <SelectValue placeholder="Sort by" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="new">New</SelectItem>
-          <SelectItem value="old">Old</SelectItem>
-          <SelectItem value="top">Top</SelectItem>
-        </SelectContent>
-      </Select>
-    </>
-  );
+  if (page && sort)
+    return (
+      <>
+        <Select value={sortBy} onValueChange={(value) => handleSortBy(value)}>
+          <SelectTrigger className="md:w-[180px] w-[80px]">
+            <SelectValue placeholder="Sort by" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="new">New</SelectItem>
+            <SelectItem value="old">Old</SelectItem>
+            <SelectItem value="top">Top</SelectItem>
+          </SelectContent>
+        </Select>
+      </>
+    );
 }

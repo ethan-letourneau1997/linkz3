@@ -21,19 +21,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal, Trash } from "lucide-react";
 import { Post, PostPreview } from "@/types";
+import { useParams, useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
 import { AiOutlineEdit } from "react-icons/ai";
 import Link from "next/link";
 import { LoadingButton } from "@/components/loading-button";
 import { deletePost } from "../api/delete-post";
-import { useRouter } from 'next/navigation'
 import { useToast } from "@/components/ui/use-toast";
 
 type PostOptionsMenuProps = {
   post: Post | PostPreview;
-  disableRedirect?:boolean
-
+  disableRedirect?: boolean;
 };
 
 export function PostOptions({ post, disableRedirect }: PostOptionsMenuProps) {
@@ -41,28 +40,25 @@ export function PostOptions({ post, disableRedirect }: PostOptionsMenuProps) {
   const [openModal, setOpenModal] = useState(false);
   const [isPending, startTransition] = useTransition();
 
-
-  const router = useRouter()
+  const router = useRouter();
+  const params = useParams();
 
   const { toast } = useToast();
 
   function handleDeletePost() {
     startTransition(async () => {
-      const  data  = await deletePost(post);
-      if(data){
-        console.log(data)
-      
-      }
-    
+      const data = await deletePost(post);
+      if (data) {
+        console.log(data);
+        toast({
+          title: "Post Deleted",
+          description: `Your post has been permanently deleted.`,
+        });
 
-      toast({
-        title: "Post Deleted",
-        description: `Your post has been permanently deleted.`,
-      });
-      if(!disableRedirect) {
-        router.back()
+        if (!disableRedirect) {
+          router.back();
+        }
       }
-      
     });
   }
 
@@ -96,10 +92,7 @@ export function PostOptions({ post, disableRedirect }: PostOptionsMenuProps) {
 
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
-          <button
-            className="bg-transparent border-none dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-transparent hover:bg-transparent dark:bg-transparent dark:border-none"
-       
-          >
+          <button className="bg-transparent border-none dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-transparent hover:bg-transparent dark:bg-transparent dark:border-none">
             <MoreHorizontal />
           </button>
         </DropdownMenuTrigger>
@@ -109,7 +102,7 @@ export function PostOptions({ post, disableRedirect }: PostOptionsMenuProps) {
             <DropdownMenuItem className="py-0 ">
               <Link
                 className="w-full  py-1.5 flex gap-1"
-                href={`${post.id}/edit`}
+                href={`/spaces/${params.spaceId}/${params.spaceName}/edit/${post.id}`}
               >
                 <AiOutlineEdit className="w-4 h-4 mr-2" />
                 Edit

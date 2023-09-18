@@ -22,16 +22,14 @@ export function ClientSpaceSidebar() {
       Subscribe
     </Button>
   );
-
-  const { data: space } = useSWR("community", async () => {
-    const { data: posts, error } = await supabase
+  const { data: space } = useSWR("space", async () => {
+    const { data: community } = await supabase
       .from("community")
-      .select()
+      .select("*")
       .eq("name", spaceName)
       .single();
 
-    if (error) throw error.message;
-    return posts;
+    return community;
   });
 
   return (

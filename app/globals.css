@@ -241,8 +241,6 @@ strong {
 
 /* Sidebar collapse */
 
-
-
 .sidebar {
   width: 300px;
   background-color: red;
@@ -251,4 +249,9 @@ strong {
 
 .sidebar:hover {
   width: 0px;
+}
+
+/* space select */
+.space-select-trigger svg {
+  @apply dark:text-white w-5 h-5;
 }

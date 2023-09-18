@@ -1,6 +1,6 @@
+import { HandleSpacePagination } from "@/features/page-navigation";
 import { HandleSpaceSidebar } from "./handle-space-sidar";
-import { SpaceDetails } from "@/layout/space-layout";
-import { Suspense } from "react";
+import { SpaceHeader } from "@/features/space-header";
 
 export const dynamic = "force-dynamic";
 
@@ -10,12 +10,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex gap-5">
-      <div className="w-full max-w-3xl">
-        <Suspense fallback={<></>}>
-          <SpaceDetails />
-        </Suspense>
+    <div className="flex w-full max-w-5xl gap-5">
+      <div className="flex flex-col w-full max-w-3xl">
+        <SpaceHeader />
         {children}
+        <HandleSpacePagination />
       </div>
       <HandleSpaceSidebar />
     </div>

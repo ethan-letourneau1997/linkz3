@@ -6,16 +6,18 @@ type SpaceLayoutProps = {
   params: {
     spaceName: string;
     spaceId: string;
+  };
+  searchParams: {
     page: string;
-    sortBy: "top" | "new" | "old";
+    sort: "top" | "new" | "old";
   };
 };
 
-export async function SpaceLayout({ params }: SpaceLayoutProps) {
+export async function SpaceLayout({ params, searchParams }: SpaceLayoutProps) {
   return (
     <>
       <Suspense fallback={<PreviewSkeleton count={10} />}>
-        <SpacePagePosts params={params} />
+        <SpacePagePosts params={params} searchParams={searchParams} />
       </Suspense>
     </>
   );

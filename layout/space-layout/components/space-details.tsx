@@ -12,7 +12,7 @@ export function SpaceDetails() {
         {params.spaceName}
       </div>
       <div className="pl-2 md:pl-0">
-        <SortPosts pathname={`/spaces/${params.spaceId}/${params.spaceName}`} />
+        <SortPosts />
       </div>
     </div>
   );

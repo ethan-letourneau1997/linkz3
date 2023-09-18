@@ -11,7 +11,7 @@ export async function PostCommunity({ post }: PostCommunityProps) {
   return (
     <Link
       className="hover:underline hover:cursor-pointer "
-      href={`/spaces/${post.posted_in}/${communityName}/new/1`}
+      href={`/spaces/${post.posted_in}/${communityName}`}
     >
       {communityName}
     </Link>

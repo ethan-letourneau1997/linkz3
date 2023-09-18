@@ -1,4 +1,4 @@
-import { HandleSpacePagination } from "@/features/page-navigation";
+import { CommunitySelect } from "@/features/community-select";
 
 export const dynamic = "force-dynamic";
 
@@ -8,9 +8,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <>
+      <CommunitySelect />
       {children}
-      <HandleSpacePagination />
-    </div>
+    </>
   );
 }
