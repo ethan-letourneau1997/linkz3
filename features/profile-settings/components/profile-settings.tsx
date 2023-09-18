@@ -19,8 +19,6 @@ export async function ProfileSettings() {
     .eq("id", data.session?.user.id)
     .single();
 
-  console.log(public_profile);
-
   return (
     <div className="max-w-lg ">
       <h2 className="text-xl font-semibold ">Profile</h2>

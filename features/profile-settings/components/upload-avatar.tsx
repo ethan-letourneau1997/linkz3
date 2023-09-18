@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 
 import { PublicProfile } from "@/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { upsertUserAvatar } from "../api/upsert-user-avatar";
+
 import { v4 as uuidv4 } from "uuid";
 
 import { LoadingButton } from "@/components/loading-button";
@@ -44,6 +44,7 @@ export function UploadAvatar({ user, close }: UploadAvatarProps) {
         if (file) {
           const filename = uuidv4();
 
+          // upload image to storage
           const { data, error } = await supabase.storage
             .from("images")
             .upload(`/public/${filename}`, file, {
@@ -51,12 +52,13 @@ export function UploadAvatar({ user, close }: UploadAvatarProps) {
               upsert: false,
             });
           if (data) {
+            // get image information form storage
             const { data: publicUrl } = await supabase.storage
               .from("images")
               .getPublicUrl(`${data.path}`);
 
             if (publicUrl) {
-              upsertUserAvatar(publicUrl.publicUrl);
+              // update user avatar in database
               await supabase
                 .from("public_profile")
                 .upsert({
@@ -72,6 +74,7 @@ export function UploadAvatar({ user, close }: UploadAvatarProps) {
                 .from("images")
                 .remove([`public/${previousImage}`]);
 
+              // close modal when done
               close();
             }
           }
