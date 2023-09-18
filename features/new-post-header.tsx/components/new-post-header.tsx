@@ -3,7 +3,6 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Card } from "@/components/ui/card";
-
 import { SortTabs } from "@/features/sort-tabs.tsx";
 
 export function NewPostHeader() {
@@ -14,7 +13,11 @@ export function NewPostHeader() {
   const pathname = usePathname();
 
   function handleNavigateToCreate() {
-    router.push(`${pathname}/create`);
+    if (pathname.includes("/spaces")) {
+      router.push(`${pathname}/create`);
+    }
+
+    router.push(`/create/post`);
   }
 
   if (sort && page)

@@ -1,17 +1,17 @@
-import { Space } from "@/types";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
+
 import { FaUserAstronaut } from "react-icons/fa";
 import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
+import { Space } from "@/types";
+import { cookies } from "next/headers";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export async function FeedSidebar() {
   const supabase = createServerComponentClient({ cookies });
 
   async function getUserSubscriptions() {
     const { data } = await supabase.auth.getSession();
-    console.log(data);
 
     if (data.session) {
       const { data: user_spaces } = await supabase

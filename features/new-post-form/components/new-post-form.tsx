@@ -23,7 +23,6 @@ type NewPostFormProps = {
 export function NewPostForm({ params }: NewPostFormProps) {
   const { spaceId, spaceName } = params;
   const pathname = usePathname();
-  console.log(pathname);
 
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");

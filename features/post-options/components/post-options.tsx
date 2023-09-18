@@ -49,7 +49,6 @@ export function PostOptions({ post, disableRedirect }: PostOptionsMenuProps) {
     startTransition(async () => {
       const data = await deletePost(post);
       if (data) {
-        console.log(data);
         toast({
           title: "Post Deleted",
           description: `Your post has been permanently deleted.`,
