@@ -2,7 +2,7 @@
 
 import "cropperjs/dist/cropper.css";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useTransition } from "react";
 
 import Cropper from "react-cropper";
 import { Input } from "@/components/ui/input";
@@ -11,7 +11,8 @@ import { PublicProfile } from "@/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { upsertUserAvatar } from "../api/upsert-user-avatar";
 import { v4 as uuidv4 } from "uuid";
-import { Button } from "@/components/ui/button";
+
+import { LoadingButton } from "@/components/loading-button";
 
 type UploadAvatarProps = {
   user: PublicProfile;
@@ -20,8 +21,8 @@ type UploadAvatarProps = {
 
 export function UploadAvatar({ user, close }: UploadAvatarProps) {
   const [image, setImage] = useState<string | null>(null);
-
   const [cropper, setCropper] = useState<Cropper>();
+  const [isPending, startTransition] = useTransition();
 
   const supabase = createClientComponentClient();
 
@@ -32,46 +33,54 @@ export function UploadAvatar({ user, close }: UploadAvatarProps) {
   };
 
   const getCropData = async () => {
-    if (cropper) {
-      const file = await fetch(cropper.getCroppedCanvas().toDataURL())
-        .then((res) => res.blob())
-        .then((blob) => {
-          return new File([blob], "newAvatar.png", { type: "image/png" });
-        });
-      if (file) {
-        const filename = uuidv4();
-
-        const { data, error } = await supabase.storage
-          .from("images")
-          .upload(`/public/${filename}`, file, {
-            cacheControl: "3600",
-            upsert: false,
+    startTransition(async () => {
+      const previousImage = user.avatar_filename;
+      if (cropper) {
+        const file = await fetch(cropper.getCroppedCanvas().toDataURL())
+          .then((res) => res.blob())
+          .then((blob) => {
+            return new File([blob], "newAvatar.png", { type: "image/png" });
           });
-        if (data) {
-          const { data: publicUrl } = await supabase.storage
+        if (file) {
+          const filename = uuidv4();
+
+          const { data, error } = await supabase.storage
             .from("images")
-            .getPublicUrl(`${data.path}`);
+            .upload(`/public/${filename}`, file, {
+              cacheControl: "3600",
+              upsert: false,
+            });
+          if (data) {
+            const { data: publicUrl } = await supabase.storage
+              .from("images")
+              .getPublicUrl(`${data.path}`);
 
-          if (publicUrl) {
-            upsertUserAvatar(publicUrl.publicUrl);
-            await supabase
-              .from("public_profile")
-              .upsert({
-                id: user.id,
-                avatar: publicUrl.publicUrl,
-                username: user.username,
-                biography: user.biography,
-              })
-              .select();
+            if (publicUrl) {
+              upsertUserAvatar(publicUrl.publicUrl);
+              await supabase
+                .from("public_profile")
+                .upsert({
+                  id: user.id,
+                  avatar: publicUrl.publicUrl,
+                  avatar_filename: filename,
+                  username: user.username,
+                  biography: user.biography,
+                })
+                .select();
 
-            close();
+              await supabase.storage
+                .from("images")
+                .remove([`public/${previousImage}`]);
+
+              close();
+            }
+          }
+          if (error) {
+            console.log(error);
           }
         }
-        if (error) {
-          console.log(error);
-        }
       }
-    }
+    });
   };
 
   return (
@@ -85,11 +94,7 @@ export function UploadAvatar({ user, close }: UploadAvatarProps) {
           onChange={setNewImage}
         />
       </div>
-      {/* <input
-        type="file"
-        accept="image/png, image/jpeg, image/jpg"
-        onChange={setNewImage}
-      /> */}
+
       {image && (
         <>
           <div className="flex justify-center max-w-full mt-5">
@@ -108,7 +113,9 @@ export function UploadAvatar({ user, close }: UploadAvatarProps) {
             />
           </div>
           <div className="flex justify-center mt-5">
-            <Button onClick={getCropData}>Save Avatar</Button>
+            <LoadingButton isLoading={isPending} onClick={getCropData}>
+              Save Avatar
+            </LoadingButton>
           </div>
         </>
       )}
