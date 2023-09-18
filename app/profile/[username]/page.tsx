@@ -9,5 +9,5 @@ type IndexProps = {
 };
 
 export default async function Index({ params }: IndexProps) {
-  redirect(`/profile/${params.username}/post/new/1`);
+  redirect(`/profile/${params.username}/posts?page=1&sort=new`);
 }
