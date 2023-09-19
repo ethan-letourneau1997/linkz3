@@ -69,7 +69,10 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
       <DropdownMenuTrigger className="py-2 pr-4 border border-transparent rounded hover:border-neutral-800">
         <div className="flex items-center gap-2">
           <Avatar className="w-6 h-6">
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarImage
+              src={profile.avatar || "https://github.com/shadcn.png"}
+              alt="@shadcn"
+            />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           {profile.username}
@@ -83,7 +86,7 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
             <FaUserAstronaut className="w-4 h-4 mr-2 " />
             <Link
               className="w-full py-1.5"
-              href={`/profile/${profile.username}/post/new/1`}
+              href={`/profile/${profile.username}/post?page=1&sort=new`}
             >
               Profile
             </Link>
@@ -91,7 +94,10 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
           <DropdownMenuItem className="py-0 ">
             <BsFillRocketFill className="w-4 h-4 mr-2 " />
 
-            <Link className="w-full py-1.5" href={`/subscriptions/feed/new/1`}>
+            <Link
+              className="w-full py-1.5"
+              href={`/subscriptions/feed?page=1&sort=new`}
+            >
               Feed
             </Link>
           </DropdownMenuItem>
@@ -118,7 +124,7 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
                       <CommandItem key={space.community_id.id} className="py-0">
                         <Link
                           className="w-full py-1.5"
-                          href={`/spaces/${space.community_id.id}/${space.community_id.name}/new/1`}
+                          href={`/spaces/${space.community_id.id}/${space.community_id.name}?page=1&sort=new`}
                         >
                           {space.community_id.name}
                         </Link>
