@@ -8,10 +8,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { Button } from "@/components/ui/button";
 import { PublicProfile } from "@/types";
 import { UploadAvatar } from "./upload-avatar";
 import { useState } from "react";
+import { BiImageAdd } from "react-icons/bi";
 
 type AvatarUploadModalProps = {
   user: PublicProfile;
@@ -25,19 +25,16 @@ export function AvatarUploadModal({ user }: AvatarUploadModalProps) {
   }
 
   return (
-    <div>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button variant="outline">Update Avatar</Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Select Avatar Image to Upload</DialogTitle>
-
-            <UploadAvatar user={user} close={closeModal} />
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
-    </div>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger className="relative opacity-50 -top-6 left-16 dark:text-neutral-200 hover:opacity-100">
+        <BiImageAdd size={35} />
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Select Avatar Image to Upload</DialogTitle>
+          <UploadAvatar user={user} close={closeModal} />
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
   );
 }

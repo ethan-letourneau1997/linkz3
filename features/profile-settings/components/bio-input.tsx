@@ -47,12 +47,10 @@ export function BioInput({ user }: BioInputProps) {
   }
 
   return (
-    <>
-      <Label className="mt-7" htmlFor="bio">
-        Bio
-      </Label>
+    <div className="mt-5 space-y-1">
+      <Label htmlFor="bio ">Bio</Label>
       <Textarea
-        className="dark:bg-dark-800"
+        className="w-5/6 dark:bg-dark-800"
         onChange={handleBioChange}
         id="bio"
         defaultValue={bio}
@@ -73,6 +71,6 @@ export function BioInput({ user }: BioInputProps) {
           Save
         </LoadingButton>
       </div>
-    </>
+    </div>
   );
 }
