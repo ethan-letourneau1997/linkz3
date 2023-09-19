@@ -8,7 +8,6 @@ type PostPreviewsProps = {
 };
 
 export async function PostPreviews({ posts }: PostPreviewsProps) {
-  console.log("rendered");
   if (posts)
     return (
       <div className="w-full max-w-3xl mt-4 border-b md:border-0 border-neutral-800">

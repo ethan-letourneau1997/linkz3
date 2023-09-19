@@ -11,13 +11,14 @@ export function NewPostHeader() {
   const sort = searchParams.get("sort");
   const page = searchParams.get("page");
   const pathname = usePathname();
+  console.log(pathname.includes("spaces"));
 
   function handleNavigateToCreate() {
     if (pathname.includes("spaces")) {
       router.push(`${pathname}/create`);
+    } else {
+      router.push(`/create/post`);
     }
-
-    router.push(`/create/post`);
   }
 
   if (sort && page)
