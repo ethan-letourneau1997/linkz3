@@ -11,7 +11,6 @@ export function NewPostHeader() {
   const sort = searchParams.get("sort");
   const page = searchParams.get("page");
   const pathname = usePathname();
-  console.log(pathname.includes("spaces"));
 
   function handleNavigateToCreate() {
     if (pathname.includes("spaces")) {

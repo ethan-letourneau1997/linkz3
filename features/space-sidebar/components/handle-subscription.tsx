@@ -19,8 +19,6 @@ export function HandleSubscription({
     return data;
   });
 
-  console.log(subscribed);
-
   if (subscribed === false || subscribed === true)
     return (
       <SidebarSubscriptionButton
