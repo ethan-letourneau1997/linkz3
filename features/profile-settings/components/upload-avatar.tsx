@@ -13,6 +13,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { v4 as uuidv4 } from "uuid";
 
 import { LoadingButton } from "@/components/loading-button";
+import { upsertUserAvatar } from "../api/upsert-user-avatar";
 
 type UploadAvatarProps = {
   user: PublicProfile;
@@ -58,17 +59,7 @@ export function UploadAvatar({ user, close }: UploadAvatarProps) {
               .getPublicUrl(`${data.path}`);
 
             if (publicUrl) {
-              // update user avatar in database
-              await supabase
-                .from("public_profile")
-                .upsert({
-                  id: user.id,
-                  avatar: publicUrl.publicUrl,
-                  avatar_filename: filename,
-                  username: user.username,
-                  biography: user.biography,
-                })
-                .select();
+              upsertUserAvatar(user, publicUrl.publicUrl, filename);
 
               await supabase.storage
                 .from("images")
@@ -104,7 +95,7 @@ export function UploadAvatar({ user, close }: UploadAvatarProps) {
             <Cropper
               aspectRatio={1}
               src={image}
-              style={{ height: 400, width: 400 }}
+              style={{ height: 350, width: 350 }}
               initialAspectRatio={4 / 4}
               minCropBoxHeight={100}
               minCropBoxWidth={100}
