@@ -13,7 +13,7 @@ export function NewPostHeader() {
   const pathname = usePathname();
 
   function handleNavigateToCreate() {
-    if (pathname.includes("/spaces")) {
+    if (pathname.includes("spaces")) {
       router.push(`${pathname}/create`);
     }
 

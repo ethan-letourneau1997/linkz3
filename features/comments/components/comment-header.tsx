@@ -18,7 +18,7 @@ export async function CommentHeader({ comment }: CommentHeaderProps) {
   return (
     <>
       <div className="flex items-center gap-2 text-xs md:text-sm text-neutral-400">
-        <CommentAvatar />
+        <CommentAvatar user={public_profile} />
         <span>
           {public_profile.username} -{" "}
           {getTimeSinceNow(comment.created_at, true)}
