@@ -14,7 +14,7 @@ import { IoPlanetOutline } from "react-icons/io5";
 import Link from "next/link";
 import { RiSpaceShipFill } from "react-icons/ri";
 
-export function NewDropdown() {
+export function NewPostDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

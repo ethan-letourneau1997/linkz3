@@ -26,11 +26,6 @@ export async function Navigation() {
           <MobileSpaceName />
         </div>
       </div>
-
-      {/* <div className="w-full dark:bg-neutral-900">
-      <MovileNavigation user={user} profile={public_profile} />
-      <DesktopNavigation user={user} profile={public_profile} />
-     </div> */}
     </nav>
   );
 }

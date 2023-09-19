@@ -3,11 +3,13 @@ import { PublicProfile } from "@/types";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
-type UserSpaceHandlerProps = {
+type AvatarDropdownHandlerProps = {
   profile: PublicProfile;
 };
 
-export async function UserSpacesHandler({ profile }: UserSpaceHandlerProps) {
+export async function AvatarDropdownHandler({
+  profile,
+}: AvatarDropdownHandlerProps) {
   const supabase = createServerComponentClient({ cookies });
 
   const { data: user_spaces } = await supabase

@@ -1,7 +1,9 @@
+import { SpacesSearch } from "@/features/spaces-search.tsx";
+
 export function Playground() {
   return (
     <div>
-      <p>hello playground.</p>
+      <SpacesSearch />
     </div>
   );
 }
