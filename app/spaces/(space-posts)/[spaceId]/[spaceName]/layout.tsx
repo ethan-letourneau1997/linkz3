@@ -1,7 +1,8 @@
 import { HandleSpacePagination } from "@/features/page-navigation";
-import { HandleSpaceSidebar } from "./handle-space-sidar";
 
 import { NewPostHeader } from "@/features/new-post-header.tsx";
+import { SidebarCollapse } from "@/features/sidebar-collapse";
+import { SpaceSidebar } from "@/features/space-sidebar";
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +18,9 @@ export default function RootLayout({
         {children}
         <HandleSpacePagination />
       </div>
-      <HandleSpaceSidebar />
+      <SidebarCollapse>
+        <SpaceSidebar />
+      </SidebarCollapse>
     </div>
   );
 }

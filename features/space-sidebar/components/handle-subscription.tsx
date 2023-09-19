@@ -1,48 +1,31 @@
 import { SidebarSubscriptionButton } from "./sidebar-subscribe-button";
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { checkUserSubscription } from "../api/check-user-subscription";
+import useSWR from "swr";
 
 type HandleSubscriptionProps = {
   spaceName: string;
   spaceId: string;
 };
 
-export async function HandleSubscription({
+export function HandleSubscription({
   spaceId,
   spaceName,
 }: HandleSubscriptionProps) {
-  const supabase = createServerComponentClient({ cookies });
-  const { data } = await supabase.auth.getSession();
+  // const [isSubscribed, setIsSubscribed] = useState(false);
 
-  async function checkUserSubscription() {
-    if (data.session) {
-      try {
-        const { data: user_community } = await supabase
-          .from("user_community")
-          .select()
-          .match({
-            user_id: data.session.user.id,
-            community_id: spaceId,
-          });
+  const { data: subscribed } = useSWR("subscribed", async () => {
+    const data = await checkUserSubscription(spaceId);
+    return data;
+  });
 
-        if (user_community && user_community.length > 0) {
-          return true;
-        } else {
-          return false;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }
+  console.log(subscribed);
 
-  const isSubscribed = await checkUserSubscription();
-
-  return (
-    <SidebarSubscriptionButton
-      isSubscribed={isSubscribed || false}
-      spaceName={spaceName}
-      spaceId={spaceId}
-    />
-  );
+  if (subscribed === false || subscribed === true)
+    return (
+      <SidebarSubscriptionButton
+        isSubscribed={subscribed}
+        spaceName={spaceName}
+        spaceId={spaceId}
+      />
+    );
 }
