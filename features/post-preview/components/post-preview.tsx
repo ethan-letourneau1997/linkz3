@@ -18,12 +18,12 @@ type PostPreviewProps = {
 
 export async function PostPreview({ post }: PostPreviewProps) {
   const timeSincePost = getTimeSinceNow(post.created_at, true);
-  const spaceName = await getPostCommunityName(post.posted_in);
-  const commentCount = await getPostCommentCount(post.id!);
+
   const postedByUsername = await getPostPostedBy(post.created_by);
 
+  const spaceName = await getPostCommunityName(post.posted_in);
   const linkToPost = `/spaces/${post.posted_in}/${spaceName}/post/${post.id}`;
-  const linkToSpace = `/spaces/${post.posted_in}/${spaceName}`;
+
   const profileLink = `/profile/${postedByUsername}`;
 
   return (
@@ -36,12 +36,7 @@ export async function PostPreview({ post }: PostPreviewProps) {
       <div className="flex flex-col justify-between order-1 col-span-9 sm:order-2">
         <div>
           <div className="text-xs ">
-            <Link
-              className="text-semibold dark:text-neutral-300 hover:underline"
-              href={linkToSpace}
-            >
-              {spaceName}
-            </Link>
+            <PostSpaceName post={post} />
             <span className="dark:text-neutral-400">
               &nbsp;posted by&nbsp;
               <Link className="hover:underline" href={profileLink}>
@@ -62,8 +57,7 @@ export async function PostPreview({ post }: PostPreviewProps) {
             href={linkToPost}
             className="flex items-center gap-2 rounded-sm hover:dark:text-neutral-300"
           >
-            <GoComment />
-            {commentCount} comments
+            <PostCommentCount post={post} />
           </Link>
           <div className="flex items-center pt-0.5 ml-2 ">
             <PostOptions post={post} disableRedirect />
@@ -80,11 +74,40 @@ export async function PostPreview({ post }: PostPreviewProps) {
           <PostVotes post={post} horizontal />
         </div>
         <div className="flex items-center gap-2 ">
-          <GoComment />
-          {commentCount} comments
+          <PostCommentCount post={post} />
         </div>
         <PostOptions post={post} disableRedirect />
       </div>
     </Card>
+  );
+}
+
+type PostSpaceNameProps = {
+  post: Post | PostPreviewType;
+};
+
+export async function PostSpaceName({ post }: PostSpaceNameProps) {
+  const spaceName = await getPostCommunityName(post.posted_in);
+  const linkToSpace = `/spaces/${post.posted_in}/${spaceName}`;
+  return (
+    <Link
+      className="text-semibold dark:text-neutral-300 hover:underline"
+      href={linkToSpace}
+    >
+      {spaceName}
+    </Link>
+  );
+}
+type PostCommentCountProps = {
+  post: Post | PostPreviewType;
+};
+
+export async function PostCommentCount({ post }: PostCommentCountProps) {
+  const commentCount = await getPostCommentCount(post.id!);
+  return (
+    <>
+      <GoComment />
+      {commentCount} comments
+    </>
   );
 }

@@ -22,12 +22,7 @@ export async function SpacePagePosts({
     searchParams.sort
   );
 
-  if (posts)
-    return (
-      <>
-        <PostPreviews posts={posts} />
-      </>
-    );
+  if (posts) return <PostPreviews posts={posts} />;
 
   if (!posts) return <div>No posts</div>;
 }

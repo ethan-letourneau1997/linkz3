@@ -28,7 +28,7 @@ export function HandleSpacePagination() {
     }
   });
 
-  if (page && pageCount)
+  if (page && pageCount && pageCount > 1)
     return (
       <div className="flex justify-center mt-3">
         <PageNavigation activePage={activePage} pageCount={pageCount} />
