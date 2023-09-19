@@ -1,6 +1,7 @@
 import { SidebarSubscriptionButton } from "./sidebar-subscribe-button";
 import { checkUserSubscription } from "../api/check-user-subscription";
 import useSWR from "swr";
+import { Button } from "@/components/ui/button";
 
 type HandleSubscriptionProps = {
   spaceName: string;
@@ -28,4 +29,14 @@ export function HandleSubscription({
         spaceId={spaceId}
       />
     );
+
+  return (
+    <Button
+      size="sm"
+      className="w-full border dark:bg-transparent dark:border-neutral-800"
+      variant="outline"
+    >
+      Subscribe
+    </Button>
+  );
 }

@@ -27,7 +27,7 @@ export function NewPostHeader() {
         <div className="flex-grow ">
           <button
             onClick={handleNavigateToCreate}
-            className="w-full rounded shadow-sm h-9 dark:bg-neutral-800 "
+            className="w-full rounded shadow-sm h-9 dark:bg-neutral-800 dark:text-neutral-300"
           >
             New Post
           </button>

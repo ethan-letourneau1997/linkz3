@@ -24,15 +24,26 @@ export function SidebarSubscriberCount({
     }
   });
 
+  if (count)
+    return (
+      <div className="flex flex-col items-center justify-center ">
+        <div className="flex items-center gap-2">
+          <FaUserAstronaut className="text-sm" />
+          <span className="text-sm">{count || 0}</span>
+        </div>
+        <div className="text-xs text-neutral-500">
+          subscriber{count === 1 ? "" : "s"}
+        </div>
+      </div>
+    );
+
   return (
     <div className="flex flex-col items-center justify-center ">
       <div className="flex items-center gap-2">
         <FaUserAstronaut className="text-sm" />
-        <span className="text-sm">{count || 0}</span>
+        <span className="text-sm">0</span>
       </div>
-      <div className="text-xs text-neutral-500">
-        subscriber{count === 1 ? "" : "s"}
-      </div>
+      <div className="text-xs text-neutral-500">subscribers</div>
     </div>
   );
 }
