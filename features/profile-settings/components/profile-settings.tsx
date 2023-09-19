@@ -3,7 +3,7 @@ import { BioInput } from "./bio-input";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Textarea } from "@/components/ui/textarea";
+
 import { UserAvatar } from "./user-avatar";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -26,14 +26,11 @@ export async function ProfileSettings() {
       <form className="grid w-full max-w-sm items-center gap-1.5 mt-7">
         <Label htmlFor="username">Username</Label>
         <Input
+          disabled
           type="text"
           id="username"
           defaultValue={public_profile.username}
         />
-        <Label className="mt-7" htmlFor="bio">
-          Bio
-        </Label>
-        <Textarea id="bio" defaultValue={public_profile.biography} />
         <BioInput user={public_profile} />
         <Label className="mt-7" htmlFor="bio">
           Avatar
