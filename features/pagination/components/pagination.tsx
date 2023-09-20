@@ -42,19 +42,18 @@ export function Pagination({ totalPages, currentPage }: PaginationProps) {
 
   if (currentPage)
     return (
-      <div className="flex gap-5 mt-5">
+      <div className="flex gap-5 mt-5 dark:text-neutral-300">
         {currentPage > 1 ? (
           <button
             onClick={goToPrevious}
-            className="flex items-center justify-center w-10 h-10 text-xl font-black border border-blue-500"
+            className="flex items-center justify-center w-10 h-10 text-xl font-bold dark:hover:text-indigo-500"
           >
             <FaChevronLeft />
           </button>
         ) : (
           <button
             disabled
-            onClick={goToPrevious}
-            className="flex items-center justify-center w-10 h-10 text-xl font-black border border-red-500"
+            className="flex items-center justify-center w-10 h-10 text-xl font-bold dark:text-neutral-500"
           >
             <FaChevronLeft />
           </button>
@@ -62,7 +61,7 @@ export function Pagination({ totalPages, currentPage }: PaginationProps) {
         {currentPage - 2 > 0 && (
           <button
             onClick={() => goToNumber(currentPage - 2)}
-            className="flex items-center justify-center w-10 h-10 text-xl font-black border border-blue-500"
+            className="flex items-center justify-center w-10 h-10 text-xl font-bold dark:hover:text-indigo-500"
           >
             {currentPage - 2}
           </button>
@@ -70,18 +69,18 @@ export function Pagination({ totalPages, currentPage }: PaginationProps) {
         {currentPage - 1 > 0 && (
           <button
             onClick={() => goToNumber(currentPage - 1)}
-            className="flex items-center justify-center w-10 h-10 text-xl font-black border border-blue-500"
+            className="flex items-center justify-center w-10 h-10 text-xl font-bold dark:hover:text-indigo-500"
           >
             {currentPage - 1}
           </button>
         )}
-        <div className="flex items-center justify-center w-10 h-10 text-xl font-black bg-blue-500">
+        <div className="flex items-center justify-center w-10 h-10 text-xl font-bold rounded dark:bg-indigo-600">
           {currentPage}
         </div>
         {currentPage + 1 <= totalPages && (
           <button
             onClick={() => goToNumber(currentPage + 1)}
-            className="flex items-center justify-center w-10 h-10 text-xl font-black border border-blue-500"
+            className="flex items-center justify-center w-10 h-10 text-xl font-bold dark:hover:text-indigo-500"
           >
             {currentPage + 1}
           </button>
@@ -89,7 +88,7 @@ export function Pagination({ totalPages, currentPage }: PaginationProps) {
         {currentPage + 2 <= totalPages && (
           <button
             onClick={() => goToNumber(currentPage + 2)}
-            className="flex items-center justify-center w-10 h-10 text-xl font-black border border-blue-500"
+            className="flex items-center justify-center w-10 h-10 text-xl font-bold dark:hover:text-indigo-500"
           >
             {currentPage + 2}
           </button>
@@ -97,14 +96,14 @@ export function Pagination({ totalPages, currentPage }: PaginationProps) {
         {currentPage < totalPages ? (
           <button
             onClick={goToNext}
-            className="flex items-center justify-center w-10 h-10 text-xl font-black border border-blue-500"
+            className="flex items-center justify-center w-10 h-10 text-xl font-bold dark:hover:text-indigo-500"
           >
             <FaChevronRight />
           </button>
         ) : (
           <button
             disabled
-            className="flex items-center justify-center w-10 h-10 text-xl font-black border border-red-500"
+            className="flex items-center justify-center w-10 h-10 text-xl font-bold dark:hover:text-indigo-500 dark:text-neutral-500"
           >
             <FaChevronRight />
           </button>

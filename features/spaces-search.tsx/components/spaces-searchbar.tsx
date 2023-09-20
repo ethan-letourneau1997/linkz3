@@ -31,8 +31,6 @@ export function SpacesSearchbar({ spaces }: SpacesSearchbar) {
 
   const router = useRouter();
 
-  console.log("Initial value:", value);
-
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>

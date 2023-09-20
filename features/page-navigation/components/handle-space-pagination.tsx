@@ -28,7 +28,7 @@ export function HandleSpacePagination() {
     }
   });
 
-  if (page && pageCount && pageCount > 1)
+  if (page && pageCount && activePage && pageCount > 1)
     return (
       <div className="flex justify-center mt-3">
         <Pagination currentPage={activePage} totalPages={pageCount} />

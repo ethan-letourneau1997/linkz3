@@ -1,6 +1,6 @@
 "use client";
 
-import { PageNavigation } from "./page-navigation";
+import { Pagination } from "@/features/pagination";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import useSWR from "swr";
 import { useSearchParams } from "next/navigation";
@@ -39,7 +39,7 @@ export function HandleSubscriptionPagination() {
   if (page && pageCount)
     return (
       <div className="flex justify-center mt-3">
-        <PageNavigation activePage={activePage} pageCount={pageCount} />
+        <Pagination currentPage={activePage} totalPages={pageCount} />
       </div>
     );
 }
