@@ -1,9 +1,9 @@
-import { SpacesSearch } from "@/features/spaces-search.tsx";
+import { Pagination } from "@/features/pagination";
 
-export function Playground() {
+export async function Playground() {
   return (
-    <div>
-      <SpacesSearch />
+    <div className="mt-5">
+      <Pagination currentPage={1} totalPages={10} />
     </div>
   );
 }
