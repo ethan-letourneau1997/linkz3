@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { PostImage } from "@/types";
 
-type ImageDisplayProps = {
+type CaptionImageProps = {
   image: PostImage;
 };
 
-export function ImageDisplay({ image }: ImageDisplayProps) {
+export function CaptionImage({ image }: CaptionImageProps) {
   return (
     <div className="relative ">
       <Image

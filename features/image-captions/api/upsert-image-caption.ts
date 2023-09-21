@@ -26,5 +26,4 @@ export async function upsertImageCaption(props: upsertImageCaptionrops) {
   revalidatePath(
     `/spaces/${params.spaceId}/${params.spaceName}/post/new/${params.postId}/captions`
   );
-  //   redirect(`/community/${post.posted_in_name}/post/${params.postId}/${params.postName}`);
 }

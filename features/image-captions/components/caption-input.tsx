@@ -15,7 +15,6 @@ type CaptionInputProps = {
 
 export function CaptionInput({ image, params }: CaptionInputProps) {
   const [caption, setCaption] = useState(image.caption || "");
-
   const [isPending, startTransition] = useTransition();
 
   const { toast } = useToast();

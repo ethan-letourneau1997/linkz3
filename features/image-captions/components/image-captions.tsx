@@ -1,6 +1,6 @@
+import { CaptionImage } from "./caption-image";
 import { CaptionInput } from "./caption-input";
 import { Card } from "@/components/ui/card";
-import { ImageDisplay } from "./image-display";
 import Link from "next/link";
 import { PostRouterParams } from "@/types";
 import { cookies } from "next/headers";
@@ -36,7 +36,7 @@ export async function ImageCaptions({ params }: ImageCaptionsProps) {
               key={image.id}
               className="grid grid-cols-1 gap-5 sm:grid-cols-2"
             >
-              <ImageDisplay image={image} />
+              <CaptionImage image={image} />
               <CaptionInput image={image} params={params} />
             </div>
           ))}

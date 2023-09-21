@@ -1,5 +1,5 @@
 import { CaptionInput } from "@/features/image-captions/components/caption-input";
-import { ImageDisplay } from "@/features/image-captions/components/image-display";
+import { ImageDisplay } from "@/features/image-captions/components/caption-image";
 import { PostRouterParams } from "@/types";
 import { Separator } from "@/components/ui/separator";
 import { cookies } from "next/headers";
