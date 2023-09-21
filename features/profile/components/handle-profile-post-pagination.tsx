@@ -6,7 +6,7 @@ import { Pagination } from "@/features/pagination";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import useSWR from "swr";
 
-export function ProfileCommentPagination() {
+export function HandleProfilePostPagination() {
   const searchParams = useSearchParams();
   const params = useParams();
 
@@ -23,9 +23,9 @@ export function ProfileCommentPagination() {
       .single();
 
     const { count } = await supabase
-      .from("comment")
+      .from("post")
       .select("*", { count: "exact", head: true })
-      .eq("posted_by", user.id);
+      .eq("created_by", user.id);
     if (count) {
       const pages = Math.ceil(count / 10);
       return pages;

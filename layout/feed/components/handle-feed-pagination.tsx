@@ -5,7 +5,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import useSWR from "swr";
 import { useSearchParams } from "next/navigation";
 
-export function HandleSubscriptionPagination() {
+export function HandleFeedPagination() {
   const searchParams = useSearchParams();
 
   const page = searchParams.get("page");
