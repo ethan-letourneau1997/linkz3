@@ -14,7 +14,7 @@ import {
   useSearchParams,
 } from "next/navigation";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function ProfileSelect() {
   const router = useRouter();
@@ -30,6 +30,11 @@ export function ProfileSelect() {
     pathname.includes("post") ? "posts" : "comments"
   );
 
+  useEffect(() => {
+    router.prefetch(`/profile/${params.username}/posts?page=1&sort=new`);
+    router.prefetch(`/profile/${params.username}/comments?page=1&sort=new`);
+  }, [router, params]);
+
   const handleSortBy = (value: string) => {
     router.push(`/profile/${params.username}/${value}?page=1&sort=new`);
     setType(value);
@@ -38,9 +43,6 @@ export function ProfileSelect() {
   if (page && sort)
     return (
       <div className="flex items-center text-sm">
-        <span className="text-neutral-400">
-          {params.username}&apos;s&nbsp;&nbsp;
-        </span>
         <Select value={type} onValueChange={(value) => handleSortBy(value)}>
           <SelectTrigger className="gap-2 pl-0 font-medium border-0 dark:bg-transparent w-fit">
             <SelectValue placeholder="Sort by" />

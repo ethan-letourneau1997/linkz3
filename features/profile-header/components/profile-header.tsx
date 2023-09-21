@@ -2,6 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import { ProfileSelect } from "@/features/profile-select";
+
 import { SortTabs } from "@/features/sort-tabs.tsx";
 
 export function ProfileHeader() {
