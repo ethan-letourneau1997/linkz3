@@ -10,9 +10,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex gap-5">
-      <div className="w-full max-w-3xl">
+    <div className="flex w-full max-w-5xl gap-5 ">
+      <div className="grow ">
         <ProfileHeader />
+
         {children}
       </div>
       <SidebarCollapse>

@@ -21,10 +21,13 @@ export function UserDetails() {
   if (user)
     return (
       <>
-        <p className="text-sm text-center">{user?.biography}</p>
-        <Separator />
+        {user.biography && (
+          <p className="mt-1 text-sm text-center">{user.biography}</p>
+        )}
 
-        <div className="grid grid-cols-2">
+        <Separator className="mt-3 " />
+
+        <div className="grid grid-cols-2 mt-3">
           <UserPostCount user={user} />
           <UserCommentCount user={user} />
         </div>

@@ -23,7 +23,12 @@ export async function ProfilePosts({
     searchParams.page
   );
 
-  if (posts) return <PostPreviews posts={posts} />;
+  if (posts && posts.length > 0) return <PostPreviews posts={posts} />;
 
-  if (!posts) return <div>No posts</div>;
+  if (posts && posts.length === 0)
+    return (
+      <div className="mt-10 text-center text-neutral-300">
+        {params.username} has not made any posts.
+      </div>
+    );
 }

@@ -38,14 +38,16 @@ export function ProfileSelect() {
   if (page && sort)
     return (
       <div className="flex items-center text-sm">
-        <span className="text-neutral-400">viewing&nbsp;</span>
+        <span className="text-neutral-400">
+          {params.username}&apos;s&nbsp;&nbsp;
+        </span>
         <Select value={type} onValueChange={(value) => handleSortBy(value)}>
           <SelectTrigger className="gap-2 pl-0 font-medium border-0 dark:bg-transparent w-fit">
             <SelectValue placeholder="Sort by" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="posts">Posts</SelectItem>
-            <SelectItem value="comments">Comments</SelectItem>
+            <SelectItem value="posts">posts</SelectItem>
+            <SelectItem value="comments">comments</SelectItem>
           </SelectContent>
         </Select>
       </div>
