@@ -13,21 +13,10 @@ type CommentCollapseProps = {
 export function CommentCollapse({ header, children }: CommentCollapseProps) {
   const [open, setOpen] = useState(true);
 
-  function handleOpen() {
-    setOpen(true);
-  }
-  function handleClose() {
-    setOpen(false);
-  }
-
-  function handleToggle() {
-    setOpen(!open);
-  }
-
   return (
     <>
       <div className="w-full max-w-3xl mt-4 ml-2 sm:hidden">
-        <button className="w-full" onClick={handleToggle}>
+        <button className="w-full" onClick={() => setOpen(!open)}>
           {header}
         </button>
 
@@ -42,7 +31,7 @@ export function CommentCollapse({ header, children }: CommentCollapseProps) {
       <div className="hidden w-full max-w-3xl sm:block">
         <div className="flex gap-2 mt-5">
           <button
-            onClick={handleOpen}
+            onClick={() => setOpen(true)}
             className={`${open ? "hidden" : "block"}`}
           >
             <CgArrowsExpandLeft className="text-neutral-400 dark:hover:text-neutral-300" />
@@ -55,7 +44,7 @@ export function CommentCollapse({ header, children }: CommentCollapseProps) {
           <CollapsibleContent className="CollapsibleContent">
             <div className="flex pt-2 pl-1">
               <button
-                onClick={handleClose}
+                onClick={() => setOpen(false)}
                 className="flex justify-center w-4 group"
               >
                 <div className="bg-neutral-700 w-[1px] group-hover:bg-neutral-300" />

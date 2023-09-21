@@ -3,8 +3,9 @@ import { Comment } from "@/types";
 import { CommentVotes } from "@/features/comment-votes";
 import { CommentFooter } from "./comment-footer";
 import { CommentCollapse } from "./comment-collapse";
-import { CommentOptionsMenu } from "./comment-options-dropdown";
+
 import { CommentHeader } from "./comment-header";
+import { CommentOptions } from "../../comment-options/components/comment-options";
 
 type CommentProps = {
   comment: Comment;
@@ -22,7 +23,7 @@ export function Comment({ comment, children, params }: CommentProps) {
           dangerouslySetInnerHTML={{ __html: comment.content || "" }}
         />
         <CommentFooter
-          options={<CommentOptionsMenu comment={comment} params={params} />}
+          options={<CommentOptions comment={comment} />}
           comment={comment}
           params={params}
         >

@@ -6,7 +6,7 @@ import { useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { LoadingButton } from "@/components/loading-button";
 import { TextEditor } from "@/features/text-editor";
-import { submitComment } from "../api/submit-comment";
+import { createComment } from "../api/create-comment";
 
 type CommentReplyInputProps = {
   comment: Comment;
@@ -21,7 +21,7 @@ export function CommentReplyInput({ comment, params }: CommentReplyInputProps) {
 
   async function handleSubmitReply() {
     startTransition(async () => {
-      await submitComment({
+      await createComment({
         routerParams: params,
         root_post: params.postId,
         parent_comment: comment.id,

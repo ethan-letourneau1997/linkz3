@@ -5,7 +5,7 @@ import { useState, useTransition } from "react";
 import { LoadingButton } from "@/components/loading-button";
 import { PostRouterParams } from "@/types";
 import { TextEditor } from "@/features/text-editor";
-import { submitComment } from "@/features/comments/api/submit-comment";
+import { createComment } from "@/features/comments/api/create-comment";
 
 type RootCommentInputProps = {
   params: PostRouterParams;
@@ -20,7 +20,7 @@ export function RootCommentInput({ params, hideReply }: RootCommentInputProps) {
 
   async function handleSubmitReply() {
     startTransition(async () => {
-      await submitComment({
+      await createComment({
         routerParams: params,
         root_post: params.postId,
         content: commentContent,

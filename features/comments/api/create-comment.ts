@@ -5,14 +5,14 @@ import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 
-type submitCommentParams = {
+type createCommentParams = {
   routerParams: PostRouterParams;
   root_post: string;
   content: string;
   parent_comment?: number | null;
 };
 
-export async function submitComment(params: submitCommentParams) {
+export async function createComment(params: createCommentParams) {
   const { content, parent_comment, routerParams } = params;
 
   const root_post = routerParams.postId;
