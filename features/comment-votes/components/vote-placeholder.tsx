@@ -1,4 +1,4 @@
-import { BiUpvote, BiDownvote } from "react-icons/bi";
+import { BiDownvote, BiUpvote } from "react-icons/bi";
 
 export function VotePlaceholer() {
   return (
@@ -6,9 +6,7 @@ export function VotePlaceholer() {
       <div className="px-2 py-1 ">
         <BiUpvote className="hover:text-teal-300" />
       </div>
-
       <div>0</div>
-
       <div className="px-2 py-1 ">
         <BiDownvote className="hover:text-teal-300" />
       </div>
