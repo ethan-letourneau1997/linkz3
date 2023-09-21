@@ -2,21 +2,14 @@ import { Comment } from "./comment";
 import { Comment as CommentType } from "@/types";
 import { FaComments } from "react-icons/fa";
 import { PostRouterParams } from "@/types";
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { fetchPostComments } from "../api/fetch-post-comments";
 
 type CommentsProps = {
   params: PostRouterParams;
 };
 
 export async function Comments({ params }: CommentsProps) {
-  const supabase = createServerComponentClient({ cookies });
-
-  const { data: comments } = await supabase
-    .from("comment_details")
-    .select()
-    .eq("root_post", params.postId)
-    .order("created_at", { ascending: false });
+  const comments = await fetchPostComments(params.postId);
 
   async function filterComments() {
     if (comments) {

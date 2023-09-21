@@ -34,6 +34,7 @@ export function CommentFooter({
         parent_comment: comment.id,
         content: commentContent,
       });
+      setCommentContent("");
       setShowReply(false);
     });
   }
