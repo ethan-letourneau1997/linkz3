@@ -1,30 +1,22 @@
 import { Post, PostPreview as PostPreviewType } from "@/types";
-import { getPostCommunityName, getPostPostedBy } from "@/lib/post-helpers";
 
 import { Card } from "@/components/ui/card";
-import { GoComment } from "react-icons/go";
 import Link from "next/link";
 import { PostOptions } from "@/features/post-options/components/post-options";
 import { PostVotes } from "@/features/post-votes";
+import { PreviewCommentCount } from "./preview-comment-count";
+import { PreviewHeader } from "./preview-header";
 import { PreviewThumbnail } from "./preview-thumbnail";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
-import { getPostCommentCount } from "@/lib/post-helpers";
-import { getTimeSinceNow } from "@/lib/get-time-since-now";
+import { getPostCommunityName } from "@/lib/post-helpers";
 
 type PostPreviewProps = {
   post: Post | PostPreviewType;
 };
 
 export async function PostPreview({ post }: PostPreviewProps) {
-  const timeSincePost = getTimeSinceNow(post.created_at, true);
-
-  const postedByUsername = await getPostPostedBy(post.created_by);
-
   const spaceName = await getPostCommunityName(post.posted_in);
-  const linkToPost = `/spaces/${post.posted_in}/${spaceName}/post/${post.id}`;
-
-  const profileLink = `/profile/${postedByUsername}`;
 
   return (
     <Card className="grid grid-cols-12 gap-3 px-3 py-3 border-0 border-t rounded-none dark:bg-dark-900 md:rounded-sm md:border sm:mt-3 sm:px-4">
@@ -35,29 +27,20 @@ export async function PostPreview({ post }: PostPreviewProps) {
       </div>
       <div className="flex flex-col justify-between order-1 col-span-9 sm:order-2">
         <div>
-          <div className="text-xs ">
-            <PostSpaceName post={post} />
-            <span className="dark:text-neutral-400">
-              &nbsp;posted by&nbsp;
-              <Link className="hover:underline" href={profileLink}>
-                {postedByUsername}
-              </Link>
-              &nbsp;-&nbsp;{timeSincePost}
-            </span>
-          </div>
+          <PreviewHeader spaceName={spaceName} post={post} />
           <Link
             className="mt-1 text-sm font-medium sm:text-base text-neutral-200"
-            href={linkToPost}
+            href={`/spaces/${post.posted_in}/${spaceName}/post/${post.id}`}
           >
             {post.title}
           </Link>
         </div>
         <div className="items-center hidden mt-2 text-sm sm:flex text-neutral-400 ">
           <Link
-            href={linkToPost}
+            href={`/spaces/${post.posted_in}/${spaceName}/post/${post.id}`}
             className="flex items-center gap-2 rounded-sm hover:dark:text-neutral-300"
           >
-            <PostCommentCount post={post} />
+            <PreviewCommentCount post={post} />
           </Link>
           <div className="flex items-center pt-0.5 ml-2 ">
             <PostOptions post={post} disableRedirect />
@@ -74,40 +57,10 @@ export async function PostPreview({ post }: PostPreviewProps) {
           <PostVotes post={post} horizontal />
         </div>
         <div className="flex items-center gap-2 ">
-          <PostCommentCount post={post} />
+          <PreviewCommentCount post={post} />
         </div>
         <PostOptions post={post} disableRedirect />
       </div>
     </Card>
-  );
-}
-
-type PostSpaceNameProps = {
-  post: Post | PostPreviewType;
-};
-
-export async function PostSpaceName({ post }: PostSpaceNameProps) {
-  const spaceName = await getPostCommunityName(post.posted_in);
-  const linkToSpace = `/spaces/${post.posted_in}/${spaceName}`;
-  return (
-    <Link
-      className="text-semibold dark:text-neutral-300 hover:underline"
-      href={linkToSpace}
-    >
-      {spaceName}
-    </Link>
-  );
-}
-type PostCommentCountProps = {
-  post: Post | PostPreviewType;
-};
-
-export async function PostCommentCount({ post }: PostCommentCountProps) {
-  const commentCount = await getPostCommentCount(post.id!);
-  return (
-    <>
-      <GoComment />
-      {commentCount} comments
-    </>
   );
 }

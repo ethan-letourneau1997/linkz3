@@ -1,6 +1,6 @@
 import { Post } from "@/types";
 import { PostPreview } from "./post-preview";
-import { PreviewSkeleton } from "@/features/post-preview";
+import { PreviewSkeleton } from "./preview-skeleton";
 import { Suspense } from "react";
 
 type PostPreviewsProps = {

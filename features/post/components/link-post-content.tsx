@@ -1,5 +1,5 @@
 import { Post } from "@/types";
-import { getPreviewThumbnail } from "@/features/post-preview/api/get-preview-thumbnail";
+import { getPreviewThumbnail } from "@/features/post-previews/api/get-preview-thumbnail";
 
 type LinkPostContentProps = {
   post: Post;

@@ -1,4 +1,4 @@
-import { PostPreviews } from "@/features/post-preview";
+import { PostPreviews } from "@/features/post-previews";
 import { getSortedSubscriptionPosts } from "../api/get-sorted-subscription-posts";
 
 type FeedProps = {
