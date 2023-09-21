@@ -44,7 +44,7 @@ export function SortTabs() {
         <Link
           href={`${replacePathSegment(pathname, params.sort as string, "new")}`}
           className={`${
-            sort === "new" ? "border-b" : ""
+            sort === "new" ? "border-b" : "hover:text-indigo-500"
           } border-indigo-500 px-4 pb-1 hover:cursor-pointer`}
         >
           New
@@ -52,7 +52,7 @@ export function SortTabs() {
         <Link
           href={`${replacePathSegment(pathname, params.sort as string, "top")}`}
           className={`${
-            sort === "top" ? "border-b" : ""
+            sort === "top" ? "border-b" : "hover:text-indigo-500"
           } border-indigo-500 px-4 pb-1 hover:cursor-pointer`}
         >
           Top
@@ -60,7 +60,7 @@ export function SortTabs() {
         <Link
           href={`${replacePathSegment(pathname, params.sort as string, "old")}`}
           className={`${
-            sort === "old" ? "border-b" : ""
+            sort === "old" ? "border-b" : "hover:text-indigo-500"
           } border-indigo-500 px-4 pb-1 hover:cursor-pointer`}
         >
           Old
