@@ -15,7 +15,7 @@ export function PreviewSkeleton({ count }: { count: number }) {
           <Skeleton className="w-full h-full" />
         </div>
       </div>
-      <Skeleton className="w-full h-[110px] mt-2 hidden sm:blockmax-w-3xl " />
+      <Skeleton className="w-full h-[110px] mt-2 hidden sm:block max-w-3xl " />
     </>
   ));
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { usePathname, useSearchParams } from "next/navigation";
 
 import Link from "next/link";
 
@@ -11,19 +10,13 @@ type PaginationProps = {
 };
 
 export function Pagination({ totalPages, currentPage }: PaginationProps) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  console.log(pathname);
-
   if (currentPage)
     return (
       <div className="flex gap-5 mt-5 dark:text-neutral-300">
         {currentPage > 1 ? (
           <Link
             className="flex items-center justify-center w-10 h-10 text-xl font-bold dark:hover:text-indigo-500"
-            href={`${pathname}?page=${currentPage - 1}&sort=${searchParams.get(
-              "sort"
-            )}`}
+            href={`${currentPage - 1}`}
           >
             <FaChevronLeft />
           </Link>
@@ -35,9 +28,7 @@ export function Pagination({ totalPages, currentPage }: PaginationProps) {
         {currentPage - 2 > 0 && (
           <Link
             className="flex items-center justify-center w-10 h-10 text-xl font-bold dark:hover:text-indigo-500"
-            href={`${pathname}?page=${currentPage - 2}&sort=${searchParams.get(
-              "sort"
-            )}`}
+            href={`${currentPage - 2}`}
           >
             {currentPage - 2}
           </Link>
@@ -45,9 +36,7 @@ export function Pagination({ totalPages, currentPage }: PaginationProps) {
         {currentPage - 1 > 0 && (
           <Link
             className="flex items-center justify-center w-10 h-10 text-xl font-bold dark:hover:text-indigo-500"
-            href={`${pathname}?page=${currentPage - 1}&sort=${searchParams.get(
-              "sort"
-            )}`}
+            href={`${currentPage - 1}`}
           >
             {currentPage - 1}
           </Link>
@@ -58,9 +47,7 @@ export function Pagination({ totalPages, currentPage }: PaginationProps) {
         {currentPage + 1 <= totalPages && (
           <Link
             className="flex items-center justify-center w-10 h-10 text-xl font-bold dark:hover:text-indigo-500"
-            href={`${pathname}?page=${currentPage + 1}&sort=${searchParams.get(
-              "sort"
-            )}`}
+            href={`${currentPage + 1}`}
           >
             {currentPage + 1}
           </Link>
@@ -68,9 +55,7 @@ export function Pagination({ totalPages, currentPage }: PaginationProps) {
         {currentPage + 2 <= totalPages && (
           <Link
             className="flex items-center justify-center w-10 h-10 text-xl font-bold dark:hover:text-indigo-500"
-            href={`${pathname}?page=${currentPage + 2}&sort=${searchParams.get(
-              "sort"
-            )}`}
+            href={`${currentPage + 2}`}
           >
             {currentPage + 2}
           </Link>
@@ -78,9 +63,7 @@ export function Pagination({ totalPages, currentPage }: PaginationProps) {
         {currentPage < totalPages ? (
           <Link
             className="flex items-center justify-center w-10 h-10 text-xl font-bold dark:hover:text-indigo-500"
-            href={`${pathname}?page=${currentPage + 1}&sort=${searchParams.get(
-              "sort"
-            )}`}
+            href={`${currentPage + 1}`}
           >
             <FaChevronRight />
           </Link>

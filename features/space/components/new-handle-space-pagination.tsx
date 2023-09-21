@@ -1,16 +1,15 @@
 "use client";
 
-import { useParams, useSearchParams } from "next/navigation";
-
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import useSWR from "swr";
 import { Pagination } from "@/features/pagination";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useParams } from "next/navigation";
+import useSWR from "swr";
 
 export function HandleSpacePagination() {
   const params = useParams();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
-  const page = searchParams.get("page");
+  const page = params.page as string;
   const activePage = page ? parseInt(page, 10) : 1;
 
   const supabase = createClientComponentClient();

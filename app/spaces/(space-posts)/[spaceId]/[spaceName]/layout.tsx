@@ -1,7 +1,8 @@
 import { NewPostHeader } from "@/features/new-post-header.tsx";
 import { SidebarCollapse } from "@/features/sidebar-collapse";
-import { HandleSpacePagination } from "@/features/space";
+
 import { SpaceSidebar } from "@/features/space-sidebar";
+import { HandleSpacePagination } from "@/features/space/components/new-handle-space-pagination";
 
 export const dynamic = "force-dynamic";
 
@@ -12,11 +13,13 @@ export default function RootLayout({
 }) {
   return (
     <div className="flex w-full max-w-5xl gap-5">
-      <div className="flex flex-col w-full max-w-3xl">
+      <div className="w-full max-w-3xl">
         <NewPostHeader />
+
         {children}
         <HandleSpacePagination />
       </div>
+
       <SidebarCollapse>
         <SpaceSidebar />
       </SidebarCollapse>

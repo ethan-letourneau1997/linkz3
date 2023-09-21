@@ -1,13 +1,14 @@
-import { redirect } from "next/navigation";
+import { Feed } from "@/features/feed";
 
 export const dynamic = "force-dynamic";
 
 type IndexProps = {
   params: {
-    username: string;
+    page: string;
+    sort: "top" | "new" | "old";
   };
 };
 
 export default async function Index({ params }: IndexProps) {
-  redirect(`/profile/${params.username}/comments/new/1`);
+  return <Feed params={params} />;
 }

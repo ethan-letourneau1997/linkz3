@@ -15,6 +15,7 @@ export function SpaceSidebar() {
 
   const spaceId = params.spaceId as string;
   const spaceName = params.spaceName as string;
+  console.log(spaceName);
 
   const supabase = createClientComponentClient();
 
@@ -22,7 +23,7 @@ export function SpaceSidebar() {
     const { data: community } = await supabase
       .from("community")
       .select("*")
-      .eq("name", spaceName)
+      .eq("id", spaceId)
       .single();
 
     return community;

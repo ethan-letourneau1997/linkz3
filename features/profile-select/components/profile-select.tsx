@@ -7,12 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
 
@@ -22,21 +17,20 @@ export function ProfileSelect() {
   const params = useParams();
   const pathname = usePathname();
 
-  const searchParams = useSearchParams();
-  const sort = searchParams.get("sort");
-  const page = searchParams.get("page");
+  const sort = params.sort;
+  const page = params.page;
 
   const [type, setType] = useState(
     pathname.includes("post") ? "posts" : "comments"
   );
 
   useEffect(() => {
-    router.prefetch(`/profile/${params.username}/posts?page=1&sort=new`);
-    router.prefetch(`/profile/${params.username}/comments?page=1&sort=new`);
+    router.prefetch(`/profile/${params.username}/posts/new/1`);
+    router.prefetch(`/profile/${params.username}/comments/new/1`);
   }, [router, params]);
 
   const handleSortBy = (value: string) => {
-    router.push(`/profile/${params.username}/${value}?page=1&sort=new`);
+    router.push(`/profile/${params.username}/${value}/new/1`);
     setType(value);
   };
 

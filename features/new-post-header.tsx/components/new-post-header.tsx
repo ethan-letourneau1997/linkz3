@@ -1,15 +1,15 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 import { Card } from "@/components/ui/card";
 import { SortTabs } from "@/features/sort-tabs.tsx";
 
 export function NewPostHeader() {
-  const searchParams = useSearchParams();
+  const params = useParams();
   const router = useRouter();
-  const sort = searchParams.get("sort");
-  const page = searchParams.get("page");
+  const sort = params.sort;
+  const page = params.page;
   const pathname = usePathname();
 
   function handleNavigateToCreate() {

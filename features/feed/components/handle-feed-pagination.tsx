@@ -2,13 +2,13 @@
 
 import { Pagination } from "@/features/pagination";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useParams } from "next/navigation";
 import useSWR from "swr";
-import { useSearchParams } from "next/navigation";
 
 export function HandleFeedPagination() {
-  const searchParams = useSearchParams();
+  const params = useParams();
 
-  const page = searchParams.get("page");
+  const page = params.page as string;
   const activePage = page ? parseInt(page, 10) : 1;
 
   const supabase = createClientComponentClient();

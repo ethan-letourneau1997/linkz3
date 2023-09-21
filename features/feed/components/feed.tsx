@@ -2,17 +2,14 @@ import { PostPreviews } from "@/features/post-preview";
 import { getSortedSubscriptionPosts } from "../api/get-sorted-subscription-posts";
 
 type FeedProps = {
-  searchParams: {
+  params: {
     page: string;
     sort: "top" | "new" | "old";
   };
 };
 
-export async function Feed({ searchParams }: FeedProps) {
-  const posts = await getSortedSubscriptionPosts(
-    searchParams.page,
-    searchParams.sort
-  );
+export async function Feed({ params }: FeedProps) {
+  const posts = await getSortedSubscriptionPosts(params.page, params.sort);
 
   if (posts) return <PostPreviews posts={posts} />;
 
