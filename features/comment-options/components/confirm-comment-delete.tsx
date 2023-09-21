@@ -14,8 +14,8 @@ import {
 import { Comment } from "@/types";
 import { LoadingButton } from "@/components/loading-button";
 import { deleteComment } from "../api/delete-comment";
-import { toast } from "@/components/ui/use-toast";
 import { useParams } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 import { useTransition } from "react";
 
 type ConfirmCommentDeleteProps = {
@@ -32,6 +32,8 @@ export function ConfirmCommentDelete({
   const [isPending, startTransition] = useTransition();
 
   const params = useParams();
+
+  const { toast } = useToast();
 
   function handleDeleteComment() {
     startTransition(async () => {
