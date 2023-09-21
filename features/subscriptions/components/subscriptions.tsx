@@ -1,16 +1,13 @@
-import { SubscriptionCard } from "./subscription-card";
-import { UserSubscription } from "@/types";
+import { HandleDisplaySubscriptions } from "./handle-display-subscriptions";
+import { Separator } from "@/components/ui/separator";
 
-type SubscriptionsProps = {
-  spaces: UserSubscription[];
-};
-
-export async function Subscriptions({ spaces }: SubscriptionsProps) {
+export async function Subscriptions() {
   return (
-    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-      {spaces?.map((space) => (
-        <SubscriptionCard key={space.community_id} space={space} />
-      ))}
+    <div className="w-full max-w-3xl mt-5 ">
+      <h1 className="text-2xl font-bold tracking-tight ">My Subscriptions</h1>
+      <Separator className="mt-4" />
+
+      <HandleDisplaySubscriptions />
     </div>
   );
 }

@@ -1,6 +1,6 @@
-import { Subscriptions } from "@/features/subscriptions";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { SubscriptionCard } from "./subscription-card";
 
 export async function HandleDisplaySubscriptions() {
   const supabase = createServerComponentClient({ cookies });
@@ -29,7 +29,11 @@ export async function HandleDisplaySubscriptions() {
   return (
     <div className="mt-7">
       {spaces && spaces.length > 0 ? (
-        <Subscriptions spaces={spaces} />
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {spaces?.map((space) => (
+            <SubscriptionCard key={space.community_id} space={space} />
+          ))}
+        </div>
       ) : (
         <div>No subscriptions!</div>
       )}

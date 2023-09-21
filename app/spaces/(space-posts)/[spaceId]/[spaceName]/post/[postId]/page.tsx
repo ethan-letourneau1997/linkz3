@@ -1,4 +1,4 @@
-import { PostLayout } from "@/layout/post-layout";
+import { Post } from "@/features/post";
 import { PostRouterParams } from "@/types";
 
 export const dynamic = "force-dynamic";
@@ -8,5 +8,5 @@ type IndexProps = {
 };
 
 export default async function Index({ params }: IndexProps) {
-  return <PostLayout params={params} />;
+  return <Post params={params} />;
 }

@@ -1,7 +1,7 @@
 import { NewPostHeader } from "@/features/new-post-header.tsx";
 import { SidebarCollapse } from "@/features/sidebar-collapse";
 import { FeedSidebar } from "@/features/feed-sidebar";
-import { HandleFeedPagination } from "@/layout/feed";
+import { HandleFeedPagination } from "@/features/feed";
 
 export const dynamic = "force-dynamic";
 

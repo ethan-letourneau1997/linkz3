@@ -1,4 +1,4 @@
-import { SpaceLayout } from "@/layout/space-layout";
+import { SpacePosts } from "@/features/space";
 import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
@@ -19,5 +19,5 @@ export default async function Index({ params, searchParams }: IndexProps) {
     redirect(`/spaces/${params.spaceId}/${params.spaceName}?page=1&sort=new`);
   }
 
-  return <SpaceLayout params={params} searchParams={searchParams} />;
+  return <SpacePosts params={params} searchParams={searchParams} />;
 }

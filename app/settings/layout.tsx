@@ -1,4 +1,4 @@
-import { SettingsLayout } from "@/layout/settings-layout";
+import { UserSettings } from "@/features/user-settings";
 
 export const dynamic = "force-dynamic";
 
@@ -9,7 +9,7 @@ export default function RootLayout({
 }) {
   return (
     <div className="w-full max-w-4xl ">
-      <SettingsLayout>{children}</SettingsLayout>
+      <UserSettings>{children}</UserSettings>
     </div>
   );
 }

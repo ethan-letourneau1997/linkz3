@@ -1,7 +1,7 @@
 import { NewPostHeader } from "@/features/new-post-header.tsx";
 import { SidebarCollapse } from "@/features/sidebar-collapse";
+import { HandleSpacePagination } from "@/features/space";
 import { SpaceSidebar } from "@/features/space-sidebar";
-import { HandleSpacePagination } from "@/layout/space-layout";
 
 export const dynamic = "force-dynamic";
 

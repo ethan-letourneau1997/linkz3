@@ -1,7 +1,7 @@
 import { PostPreviews } from "@/features/post-preview";
 import { getSortedPosts } from "../api/get-sorted-posts";
 
-type SpacePagePostsProps = {
+type SpacePostsProps = {
   params: {
     spaceName: string;
     spaceId: string;
@@ -12,10 +12,7 @@ type SpacePagePostsProps = {
   };
 };
 
-export async function SpacePagePosts({
-  params,
-  searchParams,
-}: SpacePagePostsProps) {
+export async function SpacePosts({ params, searchParams }: SpacePostsProps) {
   const posts = await getSortedPosts(
     params.spaceId,
     searchParams.page,

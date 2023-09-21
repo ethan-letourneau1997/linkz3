@@ -1,7 +1,7 @@
-import { HomeLayout } from "@/layout/home-layout";
+import { Home } from "@/features/home";
 
 export const dynamic = "force-dynamic";
 
 export default async function Index() {
-  return <HomeLayout />;
+  return <Home />;
 }

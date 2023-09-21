@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect } from "next/navigation";
 
-export async function HomeLayout() {
+export async function Home() {
   const supabase = createServerComponentClient({ cookies });
 
   const { data } = await supabase.auth.getSession();

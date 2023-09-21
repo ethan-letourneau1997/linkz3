@@ -7,7 +7,7 @@ type SettingsLayoutProps = {
   children: React.ReactNode;
 };
 
-export async function SettingsLayout({ children }: SettingsLayoutProps) {
+export async function UserSettings({ children }: SettingsLayoutProps) {
   const items = [
     {
       href: "/settings/profile",

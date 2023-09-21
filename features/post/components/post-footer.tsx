@@ -1,7 +1,7 @@
 "use client";
 
 import { PostRouterParams } from "@/types";
-import { RootCommentInput } from "@/layout/post-layout/components/root-comment-input";
+import { RootCommentInput } from "@/features/post/components/root-comment-input";
 import { useState } from "react";
 
 type PostFooterProps = {

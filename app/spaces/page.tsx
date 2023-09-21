@@ -1,7 +1,7 @@
-import { SpacesLayout } from "@/layout/spaces-layout";
+import { Spaces } from "@/features/spaces";
 
 export const dynamic = "force-dynamic";
 
 export default async function Index() {
-  return <SpacesLayout />;
+  return <Spaces />;
 }

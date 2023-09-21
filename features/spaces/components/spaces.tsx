@@ -1,8 +1,8 @@
-import { SpacePreview } from "@/features/space-preview/components/space-preview";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { SpacePreview } from "@/features/space-preview";
 
-export async function SpacesLayout() {
+export async function Spaces() {
   const supabase = createServerComponentClient({ cookies });
 
   const { data: spaces } = await supabase.from("community").select();

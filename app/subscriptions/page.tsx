@@ -1,7 +1,7 @@
-import { SubscriptionsLayout } from "@/layout/subscription-layout";
+import { Subscriptions } from "@/features/subscriptions";
 
 export const dynamic = "force-dynamic";
 
 export default async function Index() {
-  return <SubscriptionsLayout />;
+  return <Subscriptions />;
 }

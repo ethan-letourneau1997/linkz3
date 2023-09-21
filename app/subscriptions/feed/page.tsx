@@ -1,4 +1,4 @@
-import { Feed } from "@/layout/feed";
+import { Feed } from "@/features/feed";
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 
