@@ -1,5 +1,5 @@
-import { LoginForm } from "@/features/login-form";
+import { LoginTabs } from "@/features/login-form";
 
 export default function Login() {
-  return <LoginForm />;
+  return <LoginTabs />;
 }

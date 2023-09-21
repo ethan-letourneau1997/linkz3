@@ -14,13 +14,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Messages from "./messages";
 
-export function SignupForm() {
+export function LoginForm() {
   return (
-    <form action="/auth/sign-in" method="post">
+    <form action="/auth/sign-up" method="post">
       <Card>
         <CardHeader>
-          <CardTitle>Login</CardTitle>
-          <CardDescription>Sign in to your account.</CardDescription>
+          <CardTitle>Sign Up</CardTitle>
+          <CardDescription>Sign up for a new account.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
           <div className="space-y-1">
