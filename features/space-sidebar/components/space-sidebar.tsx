@@ -1,21 +1,19 @@
 "use client";
 
+import { HandleSubscription } from "./handle-subscription";
 import { Separator } from "@/components/ui/separator";
-
+import { SidebarSubscriberCount } from "./sidebar-subscriber-count";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Space } from "@/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
-import { HandleSubscription } from "./handle-subscription";
-import { SidebarSubscriberCount } from "./sidebar-subscriber-count";
-import { Space } from "@/types";
-import { Skeleton } from "@/components/ui/skeleton";
 
 export function SpaceSidebar() {
   const params = useParams();
 
   const spaceId = params.spaceId as string;
   const spaceName = params.spaceName as string;
-  console.log(spaceName);
 
   const supabase = createClientComponentClient();
 
