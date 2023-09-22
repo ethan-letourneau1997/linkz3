@@ -10,7 +10,8 @@ export async function UsernameForm() {
     // write a new user to supabase
     const supabase = createServerActionClient({ cookies });
     await supabase.from("public_profile").insert({ username });
-    // reload page
+
+    // refresh page data
     revalidatePath("/");
   };
 
