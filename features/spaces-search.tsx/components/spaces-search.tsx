@@ -1,10 +1,8 @@
 import { SpacesSearchbar } from "./spaces-searchbar";
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { fetchAllSpaces } from "@/lib/space/fetch-all-spaces";
 
 export async function SpacesSearch() {
-  const supabase = createServerComponentClient({ cookies });
-  const { data: spaces } = await supabase.from("community").select("*");
+  const spaces = await fetchAllSpaces();
 
   if (spaces) return <SpacesSearchbar spaces={spaces} />;
 }

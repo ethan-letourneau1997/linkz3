@@ -1,11 +1,5 @@
 "use client";
 
-import * as React from "react";
-import { Check } from "lucide-react";
-import { AiOutlineSearch } from "react-icons/ai";
-
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -18,16 +12,22 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+
+import { AiOutlineSearch } from "react-icons/ai";
+import { Button } from "@/components/ui/button";
+import { Check } from "lucide-react";
 import { Space } from "@/types";
+import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 type SpacesSearchbar = {
   spaces: Space[];
 };
 
 export function SpacesSearchbar({ spaces }: SpacesSearchbar) {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
 
   const router = useRouter();
 
