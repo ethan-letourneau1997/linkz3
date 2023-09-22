@@ -86,7 +86,7 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
             <FaUserAstronaut className="w-4 h-4 mr-2 " />
             <Link
               className="w-full py-1.5"
-              href={`/profile/${profile.username}/post/post/new/1`}
+              href={`/profile/${profile.username}/post/new/1`}
             >
               Profile
             </Link>
@@ -94,10 +94,7 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
           <DropdownMenuItem className="py-0 ">
             <BsFillRocketFill className="w-4 h-4 mr-2 " />
 
-            <Link
-              className="w-full py-1.5"
-              href={`/subscriptions/feed/post/new/1`}
-            >
+            <Link className="w-full py-1.5" href={`/subscriptions/feed/new/1`}>
               Feed
             </Link>
           </DropdownMenuItem>
@@ -124,7 +121,7 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
                       <CommandItem key={space.community_id.id} className="py-0">
                         <Link
                           className="w-full py-1.5"
-                          href={`/spaces/${space.community_id.id}/${space.community_id.name}/post/new/1`}
+                          href={`/spaces/${space.community_id.id}/${space.community_id.name}/new/1`}
                         >
                           {space.community_id.name}
                         </Link>

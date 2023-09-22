@@ -55,7 +55,7 @@ export function SpacesSearchbar({ spaces }: SpacesSearchbar) {
                 onSelect={(currentValue) => {
                   setValue(currentValue === value ? "" : currentValue);
                   setOpen(false);
-                  router.push(`/spaces/${space.id}/${space.name}/post/new/1`);
+                  router.push(`/spaces/${space.id}/${space.name}/new/1`);
                 }}
               >
                 <Check

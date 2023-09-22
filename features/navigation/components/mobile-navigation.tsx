@@ -36,7 +36,7 @@ export function MobileNavigation({ profile }: DesktopNavigationProps) {
               <>
                 <div className="flex items-center gap-1">
                   <FaUserAstronaut className="w-4 h-4 mr-2 " />
-                  <Link href={`/profile/${profile?.username}/post/new/1`}>
+                  <Link href={`/profile/${profile?.username}/new/1`}>
                     Profile
                   </Link>
                 </div>
