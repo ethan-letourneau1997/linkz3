@@ -3,8 +3,7 @@ import { LinkPreview, Post, PostPreview } from "@/types";
 import { BiLinkExternal } from "react-icons/bi";
 import { HiOutlineLink } from "react-icons/hi";
 import { RiText } from "react-icons/ri";
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { fetchPostImagePreview } from "../api/fetch-post-image-preview";
 import { getLinkPreview } from "link-preview-js";
 
 type PreviewThumbnailProps = {
@@ -52,21 +51,14 @@ export async function PreviewThumbnail({ post }: PreviewThumbnailProps) {
   }
 
   if (post.type === "image") {
-    const supabase = createServerComponentClient({ cookies });
+    const image = await fetchPostImagePreview(post.id);
 
-    const { data: post_image } = await supabase
-      .from("post_image")
-      .select()
-      .eq("post_id", post.id)
-      .limit(1)
-      .single();
-
-    if (post_image) {
+    if (image) {
       return (
         <div
           className="w-full h-full rounded"
           style={{
-            backgroundImage: `url(${post_image.url})`,
+            backgroundImage: `url(${image.url})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",

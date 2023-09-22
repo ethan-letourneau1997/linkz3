@@ -1,12 +1,13 @@
 "use client";
 
-import { Post } from "@/types";
+import { Post, PostPreview } from "@/types";
+
 import { PostOptionsDropdown } from "./post-options-dropdown";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import useSWR from "swr";
 
 type PostOptionsMenuProps = {
-  post: Post;
+  post: Post | PostPreview;
   disableRedirect?: boolean;
 };
 
