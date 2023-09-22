@@ -1,32 +1,25 @@
+import { CaptionImage } from "@/features/image-captions/components/caption-image";
 import { CaptionInput } from "@/features/image-captions/components/caption-input";
-import { ImageDisplay } from "@/features/image-captions/components/caption-image";
 import { PostRouterParams } from "@/types";
 import { Separator } from "@/components/ui/separator";
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { fetchPostImages } from "@/lib/post/fetch-post-images";
 
 type ImageEditorBodyProps = {
   params: PostRouterParams;
 };
 
 export async function ImageEditorBody({ params }: ImageEditorBodyProps) {
-  const supabase = createServerComponentClient({ cookies });
-  const { data: post_images } = await supabase
-    .from("post_image")
-    .select()
-    .eq("post_id", params.postId)
-    .order("priority", { ascending: true });
-
+  const postImages = await fetchPostImages(params.postId as string);
   return (
     <div className="pb-5 space-y-10 mt-7">
       <Separator className="mb-4" />
-      {post_images?.map((image, index) => (
+      {postImages?.map((image, index) => (
         <>
           <div key={image.id} className="grid grid-cols-2 gap-5">
-            <ImageDisplay image={image} />
+            <CaptionImage image={image} />
             <CaptionInput image={image} params={params} />
           </div>
-          {index < post_images.length - 1 && <Separator className="mb-4" />}
+          {index < postImages.length - 1 && <Separator className="mb-4" />}
         </>
       ))}
     </div>

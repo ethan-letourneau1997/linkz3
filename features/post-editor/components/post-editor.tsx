@@ -3,6 +3,7 @@ import { PostRouterParams } from "@/types";
 import { PostTextEditor } from "./post-text-editor";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { fetchPostFromId } from "@/lib/post/fetch-post-from-id";
 import { redirect } from "next/navigation";
 
 type HandlePostEditorProps = {
@@ -13,11 +14,7 @@ export async function PostEditor({ params }: HandlePostEditorProps) {
   const supabase = createServerComponentClient({ cookies });
   const { data } = await supabase.auth.getSession();
 
-  const { data: post } = await supabase
-    .from("post")
-    .select()
-    .eq("id", params.postId)
-    .single();
+  const post = await fetchPostFromId(params.postId as string);
 
   // prevent post edit access form url
   if (
