@@ -4,20 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { UserAvatar } from "./user-avatar";
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { fetchLoggedInProfile } from "@/lib/user/fetch-logged-in-profile";
 
 export async function ProfileSettings() {
-  const supabase = createServerComponentClient({ cookies });
-
-  const { data } = await supabase.auth.getSession();
-
-  const { data: public_profile } = await supabase
-    .from("public_profile")
-    .select()
-    .eq("id", data.session?.user.id)
-    .single();
-
+  const profile = await fetchLoggedInProfile();
   return (
     <div className="max-w-lg ">
       <h2 className="text-xl font-semibold ">Profile</h2>
@@ -25,8 +15,8 @@ export async function ProfileSettings() {
 
       <div className="mt-3">
         <Label htmlFor="avatar">Avatar</Label>
-        <UserAvatar user={public_profile} />
-        <AvatarUploadModal user={public_profile} />
+        <UserAvatar user={profile} />
+        <AvatarUploadModal user={profile} />
         <div className="relative -top-3">
           <Label htmlFor="username">Username</Label>
           <Input
@@ -34,9 +24,9 @@ export async function ProfileSettings() {
             disabled
             type="text"
             id="username"
-            defaultValue={public_profile.username}
+            defaultValue={profile.username}
           />
-          <BioInput user={public_profile} />
+          <BioInput user={profile} />
         </div>
       </div>
     </div>
