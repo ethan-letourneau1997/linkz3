@@ -30,26 +30,31 @@ export function NewSpace() {
     <Card className="w-full max-w-2xl mt-5 ">
       <CardHeader>
         <CardTitle>New Space</CardTitle>
-  
       </CardHeader>
       <CardContent>
         <form className="space-y-5 ">
           <div className="space-y-1">
-            <Label htmlFor="spaceName">Space Name</Label>
+            <Label htmlFor="spaceName" className="dark:text-neutral-300">
+              Space Name
+            </Label>
             <Input
               onChange={(e) => setSpaceName(e.target.value)}
               value={spaceName}
               type="spaceName"
               id="username"
+              className="h-9 dark:bg-dark-800"
             />
           </div>
 
           <div className="space-y-1">
-            <Label htmlFor="description">Description</Label>
+            <Label className="dark:text-neutral-300" htmlFor="description">
+              Description
+            </Label>
             <Textarea
               onChange={(e) => setDescription(e.target.value)}
               value={description}
               id="description"
+              className="dark:bg-dark-800"
             />
           </div>
         </form>
