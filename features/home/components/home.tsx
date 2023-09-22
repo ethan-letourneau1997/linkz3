@@ -19,5 +19,5 @@ export async function Home() {
 
   if (!public_profile) return <UsernameForm />;
 
-  if (data.session) return redirect("/subscriptions/feed?page=1&sort=new");
+  if (data.session) return redirect("/subscriptions/feed/post/new/1");
 }

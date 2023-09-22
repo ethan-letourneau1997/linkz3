@@ -4,6 +4,7 @@ import { PostDetails } from "./post-details";
 import { PostRouterParams } from "@/types";
 import { RootCommentInput } from "./root-comment-input";
 import { Separator } from "@/components/ui/separator";
+import { Suspense } from "react";
 
 type PostLayoutProps = {
   params: PostRouterParams;
@@ -18,7 +19,9 @@ export async function Post({ params }: PostLayoutProps) {
           <RootCommentInput params={params} />
         </div>
         <Separator className="my-10" />
-        <Comments params={params} />
+        <Suspense fallback={<div>loading..</div>}>
+          <Comments params={params} />
+        </Suspense>
       </Card>
     </div>
   );

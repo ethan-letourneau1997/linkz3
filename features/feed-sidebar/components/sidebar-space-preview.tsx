@@ -20,7 +20,7 @@ export async function SidebarSpacePreview({ space }: SidebarSpacePreviewProps) {
           </Avatar>
           <Link
             className="hover:underline"
-            href={`/spaces/${space.id}/${space.name}?page=1&sort=new`}
+            href={`/spaces/${space.id}/${space.name}/post/new/1`}
           >
             {space.name}
           </Link>

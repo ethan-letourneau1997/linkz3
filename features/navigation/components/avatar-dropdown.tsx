@@ -86,7 +86,7 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
             <FaUserAstronaut className="w-4 h-4 mr-2 " />
             <Link
               className="w-full py-1.5"
-              href={`/profile/${profile.username}/post?page=1&sort=new`}
+              href={`/profile/${profile.username}/post/post/new/1`}
             >
               Profile
             </Link>
@@ -96,7 +96,7 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
 
             <Link
               className="w-full py-1.5"
-              href={`/subscriptions/feed?page=1&sort=new`}
+              href={`/subscriptions/feed/post/new/1`}
             >
               Feed
             </Link>
@@ -124,7 +124,7 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
                       <CommandItem key={space.community_id.id} className="py-0">
                         <Link
                           className="w-full py-1.5"
-                          href={`/spaces/${space.community_id.id}/${space.community_id.name}?page=1&sort=new`}
+                          href={`/spaces/${space.community_id.id}/${space.community_id.name}/post/new/1`}
                         >
                           {space.community_id.name}
                         </Link>
