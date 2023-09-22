@@ -43,7 +43,6 @@ export function ImageInput({ files, setFiles }: ImageInputProps) {
           }}
           allowMultiple={true}
           maxFiles={3}
-          //   server="/api"
           name="files"
           labelIdle='Drag & Drop your images or <span class="filepond--label-action">Browse</span>'
         />

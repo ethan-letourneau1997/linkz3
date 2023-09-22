@@ -1,4 +1,4 @@
-import { CommunitySelect } from "@/features/community-select";
+import { SpaceSelect } from "@/features/new-post-form";
 
 export const dynamic = "force-dynamic";
 
@@ -9,7 +9,7 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <CommunitySelect />
+      <SpaceSelect />
       {children}
     </>
   );
