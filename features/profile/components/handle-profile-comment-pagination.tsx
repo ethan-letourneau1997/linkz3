@@ -1,7 +1,7 @@
 "use client";
 
 import { Pagination } from "@/features/pagination";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { getProfileCommentPageCount } from "../api/get-profile-comment-page-count";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
 
@@ -11,23 +11,11 @@ export function HandleProfileCommentPagination() {
   const page = params.page as string;
   const activePage = page ? parseInt(page, 10) : 1;
 
-  const supabase = createClientComponentClient();
-
   const { data: pageCount } = useSWR("public_profile", async () => {
-    const { data: user } = await supabase
-      .from("public_profile")
-      .select()
-      .eq("username", params.username)
-      .single();
-
-    const { count } = await supabase
-      .from("comment")
-      .select("*", { count: "exact", head: true })
-      .eq("posted_by", user.id);
-    if (count) {
-      const pages = Math.ceil(count / 10);
-      return pages;
-    }
+    const pageCount = await getProfileCommentPageCount(
+      params.username as string
+    );
+    return pageCount;
   });
 
   if (page && pageCount)

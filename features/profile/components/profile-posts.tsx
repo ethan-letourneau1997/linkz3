@@ -10,8 +10,6 @@ type ProfilePostsProps = {
 };
 
 export async function ProfilePosts({ params }: ProfilePostsProps) {
-  // const posts = await getPosts();
-
   const posts = await getSortedProfilePosts(
     params.sort,
     params.username,
