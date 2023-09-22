@@ -1,124 +1,28 @@
 "use client";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuShortcut,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, Trash } from "lucide-react";
-import { Post, PostPreview } from "@/types";
-import { useParams, useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
-
-import { AiOutlineEdit } from "react-icons/ai";
-import Link from "next/link";
-import { LoadingButton } from "@/components/loading-button";
-import { deletePost } from "../api/delete-post";
-import { useToast } from "@/components/ui/use-toast";
+import { Post } from "@/types";
+import { PostOptionsDropdown } from "./post-options-dropdown";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import useSWR from "swr";
 
 type PostOptionsMenuProps = {
-  post: Post | PostPreview;
+  post: Post;
   disableRedirect?: boolean;
 };
 
 export function PostOptions({ post, disableRedirect }: PostOptionsMenuProps) {
-  const [open, setOpen] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-  const [isPending, startTransition] = useTransition();
+  const supabase = createClientComponentClient();
 
-  const router = useRouter();
-  const params = useParams();
+  const { data: user } = useSWR("user", async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-  const { toast } = useToast();
+    return user;
+  });
 
-  function handleDeletePost() {
-    startTransition(async () => {
-      const data = await deletePost(post);
-      if (data) {
-        toast({
-          title: "Post Deleted",
-          description: `Your post has been permanently deleted.`,
-        });
-
-        if (!disableRedirect) {
-          router.back();
-        }
-      }
-    });
-  }
-
-  return (
-    <>
-      <AlertDialog open={openModal} onOpenChange={setOpenModal}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle className="dark:text-neutral-200">
-              Are you absolutely sure?
-            </AlertDialogTitle>
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel className="dark:border-transparent dark:text-neutral-200">
-              Cancel
-            </AlertDialogCancel>
-            <AlertDialogAction
-              asChild
-              className="bg-red-500 text-neutral-50 hover:bg-red-500/90 dark:bg-red-500 dark:text-neutral-50 dark:hover:bg-red-500/90"
-              onClick={handleDeletePost}
-            >
-              <LoadingButton isLoading={isPending}>Delete</LoadingButton>
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-
-      <DropdownMenu open={open} onOpenChange={setOpen}>
-        <DropdownMenuTrigger asChild>
-          <button className="bg-transparent border-none dark:text-neutral-400 dark:hover:text-neutral-200 dark:hover:bg-transparent hover:bg-transparent dark:bg-transparent dark:border-none">
-            <MoreHorizontal />
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-[200px]">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuGroup>
-            <DropdownMenuItem className="py-0 ">
-              <Link
-                className="w-full  py-1.5 flex gap-1"
-                href={`/spaces/${params.spaceId}/${params.spaceName}/edit/${post.id}`}
-              >
-                <AiOutlineEdit className="w-4 h-4 mr-2" />
-                Edit
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem
-              onClick={() => setOpenModal(true)}
-              className="text-red-600"
-            >
-              <Trash className="w-4 h-4 mr-2" />
-              Delete
-              <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </>
-  );
+  if (user && user.id === post.created_by)
+    return (
+      <PostOptionsDropdown post={post} disableRedirect={disableRedirect} />
+    );
 }
