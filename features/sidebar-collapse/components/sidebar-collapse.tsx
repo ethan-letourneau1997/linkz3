@@ -23,7 +23,6 @@ export function SidebarCollapse({ children }: SidebarCollapseProps) {
   }
 
   const displayedClassees = "px-2";
-
   const hiddenClasses = "p-0 ";
 
   return (

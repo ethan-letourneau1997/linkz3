@@ -1,4 +1,4 @@
-import { HandleSpacePagination } from "@/features/space/components/new-handle-space-pagination";
+import { HandleSpacePagination } from "@/features/space";
 import { NewPostHeader } from "@/features/new-post-header.tsx";
 import { SidebarCollapse } from "@/features/sidebar-collapse";
 import { SpaceSidebar } from "@/features/space-sidebar";

@@ -1,31 +1,21 @@
 "use client";
 
-import { useParams, useSearchParams } from "next/navigation";
-
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import useSWR from "swr";
 import { Pagination } from "@/features/pagination";
+import { fetchSpacePageCount } from "../api/fetch-space-page-count";
+import { useParams } from "next/navigation";
+import useSWR from "swr";
 
 export function HandleSpacePagination() {
   const params = useParams();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
-  const page = searchParams.get("page");
+  const page = params.page as string;
   const activePage = page ? parseInt(page, 10) : 1;
 
-  const supabase = createClientComponentClient();
-
   const { data: pageCount } = useSWR("post", async () => {
-    if (page) {
-      const { count } = await supabase
-        .from("post")
-        .select("*", { count: "exact", head: true })
-        .eq("posted_in", params.spaceId);
-      if (count) {
-        const pages = Math.ceil(count / 10);
-        return pages;
-      }
-    }
+    const pageCount = await fetchSpacePageCount(params.spaceId as string);
+    console.log(pageCount);
+    return pageCount;
   });
 
   if (page && pageCount && activePage && pageCount > 1)
