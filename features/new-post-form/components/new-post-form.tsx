@@ -13,7 +13,7 @@ import { PostTextInput } from "./post-text-input";
 import { PostTitleInput } from "./post-title-input";
 import { SpaceRouterParams } from "@/types";
 import { createPost } from "../api/create-post";
-import { removeTags } from "@/lib/remove-tags";
+import { removeTags } from "@/lib/utils/remove-tags";
 import { uploadImages } from "../api/upload-images";
 
 type NewPostFormProps = {
