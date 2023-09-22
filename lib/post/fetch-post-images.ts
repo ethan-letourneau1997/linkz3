@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 
-export async function fetchPostImages(postId: string | null) {
+export async function fetchPostImages(postId: string | number| null) {
   if (!postId) return;
 
   const supabase = createServerActionClient({ cookies });
