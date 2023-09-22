@@ -27,8 +27,8 @@ export function SidebarCollapse({ children }: SidebarCollapseProps) {
 
   return (
     <Card
-      className={`hidden mt-5 space-y-3 rounded-sm h-fit md:block w-72 ${
-        isDisplayed ? "" : ""
+      className={`hidden mt-5 space-y-3 rounded-sm h-fit md:block  ${
+        isDisplayed ? "w-72" : ""
       }`}
     >
       <div

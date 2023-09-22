@@ -22,7 +22,7 @@ export function NewPostHeader() {
 
   if (sort && page)
     return (
-      <Card className="flex items-center gap-5 px-4 py-3 mt-5">
+      <Card className="flex items-center max-w-3xl gap-5 px-4 py-3 mt-5">
         <SortTabs />
         <div className="flex-grow ">
           <button

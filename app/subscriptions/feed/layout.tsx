@@ -11,10 +11,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex w-full max-w-5xl gap-5 ">
-      <div className="grow ">
+    <div className="flex w-full max-w-5xl gap-5">
+      <div className="max-w-3xl grow">
         <NewPostHeader />
-
         {children}
         <HandleFeedPagination />
       </div>
@@ -22,15 +21,5 @@ export default function RootLayout({
         <FeedSidebar />
       </SidebarCollapse>
     </div>
-    // <div className="flex gap-5">
-    //   <div className="w-full max-w-3xl">
-    //     <NewPostHeader />
-    //     {children}
-    //     <HandleFeedPagination />
-    //   </div>
-    //   <SidebarCollapse>
-    //     <FeedSidebar />
-    //   </SidebarCollapse>
-    // </div>
   );
 }

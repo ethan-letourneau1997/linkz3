@@ -18,8 +18,8 @@ export async function UserSettings({ children }: SettingsLayoutProps) {
       title: "Account",
     },
     {
-      href: "/settings/messaging",
-      title: "Messaging",
+      href: "/settings/admin",
+      title: "Admin",
     },
     {
       href: "/settings/privacy",
