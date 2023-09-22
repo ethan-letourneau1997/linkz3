@@ -1,13 +1,13 @@
 import { Comment } from "@/types";
 import { CommentAvatar } from "./comment-avatar";
-import { fetchProfileFromId } from "@/lib/profile/fetch-profile-from-id";
-import { getTimeSinceNow } from "../../../lib/get-time-since-now";
+import { fetchProfileById } from "@/lib/profile/fetch-profile-by-id";
+import { getTimeSinceNow } from "../../../lib/utils/get-time-since-now";
 
 type CommentHeaderProps = {
   comment: Comment;
 };
 export async function CommentHeader({ comment }: CommentHeaderProps) {
-  const profile = await fetchProfileFromId(comment.posted_by);
+  const profile = await fetchProfileById(comment.posted_by);
 
   return (
     <>

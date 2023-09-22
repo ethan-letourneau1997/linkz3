@@ -3,7 +3,7 @@
 import {
   createSubscription,
   deleteSubscription,
-} from "@/lib/subscription-helpers";
+} from "@/lib/space/subscription-helpers";
 
 import { Button } from "@/components/ui/button";
 import { Space } from "@/types";

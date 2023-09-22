@@ -1,7 +1,7 @@
 import { Comment } from "@/types";
 import { fetchCommentFromId } from "@/lib/comment/fetch-comment-from-id";
-import { fetchProfileFromId } from "@/lib/profile/fetch-profile-from-id";
-import { getTimeSinceNow } from "@/lib/get-time-since-now";
+import { fetchProfileById } from "@/lib/profile/fetch-profile-by-id";
+import { getTimeSinceNow } from "@/lib/utils/get-time-since-now";
 
 type CommentPreviewParentProps = {
   comment: Comment;
@@ -13,7 +13,7 @@ export async function CommentPreviewParent({
   children,
 }: CommentPreviewParentProps) {
   const parentComment = await fetchCommentFromId(comment.parent_comment!);
-  const profile = await fetchProfileFromId(comment.posted_by);
+  const profile = await fetchProfileById(comment.posted_by);
 
   return (
     <div className="pl-5 mt-3 text-sm border-l border-dashed dark:border-neutral-400">

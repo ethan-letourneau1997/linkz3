@@ -1,5 +1,5 @@
 import { Comment } from "@/types";
-import { getTimeSinceNow } from "@/lib/get-time-since-now";
+import { getTimeSinceNow } from "@/lib/utils/get-time-since-now";
 
 type ProfileCommentProps = {
   username: string;

@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 
-export async function fetchProfileFromId(userId: string | null) {
+export async function fetchProfileById(userId: string | null) {
 
   if (!userId) return;
 

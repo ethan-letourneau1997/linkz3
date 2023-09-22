@@ -1,19 +1,20 @@
 import Link from "next/link";
 import { Post } from "@/types";
-import { getPostCommunityName } from "@/lib/post-helpers";
+import { fetchSpaceById } from "@/lib/space/fetch-space-by-id";
 
 type PostCommunityProps = {
   post: Post;
 };
 
 export async function PostCommunity({ post }: PostCommunityProps) {
-  const communityName = await getPostCommunityName(post.posted_in);
+  const space = await fetchSpaceById(post.posted_in);
+
   return (
     <Link
       className="hover:underline hover:cursor-pointer "
-      href={`/spaces/${post.posted_in}/${communityName}`}
+      href={`/spaces/${post.posted_in}/${space.name}`}
     >
-      {communityName}
+      {space.name}
     </Link>
   );
 }

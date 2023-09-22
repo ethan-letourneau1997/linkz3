@@ -9,14 +9,14 @@ import { PreviewHeader } from "./preview-header";
 import { PreviewThumbnail } from "./preview-thumbnail";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
-import { getPostCommunityName } from "@/lib/post-helpers";
+import { fetchSpaceById } from "@/lib/space/fetch-space-by-id";
 
 type PostPreviewProps = {
   post: Post | PostPreviewType;
 };
 
 export async function PostPreview({ post }: PostPreviewProps) {
-  const spaceName = await getPostCommunityName(post.posted_in);
+  const space = await fetchSpaceById(post.posted_in);
 
   return (
     <Card className="grid grid-cols-12 gap-3 px-3 py-3 border-0 border-t rounded-none dark:bg-dark-900 md:rounded-sm md:border sm:px-4">
@@ -27,17 +27,17 @@ export async function PostPreview({ post }: PostPreviewProps) {
       </div>
       <div className="flex flex-col justify-between order-1 col-span-9 sm:order-2">
         <div>
-          <PreviewHeader spaceName={spaceName} post={post} />
+          <PreviewHeader spaceName={space.name} post={post} />
           <Link
             className="mt-1 text-sm font-medium sm:text-base text-neutral-200"
-            href={`/spaces/${post.posted_in}/${spaceName}/post/${post.id}`}
+            href={`/spaces/${post.posted_in}/${space.name}/post/${post.id}`}
           >
             {post.title}
           </Link>
         </div>
         <div className="items-center hidden mt-2 text-sm sm:flex text-neutral-400 ">
           <Link
-            href={`/spaces/${post.posted_in}/${spaceName}/post/${post.id}`}
+            href={`/spaces/${post.posted_in}/${space.name}/post/${post.id}`}
             className="flex items-center gap-2 rounded-sm hover:dark:text-neutral-300"
           >
             <PreviewCommentCount post={post} />

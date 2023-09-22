@@ -1,18 +1,18 @@
 import { Post } from "@/types";
-import { getPostPostedBy } from "@/lib/post-helpers";
-import { getTimeSinceNow } from "@/lib/get-time-since-now";
+import { fetchProfileById } from "@/lib/profile/fetch-profile-by-id";
+import { getTimeSinceNow } from "@/lib/utils/get-time-since-now";
 
 type PostMetadataProps = {
   post: Post;
 };
 
 export async function PostMetadata({ post }: PostMetadataProps) {
-  const postedby = await getPostPostedBy(post.created_by);
+  const profile = await fetchProfileById(post.created_by);
   const timeSincePost = getTimeSinceNow(post.created_at, true);
 
   return (
     <>
-      posted by {postedby} - {timeSincePost}
+      posted by {profile.username} - {timeSincePost}
     </>
   );
 }

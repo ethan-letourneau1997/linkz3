@@ -1,8 +1,8 @@
 import { Post, PostPreview as PostPreviewType } from "@/types";
 
 import Link from "next/link";
-import { getPostPostedBy } from "@/lib/post-helpers";
-import { getTimeSinceNow } from "@/lib/get-time-since-now";
+import { fetchProfileById } from "@/lib/profile/fetch-profile-by-id";
+import { getTimeSinceNow } from "@/lib/utils/get-time-since-now";
 
 type PreviewHeaderProps = {
   post: Post | PostPreviewType;
@@ -10,7 +10,7 @@ type PreviewHeaderProps = {
 };
 
 export async function PreviewHeader({ post, spaceName }: PreviewHeaderProps) {
-  const postedByUsername = await getPostPostedBy(post.created_by);
+  const profile = await fetchProfileById(post.created_by);
   const timeSincePost = getTimeSinceNow(post.created_at, true);
 
   return (
@@ -23,8 +23,8 @@ export async function PreviewHeader({ post, spaceName }: PreviewHeaderProps) {
       </Link>
       <span className="dark:text-neutral-400">
         &nbsp;posted by&nbsp;
-        <Link className="hover:underline" href={`/profile/${postedByUsername}`}>
-          {postedByUsername}
+        <Link className="hover:underline" href={`/profile/${profile.username}`}>
+          {profile.username}
         </Link>
         &nbsp;-&nbsp;{timeSincePost}
       </span>
