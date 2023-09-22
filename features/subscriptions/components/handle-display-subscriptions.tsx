@@ -1,30 +1,8 @@
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { SubscriptionCard } from "./subscription-card";
+import { fetchUserSpaces } from "@/lib/user/fetch-user-spaces";
 
 export async function HandleDisplaySubscriptions() {
-  const supabase = createServerComponentClient({ cookies });
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  async function getSpaces() {
-    if (user) {
-      try {
-        const { data: spaces } = await supabase
-          .from("user_subscription")
-          .select()
-          .eq("user_id", user.id);
-
-        return spaces;
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  }
-
-  const spaces = await getSpaces();
+  const spaces = await fetchUserSpaces();
 
   return (
     <div className="mt-7">

@@ -1,7 +1,6 @@
 import { SubscriptionButtons } from "./subscription-buttons";
 import { UserSubscription } from "@/types";
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { checkUserSubscription } from "@/lib/space/check-user-subscription";
 
 type UserSubscriptionProps = {
   space: UserSubscription;
@@ -10,33 +9,9 @@ type UserSubscriptionProps = {
 export async function HandleSubscriptionButtons({
   space,
 }: UserSubscriptionProps) {
-  const supabase = createServerComponentClient({ cookies });
-
-  const { data } = await supabase.auth.getSession();
-
-  async function checkUserSubscription() {
-    if (data.session) {
-      try {
-        const { data: user_community } = await supabase
-          .from("user_community")
-          .select()
-          .match({
-            user_id: data.session.user.id,
-            community_id: space.community_id,
-          });
-
-        if (user_community && user_community.length > 0) {
-          return true;
-        } else {
-          return false;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }
-
-  const isSubscribed = await checkUserSubscription();
+  const isSubscribed = space.community_id
+    ? await checkUserSubscription(space.community_id)
+    : null;
 
   return (
     <SubscriptionButtons space={space} isSubscribed={isSubscribed || false} />
