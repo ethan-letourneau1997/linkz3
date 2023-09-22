@@ -24,21 +24,14 @@ export function PostVoteButtons({
   post,
   horizontal,
 }: PostVoteButtonsProps) {
-  // const [optomisticUserVote, setOptomisticUserVote] = useState(userVote);
-  // const [optomisticPostVotes, setOptomisticPostVotes] = useState(postVotes);
+  const [optimisticUserVote, setOptimisticUserVote] =
+    useOptimistic<number>(userVote);
 
-  const [optimisticUserVote, setOptimisticUserVote] = useOptimistic<number>(
-    userVote
-  );
+  const [optimisticTotalVotes, setOptimisticTotalVotes] =
+    useOptimistic<number>(postVotes);
 
-  const [optimisticTotalVotes, setOptimisticTotalVotes] = useOptimistic<number>(
-    postVotes 
-  );
-
-  const [isUpvoted, setIsUpvoted] = useState( optimisticUserVote === 1)
-  const [isDownvoted, setIsDownvoted] = useState(optimisticUserVote === -1)
-
- 
+  const [isUpvoted, setIsUpvoted] = useState(optimisticUserVote === 1);
+  const [isDownvoted, setIsDownvoted] = useState(optimisticUserVote === -1);
 
   async function updateVotes(userVoteChange: number, totalVotesChange: number) {
     setOptimisticUserVote(userVoteChange);
@@ -47,34 +40,32 @@ export function PostVoteButtons({
   }
 
   async function removeUpvote() {
-    setIsUpvoted(false)
+    setIsUpvoted(false);
     await updateVotes(0, -1);
   }
 
   async function removeDownvote() {
-    setIsDownvoted(false)
+    setIsDownvoted(false);
     await updateVotes(0, 1);
   }
 
   async function addDownvote() {
-    if(optimisticUserVote === 1){
-      setIsUpvoted(false)
+    if (optimisticUserVote === 1) {
+      setIsUpvoted(false);
     }
-    setIsDownvoted(true)
+    setIsDownvoted(true);
     const totalVoteChange = isUpvoted ? -2 : -1;
     await updateVotes(-1, totalVoteChange);
   }
 
   async function addUpvote() {
-    if(optimisticUserVote === -1){
-      setIsDownvoted(false)
+    if (optimisticUserVote === -1) {
+      setIsDownvoted(false);
     }
-    setIsUpvoted(true)
+    setIsUpvoted(true);
     const totalVoteChange = isDownvoted ? 2 : 1;
     await updateVotes(1, totalVoteChange);
   }
-
-
 
   return (
     <div
@@ -87,11 +78,7 @@ export function PostVoteButtons({
           <BiSolidUpvote onClick={removeUpvote} className="text-indigo-400" />
         </button>
       ) : (
-        <button
-          type="button"
-          onClick={addUpvote}
-          className="px-1 py-1 md:px-2"
-        >
+        <button type="button" onClick={addUpvote} className="px-1 py-1 md:px-2">
           <BiUpvote className="hover:text-indigo-400" />
         </button>
       )}

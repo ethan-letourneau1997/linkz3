@@ -1,4 +1,4 @@
-import { BiUpvote, BiDownvote } from "react-icons/bi";
+import { BiDownvote, BiUpvote } from "react-icons/bi";
 
 export function VotePlaceholer() {
   return (
