@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 
-export async function checkUserSubscription(spaceId: number) {
+export async function checkUserSubscription(spaceId: number | string) {
   const supabase = createServerActionClient({ cookies });
 
   const { data } = await supabase.auth.getSession();

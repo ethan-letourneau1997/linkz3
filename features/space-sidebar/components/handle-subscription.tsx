@@ -1,7 +1,7 @@
-import { SidebarSubscriptionButton } from "./sidebar-subscribe-button";
-import { checkUserSubscription } from "../api/check-user-subscription";
-import useSWR from "swr";
 import { Button } from "@/components/ui/button";
+import { SidebarSubscriptionButton } from "./sidebar-subscribe-button";
+import { checkUserSubscription } from "@/lib/space/check-user-subscription";
+import useSWR from "swr";
 
 type HandleSubscriptionProps = {
   spaceName: string;
@@ -12,8 +12,6 @@ export function HandleSubscription({
   spaceId,
   spaceName,
 }: HandleSubscriptionProps) {
-  // const [isSubscribed, setIsSubscribed] = useState(false);
-
   const { data: subscribed } = useSWR("subscribed", async () => {
     const data = await checkUserSubscription(spaceId);
     return data;
