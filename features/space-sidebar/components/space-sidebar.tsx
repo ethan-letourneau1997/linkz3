@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { SidebarSubscriberCount } from "./sidebar-subscriber-count";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Space } from "@/types";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { fetchSpaceById } from "@/lib/space/fetch-space-by-id";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
 
@@ -15,25 +15,17 @@ export function SpaceSidebar() {
   const spaceId = params.spaceId as string;
   const spaceName = params.spaceName as string;
 
-  const supabase = createClientComponentClient();
-
   const { data: space } = useSWR("space", async () => {
-    const { data: community } = await supabase
-      .from("community")
-      .select("*")
-      .eq("id", spaceId)
-      .single();
+    const space = await fetchSpaceById(spaceId);
 
-    return community;
+    return space;
   });
 
   return (
     <div className="px-4 pb-3 space-y-3 w-72">
       <h2 className="text-lg font-semibold text-center">{spaceName}</h2>
-
       <SpaceDescription space={space} />
       <Separator />
-
       <div className="flex gap-5">
         <SidebarSubscriberCount spaceId={spaceId} />
         <HandleSubscription spaceName={spaceName} spaceId={spaceId} />

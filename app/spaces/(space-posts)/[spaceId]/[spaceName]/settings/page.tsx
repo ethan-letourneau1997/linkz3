@@ -1,3 +1,5 @@
+import { SpaceSettings } from "@/features/space-settings";
+
 export const dynamic = "force-dynamic";
 
 type IndexProps = {
@@ -8,5 +10,5 @@ type IndexProps = {
 };
 
 export default async function Index({ params }: IndexProps) {
-  return <div>{params.spaceName} settings</div>;
+  return <SpaceSettings spaceName={params.spaceName} />;
 }

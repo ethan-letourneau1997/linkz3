@@ -192,6 +192,37 @@ export interface Database {
           }
         ]
       }
+      community_avatar: {
+        Row: {
+          file_name: string | null
+          id: number
+          path: string
+        }
+        Insert: {
+          file_name?: string | null
+          id?: number
+          path: string
+        }
+        Update: {
+          file_name?: string | null
+          id?: number
+          path?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "community_avatar_id_fkey"
+            columns: ["id"]
+            referencedRelation: "community"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "community_avatar_id_fkey"
+            columns: ["id"]
+            referencedRelation: "user_subscription"
+            referencedColumns: ["community_id"]
+          }
+        ]
+      }
       post: {
         Row: {
           content: string | null

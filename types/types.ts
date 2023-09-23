@@ -13,6 +13,8 @@ export type PostWithVotes =
 export type PostPreview = Database["public"]["Views"]["post_preview"]["Row"];
 export type UserSubscription =
   Database["public"]["Views"]["user_subscription"]["Row"];
+  export type SpaceAvatar =
+  Database["public"]["Tables"]["community_avatar"]["Row"];
 
 export type UserSpace = {
   user_id: string;
