@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BackButton } from "@/components/back-button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { IoPlanetOutline } from "react-icons/io5";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { SpaceAvatarUModal } from "./space-avatar-modal";
@@ -93,17 +94,13 @@ export async function SpaceAvatar({ spaceId }: SpaceAvatarProps) {
 
   return (
     <div className="ml-2">
-      {spaceAvater ? (
-        <Avatar className="w-20 h-20 ">
-          <AvatarImage src={spaceAvater.path} alt="@shadcn" />
-          <AvatarFallback>{spaceId}</AvatarFallback>
-        </Avatar>
-      ) : (
-        <Avatar className="w-20 h-20 rounded-sm ">
-          <AvatarImage src={``} alt="@shadcn" />
-          <AvatarFallback>{spaceId}</AvatarFallback>
-        </Avatar>
-      )}
+      <Avatar className="w-20 h-20 ">
+        <AvatarImage src={spaceAvater ? spaceAvater.path : "#"} alt="@shadcn" />
+        <AvatarFallback>
+          {<IoPlanetOutline className="w-9 h-9" />}
+        </AvatarFallback>
+      </Avatar>
+
       <SpaceAvatarUModal spaceId={spaceId} spaceAvatar={spaceAvater} />
     </div>
   );
