@@ -31,6 +31,8 @@ import { GiGalaxy } from "react-icons/gi";
 import { IoChevronDown } from "react-icons/io5";
 import Link from "next/link";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { fetchProfileAvatar } from "@/lib/user/fetch-profile-avatar";
+import useSWR from "swr";
 
 type AvatarDropdownProps = {
   profile: PublicProfile;
@@ -64,13 +66,18 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
     };
   }, [supabase, setSpaces, spaces]);
 
+  const { data: profileAvatar } = useSWR("profileAvatar", async () => {
+    const profileAvatar = await fetchProfileAvatar(profile.id);
+    return profileAvatar;
+  });
+
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger className="py-2 pr-4 border border-transparent rounded hover:border-neutral-800">
         <div className="flex items-center gap-2">
           <Avatar className="w-6 h-6">
             <AvatarImage
-              src={profile.avatar || "https://github.com/shadcn.png"}
+              src={profileAvatar.path || "https://github.com/shadcn.png"}
               alt="@shadcn"
             />
             <AvatarFallback>CN</AvatarFallback>

@@ -15,8 +15,6 @@ export async function upsertUserBio(user: PublicProfile, bio: string) {
         .from("public_profile")
         .upsert({
           id: user.id,
-          avatar: user.avatar,
-          avatar_filename: user.avatar_filename,
           username: user.username,
           biography: bio,
         })
