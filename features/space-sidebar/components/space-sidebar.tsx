@@ -1,14 +1,14 @@
 "use client";
 
 import { HandleSubscription } from "./handle-subscription";
-import { MdOutlineEvent } from "react-icons/md";
 import { Separator } from "@/components/ui/separator";
 import { SidebarSubscriberCount } from "./sidebar-subscriber-count";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Space } from "@/types";
+import { SpaceSidebarDetails } from "./space-sidebar-details";
+import { SpaceSidebarFallback } from "./space-sidebar-fallback";
 import { SpaceSiderbarAvatar } from "./space-sidebar-avatar";
+import { checkUserSubscription } from "@/lib/space/check-user-subscription";
 import { fetchSpaceById } from "@/lib/space/fetch-space-by-id";
-import { formatCreatedAt } from "@/lib/utils/format-created-at";
+import { fetchSpaceSubscriberCount } from "@/lib/space/fetch-space-subscriber-count";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
 
@@ -24,45 +24,45 @@ export function SpaceSidebar() {
     return space;
   });
 
-  return (
-    <div className="px-4 pt-2 pb-3 space-y-3 w-72">
-      {space && (
+  const { data: count } = useSWR("user_community", async () => {
+    try {
+      const count = await fetchSpaceSubscriberCount(spaceId);
+
+      return count;
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  const { data: subscribed } = useSWR("subscribed", async () => {
+    const data = await checkUserSubscription(spaceId);
+    return data;
+  });
+
+  if (space && count && subscribed)
+    return (
+      <div className="px-4 pt-2 pb-3 space-y-3 w-72">
         <div className="flex items-center gap-3">
           <SpaceSiderbarAvatar spaceId={space.id} />
           <h2 className="text-lg font-semibold text-center">{spaceName}</h2>
         </div>
-      )}
 
-      <SpaceDescription space={space} />
-      <Separator />
-      <div className="flex gap-5">
-        <SidebarSubscriberCount spaceId={spaceId} />
-        <HandleSubscription spaceName={spaceName} spaceId={spaceId} />
-      </div>
-    </div>
-  );
-}
-
-type SpaceDescriptionProps = {
-  space: Space;
-};
-
-export function SpaceDescription({ space }: SpaceDescriptionProps) {
-  if (space)
-    return (
-      <div className="pt-2">
-        <p className="text-sm ">{space.description}</p>
-        <p className="flex items-center gap-1 mt-2 text-sm dark:text-neutral-500">
-          <MdOutlineEvent />
-          Created {space.created_at && formatCreatedAt(space.created_at)}
-        </p>
+        <SpaceSidebarDetails space={space} />
+        <Separator />
+        <div className="flex gap-5">
+          <SidebarSubscriberCount count={count} />
+          <HandleSubscription
+            subscribed={subscribed}
+            spaceName={spaceName}
+            spaceId={spaceId}
+          />
+        </div>
       </div>
     );
 
   return (
-    <div className="space-y-2">
-      <Skeleton className="h-4" />
-      <Skeleton className="h-4" />
+    <div className="px-4 pt-2 pb-3 space-y-3 w-72">
+      <SpaceSidebarFallback />
     </div>
   );
 }

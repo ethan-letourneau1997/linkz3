@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 
-export async function fetchSpaceSubscriberCount(spaceId: number) {
+export async function fetchSpaceSubscriberCount(spaceId: number | string) {
   const supabase = createServerActionClient({ cookies });
 
   try {
@@ -12,7 +12,10 @@ export async function fetchSpaceSubscriberCount(spaceId: number) {
       .select("*", { count: "exact", head: true })
       .eq("community_id", spaceId);
 
-    return count;
+      if(count) return count
+      return 0
+
+
   } catch (e) {
     console.log(e);
   }
