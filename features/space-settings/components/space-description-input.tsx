@@ -54,7 +54,7 @@ export function SpaceDescriptionInput({ space }: SpaceDescriptionInputProps) {
         </div>
 
         <Textarea
-          className="max-w-sm ml-1 dark:bg-dark-700"
+          className="max-w-sm ml-1 dark:bg-dark-800"
           value={description}
           onChange={handleBioChange}
         />
