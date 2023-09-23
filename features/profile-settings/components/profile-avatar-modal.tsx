@@ -8,16 +8,20 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { PublicProfile } from "@/types";
-import { UploadAvatar } from "./upload-avatar";
-import { useState } from "react";
 import { BiImageAdd } from "react-icons/bi";
+import { ProfileAvatar } from "@/types";
+import { UploadProfileAvatar } from "./upload-profile-avatar";
+import { useState } from "react";
 
-type AvatarUploadModalProps = {
-  user: PublicProfile;
+type ProfileAvatarUModalProps = {
+  profileAvatar?: ProfileAvatar;
+  userId: string | number;
 };
 
-export function AvatarUploadModal({ user }: AvatarUploadModalProps) {
+export function ProfileAvatarModal({
+  profileAvatar,
+  userId,
+}: ProfileAvatarUModalProps) {
   const [open, setOpen] = useState(false);
 
   function closeModal() {
@@ -32,7 +36,11 @@ export function AvatarUploadModal({ user }: AvatarUploadModalProps) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Select Avatar Image to Upload</DialogTitle>
-          <UploadAvatar user={user} close={closeModal} />
+          <UploadProfileAvatar
+            profileAvatar={profileAvatar}
+            userId={userId}
+            close={closeModal}
+          />
         </DialogHeader>
       </DialogContent>
     </Dialog>

@@ -6,21 +6,24 @@ import { ChangeEvent, useState, useTransition } from "react";
 
 import Cropper from "react-cropper";
 import { Input } from "@/components/ui/input";
-
-import { PublicProfile } from "@/types";
+import { LoadingButton } from "@/components/loading-button";
+import { ProfileAvatar } from "@/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-
+import { upsertProfileAvatar } from "../api/upsert-profile-avatar";
 import { v4 as uuidv4 } from "uuid";
 
-import { LoadingButton } from "@/components/loading-button";
-import { upsertUserAvatar } from "../api/upsert-user-avatar";
-
-type UploadAvatarProps = {
-  user: PublicProfile;
+type UploadProfileAvatarProps = {
+  userId: string | number;
+  profileAvatar?: ProfileAvatar;
   close: () => void;
 };
 
-export function UploadAvatar({ user, close }: UploadAvatarProps) {
+export function UploadProfileAvatar({
+  userId,
+  profileAvatar,
+  close,
+}: UploadProfileAvatarProps) {
+  console.log(profileAvatar);
   const [image, setImage] = useState<string | null>(null);
   const [cropper, setCropper] = useState<Cropper>();
   const [isPending, startTransition] = useTransition();
@@ -35,7 +38,7 @@ export function UploadAvatar({ user, close }: UploadAvatarProps) {
 
   const getCropData = async () => {
     startTransition(async () => {
-      const previousImage = user.avatar_filename;
+      const previousImage = profileAvatar ? profileAvatar.file_name : null;
       if (cropper) {
         const file = await fetch(cropper.getCroppedCanvas().toDataURL())
           .then((res) => res.blob())
@@ -59,11 +62,15 @@ export function UploadAvatar({ user, close }: UploadAvatarProps) {
               .getPublicUrl(`${data.path}`);
 
             if (publicUrl) {
-              upsertUserAvatar(user, publicUrl.publicUrl, filename);
+              upsertProfileAvatar(userId, publicUrl.publicUrl, filename);
 
-              await supabase.storage
-                .from("images")
-                .remove([`public/${previousImage}`]);
+              if (previousImage) {
+                console.log("previous");
+                const { data, error } = await supabase.storage
+                  .from("images")
+                  .remove([`public/${previousImage}`]);
+                console.log(data, error);
+              }
 
               // close modal when done
               close();

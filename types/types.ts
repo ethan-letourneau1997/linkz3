@@ -15,6 +15,8 @@ export type UserSubscription =
   Database["public"]["Views"]["user_subscription"]["Row"];
   export type SpaceAvatar =
   Database["public"]["Tables"]["community_avatar"]["Row"];
+  export type ProfileAvatar =
+  Database["public"]["Tables"]["profile_avatar"]["Row"];
 
 export type UserSpace = {
   user_id: string;

@@ -412,6 +412,31 @@ export interface Database {
           }
         ]
       }
+      profile_avatar: {
+        Row: {
+          file_name: string | null
+          id: string
+          path: string
+        }
+        Insert: {
+          file_name?: string | null
+          id: string
+          path: string
+        }
+        Update: {
+          file_name?: string | null
+          id?: string
+          path?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profile_avatar_id_fkey"
+            columns: ["id"]
+            referencedRelation: "public_profile"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       public_profile: {
         Row: {
           avatar: string | null
