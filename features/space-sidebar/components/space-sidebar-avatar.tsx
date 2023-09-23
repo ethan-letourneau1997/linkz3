@@ -11,7 +11,7 @@ type SpaceSiderbarAvatarProps = {
 export function SpaceSiderbarAvatar({ spaceId }: SpaceSiderbarAvatarProps) {
   const { data: spaceAvater } = useSWR("spaceAvater", async () => {
     const spaceAvater = await fetchSpaceAvatar(spaceId);
-    console.log(spaceAvater);
+
     return spaceAvater;
   });
 

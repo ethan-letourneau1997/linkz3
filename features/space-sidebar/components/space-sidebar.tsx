@@ -39,7 +39,7 @@ export function SpaceSidebar() {
     return data;
   });
 
-  if (space && count && subscribed)
+  if (space)
     return (
       <div className="px-4 pt-2 pb-3 space-y-3 w-72">
         <div className="flex items-center gap-3">
@@ -50,9 +50,9 @@ export function SpaceSidebar() {
         <SpaceSidebarDetails space={space} />
         <Separator />
         <div className="flex gap-5">
-          <SidebarSubscriberCount count={count} />
+          <SidebarSubscriberCount count={count || 0} />
           <HandleSubscription
-            subscribed={subscribed}
+            subscribed={subscribed || false}
             spaceName={spaceName}
             spaceId={spaceId}
           />

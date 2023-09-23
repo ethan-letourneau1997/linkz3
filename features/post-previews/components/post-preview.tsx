@@ -18,8 +18,6 @@ type PostPreviewProps = {
 export async function PostPreview({ post }: PostPreviewProps) {
   const space = await fetchSpaceById(post.posted_in);
 
-  console.log(post);
-
   return (
     <Card className="grid grid-cols-12 gap-3 px-3 py-3 border-0 border-t rounded-none dark:bg-dark-900 md:rounded-sm md:border sm:px-4">
       <div className="order-2 sm:order-1 col-span-3 sm:col-span-2 aspect-[4/3]">

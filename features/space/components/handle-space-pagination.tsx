@@ -14,7 +14,6 @@ export function HandleSpacePagination() {
 
   const { data: pageCount } = useSWR("post", async () => {
     const pageCount = await fetchSpacePageCount(params.spaceId as string);
-    console.log(pageCount);
     return pageCount;
   });
 

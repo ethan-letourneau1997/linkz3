@@ -1,7 +1,13 @@
+import {
+  NewPostHeader,
+  NewPostHeaderFallback,
+} from "@/features/new-post-header.tsx";
+
 import { HandleSpacePagination } from "@/features/space";
-import { NewPostHeader } from "@/features/new-post-header.tsx";
+import { PreviewSkeleton } from "@/features/post-previews/components/preview-skeleton";
 import { SidebarCollapse } from "@/features/sidebar-collapse";
 import { SpaceSidebar } from "@/features/space-sidebar";
+import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -13,15 +19,20 @@ export default function RootLayout({
   return (
     <div className="flex w-full max-w-5xl gap-5">
       <div className="grow">
-        <NewPostHeader />
-
+        <Suspense fallback={<NewPostHeaderFallback />}>
+          <NewPostHeader />
+        </Suspense>
         {children}
-        <HandleSpacePagination />
+        <Suspense fallback={<></>}>
+          <HandleSpacePagination />
+        </Suspense>
       </div>
 
-      <SidebarCollapse>
-        <SpaceSidebar />
-      </SidebarCollapse>
+      <Suspense fallback={<PreviewSkeleton count={10} />}>
+        <SidebarCollapse>
+          <SpaceSidebar />
+        </SidebarCollapse>
+      </Suspense>
     </div>
   );
 }
