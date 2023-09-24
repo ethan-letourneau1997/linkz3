@@ -49,7 +49,7 @@ export function SpaceSidebar() {
             href={`/spaces/${spaceId}/${spaceName}`}
             className="text-lg font-semibold text-center hover:underline"
           >
-            {spaceName}
+            {space.display_name}
           </Link>
         </div>
 
