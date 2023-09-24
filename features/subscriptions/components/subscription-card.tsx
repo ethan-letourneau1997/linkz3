@@ -15,7 +15,6 @@ type SubscriptionCardProps = {
 };
 
 export async function SubscriptionCard({ space }: SubscriptionCardProps) {
-  console.log(space);
   return (
     <Card key={space.id} className="flex flex-col justify-between">
       <CardHeader>

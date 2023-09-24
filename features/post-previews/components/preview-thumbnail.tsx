@@ -12,8 +12,8 @@ type PreviewThumbnailProps = {
 
 export async function PreviewThumbnail({ post }: PreviewThumbnailProps) {
   if (post.type === "text") return <TextPreviewThumnail />;
-  // if (post.type === "image") return <TextPreviewThumnail />;
-  // if (post.type === "link") return <TextPreviewThumnail />;
+  if (post.type === "image") return <TextPreviewThumnail />;
+  if (post.type === "link") return <TextPreviewThumnail />;
 
   if (post.type === "link" && post.content) {
     const link: LinkPreview = await getLinkPreview(post.content);
