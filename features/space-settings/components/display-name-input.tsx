@@ -2,30 +2,29 @@
 
 import { useState, useTransition } from "react";
 
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LoadingButton } from "@/components/loading-button";
 import { Space } from "@/types";
-import { Textarea } from "@/components/ui/textarea";
-import { upsertSpaceDescription } from "../api/upsert-space-description";
+import { upsertSpaceDisplayName } from "../api/upsert-space-display-name";
 import { useToast } from "@/components/ui/use-toast";
 
-type SpaceDescriptionInputProps = {
+type DisplayNameInputProps = {
   space: Space;
 };
 
-export function SpaceDescriptionInput({ space }: SpaceDescriptionInputProps) {
-  const [description, setSpaceDescription] = useState(space.description);
+export function DisplayNameInput({ space }: DisplayNameInputProps) {
+  const [displayName, setDisplayName] = useState(space.display_name);
   const [isPending, startTransition] = useTransition();
 
   const { toast } = useToast();
-
-  function handleBioChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    setSpaceDescription(e.target.value);
+  function handleDisplayNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setDisplayName(e.target.value);
   }
   async function handleUpdateBio() {
     startTransition(async () => {
       try {
-        const error = await upsertSpaceDescription(space, description!);
+        const error = await upsertSpaceDisplayName(space, displayName!);
         if (error) {
           toast({
             title: "Error",
@@ -34,7 +33,7 @@ export function SpaceDescriptionInput({ space }: SpaceDescriptionInputProps) {
         } else {
           toast({
             title: "Success",
-            description: `Your bio has been updated.`,
+            description: `Space display name has been updated.`,
           });
         }
       } catch (e) {
@@ -48,25 +47,24 @@ export function SpaceDescriptionInput({ space }: SpaceDescriptionInputProps) {
 
   return (
     <div>
-      <div className="flex justify-end w-20 pt-0.5">
-        <Label className="flex-none ml-1 ">Description</Label>
-      </div>
-
-      <div className="flex items-end gap-4">
-        <Textarea
-          className="max-w-sm mt-1 dark:bg-dark-800"
-          value={description}
-          onChange={handleBioChange}
+      <Label className="flex-none ml-1 ">Display Name</Label>
+      <div className="flex items-center gap-4 mt-1">
+        <Input
+          className="max-w-sm dark:bg-dark-800 "
+          value={displayName}
+          onChange={handleDisplayNameChange}
         />
         <div
-          className={` ${description === space.description ? "invisible" : ""}`}
+          className={` ${
+            displayName === space.display_name ? "invisible" : ""
+          }`}
         >
           <LoadingButton
-            disabled={description === space.description}
-            className="mt-2"
+            disabled={displayName === space.display_name}
             isLoading={isPending}
             onClick={handleUpdateBio}
             size="sm"
+            className="h-9"
           >
             Update
           </LoadingButton>
