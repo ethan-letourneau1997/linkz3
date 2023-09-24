@@ -8,20 +8,19 @@ import {
 
 import { HandleSubscriptionButtons } from "./handle-subscription-buttons";
 import Link from "next/link";
-import { UserSubscription } from "@/types";
+import { Space } from "@/types";
 
 type SubscriptionCardProps = {
-  space: UserSubscription;
+  space: Space;
 };
 
 export async function SubscriptionCard({ space }: SubscriptionCardProps) {
+  console.log(space);
   return (
-    <Card key={space.community_id} className="flex flex-col justify-between">
+    <Card key={space.id} className="flex flex-col justify-between">
       <CardHeader>
         <CardTitle>
-          <Link href={`spaces/${space.community_id}/${space.name}`}>
-            {space.name}
-          </Link>
+          <Link href={`spaces/${space.id}/${space.name}`}>{space.name}</Link>
         </CardTitle>
         <CardDescription>{space.description}</CardDescription>
       </CardHeader>

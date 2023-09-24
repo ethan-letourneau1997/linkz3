@@ -6,13 +6,13 @@ import {
 } from "@/lib/space/subscription-helpers";
 
 import { Button } from "@/components/ui/button";
-import { UserSubscription } from "@/types";
+import { Space } from "@/types";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 
 type UserSubscriptionProps = {
   isSubscribed: boolean;
-  space: UserSubscription;
+  space: Space;
 };
 
 export function SubscriptionButtons({
@@ -26,7 +26,7 @@ export function SubscriptionButtons({
 
   function handleSubscribe() {
     setOptomisticIsSubscribed(true);
-    createSubscription(space.community_id!);
+    createSubscription(space.id!);
     toast({
       title: "Subscribed",
       description: `You are now a member of ${space.name}.`,
@@ -35,7 +35,7 @@ export function SubscriptionButtons({
 
   function handleUnsubscribe() {
     setOptomisticIsSubscribed(false);
-    deleteSubscription(space.community_id!);
+    deleteSubscription(space.id!);
     toast({
       title: "Unsubscribed",
       description: `You are no longer a member of ${space.name}.`,
