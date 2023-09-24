@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Messages from "./messages";
 
-export function SignupForm() {
+export function LoginForm() {
   return (
     <form action="/auth/sign-in" method="post">
       <Card>

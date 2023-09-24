@@ -40,31 +40,31 @@ type AvatarDropdownProps = {
 };
 
 export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
-  // const [spaces, setSpaces] = useState(userSpaces);
+  const [spaces, setSpaces] = useState(userSpaces);
 
   const [open, setOpen] = useState(false);
 
   const supabase = createClientComponentClient();
 
-  // useEffect(() => {
-  //   setSpaces(userSpaces);
-  // }, [userSpaces]);
+  useEffect(() => {
+    setSpaces(userSpaces);
+  }, [userSpaces]);
 
-  // useEffect(() => {
-  //   const channel = supabase
-  //     .channel("*")
-  //     .on(
-  //       "postgres_changes",
-  //       { event: "INSERT", schema: "public", table: "user_community" },
-  //       (payload) =>
-  //         setSpaces((spaces) => [...spaces, payload.new as UserSpace])
-  //     )
-  //     .subscribe();
+  useEffect(() => {
+    const channel = supabase
+      .channel("*")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "user_community" },
+        (payload) =>
+          setSpaces((spaces) => [...spaces, payload.new as UserSpace])
+      )
+      .subscribe();
 
-  //   return () => {
-  //     supabase.removeChannel(channel);
-  //   };
-  // }, [supabase, setSpaces, spaces]);
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [supabase, setSpaces, spaces]);
 
   const { data: profileAvatar } = useSWR("profileAvatar", async () => {
     const profileAvatar = await fetchProfileAvatar(profile.id);
@@ -112,7 +112,7 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
 
-          {/* <DropdownMenuSub>
+          <DropdownMenuSub>
             <DropdownMenuSubTrigger>
               <IoPlanetOutline className="w-4 h-4 mr-2" />
               My Spaces
@@ -137,7 +137,7 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
                 </CommandList>
               </Command>
             </DropdownMenuSubContent>
-          </DropdownMenuSub> */}
+          </DropdownMenuSub>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="py-0 ">
             <IoSettingsSharp className="w-4 h-4 mr-2" />

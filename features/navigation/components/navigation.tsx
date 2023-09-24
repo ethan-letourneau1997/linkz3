@@ -8,13 +8,13 @@ export async function Navigation() {
 
   return (
     <nav className="w-full border-b dark:border-dark-800 dark:bg-dark-900 bg-neutral-50 h-14">
-      <DesktopNavigation profile={profile} />
+      {/* <DesktopNavigation profile={profile} />
       <div className="grid items-center grid-cols-3 px-2 md:hidden h-14">
         <MobileNavigation profile={profile} />
         <div className="block text-center md:hidden">
           <MobileSpaceName />
         </div>
-      </div>
+      </div> */}
     </nav>
   );
 }
