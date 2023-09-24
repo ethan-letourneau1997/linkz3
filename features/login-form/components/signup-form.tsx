@@ -43,7 +43,7 @@ export function LoginForm() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button type="submit">Login</Button>
+          <Button type="submit">Sign Up</Button>
           <Messages />
         </CardFooter>
       </Card>
