@@ -7,6 +7,7 @@ import { LoadingButton } from "@/components/loading-button";
 import { Space } from "@/types";
 import { Textarea } from "@/components/ui/textarea";
 import { upsertSpaceDescription } from "../api/upsert-space-description";
+import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 
 type SpaceDescriptionInputProps = {
@@ -16,6 +17,8 @@ type SpaceDescriptionInputProps = {
 export function SpaceDescriptionInput({ space }: SpaceDescriptionInputProps) {
   const [description, setSpaceDescription] = useState(space.description);
   const [isPending, startTransition] = useTransition();
+
+  const router = useRouter();
 
   const { toast } = useToast();
 
@@ -36,6 +39,7 @@ export function SpaceDescriptionInput({ space }: SpaceDescriptionInputProps) {
             title: "Success",
             description: `Your bio has been updated.`,
           });
+          router.refresh();
         }
       } catch (e) {
         toast({

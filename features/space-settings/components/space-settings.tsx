@@ -14,12 +14,10 @@ export async function SpaceSettings({ spaceName }: SpaceSettingsProps) {
     <>
       <Card className="px-5 py-2 mt-5">
         <BackButton />
-
         <p className="mt-5 dark:text-neutral-500">settings</p>
         <h1 className="text-3xl font-semibold dark:text-neutral-3 200">
           {space.display_name}
         </h1>
-
         <Separator className="mt-2 dark:bg-neutral-500" />
         <SpaceSettingsForm space={space} />
       </Card>
