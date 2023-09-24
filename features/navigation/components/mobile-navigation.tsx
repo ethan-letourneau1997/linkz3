@@ -53,7 +53,7 @@ export function MobileNavigation({ profile }: DesktopNavigationProps) {
                   <Link href={"/settings/profile"}>Settings</Link>
                 </div>
 
-                <MobileUserSpacesHandler profile={profile} />
+                {/* <MobileUserSpacesHandler profile={profile} /> */}
               </>
             )}
           </div>
