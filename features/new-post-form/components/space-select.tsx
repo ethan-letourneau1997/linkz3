@@ -38,7 +38,7 @@ export function SpaceSelect() {
   const [value, setValue] = React.useState(spaceName);
 
   function handleChange(name: string, id: number) {
-    router.push(`/spaces/${id}/${name}/create`);
+    router.replace(`/spaces/${id}/${name}/create`);
   }
 
   if (spaces)

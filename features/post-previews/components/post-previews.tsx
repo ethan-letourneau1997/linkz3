@@ -8,6 +8,10 @@ type PostPreviewsProps = {
 };
 
 export async function PostPreviews({ posts }: PostPreviewsProps) {
+  if (posts && posts.length === 0)
+    return (
+      <div className="mt-5 text-center text-neutral-300">No posts found.</div>
+    );
   if (posts)
     return (
       <div className="w-full max-w-3xl mt-3 space-y-0 border-b sm:space-y-2 md:border-0 border-neutral-800">

@@ -20,6 +20,4 @@ export async function SpacePosts({ params, searchParams }: SpacePostsProps) {
   );
 
   if (posts) return <PostPreviews posts={posts} />;
-
-  if (!posts) return <div>No posts</div>;
 }

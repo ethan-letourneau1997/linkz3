@@ -14,7 +14,7 @@ export function NewPostHeader() {
 
   function handleNavigateToCreate() {
     if (pathname.includes("spaces")) {
-      router.push(`${pathname}/create`);
+      router.push(`/spaces/${params.spaceId}/${params.spaceName}/create`);
     } else {
       router.push(`/create/post`);
     }

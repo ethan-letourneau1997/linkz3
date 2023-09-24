@@ -23,7 +23,6 @@ export function UploadProfileAvatar({
   profileAvatar,
   close,
 }: UploadProfileAvatarProps) {
-  console.log(profileAvatar);
   const [image, setImage] = useState<string | null>(null);
   const [cropper, setCropper] = useState<Cropper>();
   const [isPending, startTransition] = useTransition();
@@ -65,11 +64,9 @@ export function UploadProfileAvatar({
               upsertProfileAvatar(userId, publicUrl.publicUrl, filename);
 
               if (previousImage) {
-                console.log("previous");
-                const { data, error } = await supabase.storage
+                await supabase.storage
                   .from("images")
                   .remove([`public/${previousImage}`]);
-                console.log(data, error);
               }
 
               // close modal when done

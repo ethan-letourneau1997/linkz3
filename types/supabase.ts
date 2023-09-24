@@ -166,6 +166,7 @@ export interface Database {
           created_at: string | null
           created_by: string | null
           description: string
+          display_name: string
           id: number
           name: string
         }
@@ -173,6 +174,7 @@ export interface Database {
           created_at?: string | null
           created_by?: string | null
           description: string
+          display_name?: string
           id?: number
           name: string
         }
@@ -180,6 +182,7 @@ export interface Database {
           created_at?: string | null
           created_by?: string | null
           description?: string
+          display_name?: string
           id?: number
           name?: string
         }
@@ -439,22 +442,16 @@ export interface Database {
       }
       public_profile: {
         Row: {
-          avatar: string | null
-          avatar_filename: string | null
           biography: string
           id: string
           username: string
         }
         Insert: {
-          avatar?: string | null
-          avatar_filename?: string | null
           biography?: string
           id?: string
           username: string
         }
         Update: {
-          avatar?: string | null
-          avatar_filename?: string | null
           biography?: string
           id?: string
           username?: string

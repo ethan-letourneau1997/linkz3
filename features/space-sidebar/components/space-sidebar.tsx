@@ -1,6 +1,7 @@
 "use client";
 
 import { HandleSubscription } from "./handle-subscription";
+import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { SidebarSubscriberCount } from "./sidebar-subscriber-count";
 import { SpaceSidebarDetails } from "./space-sidebar-details";
@@ -44,7 +45,12 @@ export function SpaceSidebar() {
       <div className="px-4 pt-2 pb-3 space-y-3 w-72">
         <div className="flex items-center gap-3">
           <SpaceSiderbarAvatar spaceId={space.id} />
-          <h2 className="text-lg font-semibold text-center">{spaceName}</h2>
+          <Link
+            href={`/spaces/${spaceId}/${spaceName}`}
+            className="text-lg font-semibold text-center hover:underline"
+          >
+            {spaceName}
+          </Link>
         </div>
 
         <SpaceSidebarDetails space={space} />

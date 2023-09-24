@@ -76,11 +76,10 @@ export function AvatarDropdown({ profile, userSpaces }: AvatarDropdownProps) {
       <DropdownMenuTrigger className="py-2 pr-4 border border-transparent rounded hover:border-neutral-800">
         <div className="flex items-center gap-2">
           <Avatar className="w-6 h-6">
-            <AvatarImage
-              src={profileAvatar.path || "https://github.com/shadcn.png"}
-              alt="@shadcn"
-            />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarImage src={profileAvatar ? profileAvatar.path : "#"} />
+            <AvatarFallback className="w-6 h-6">
+              <FaUserAstronaut />
+            </AvatarFallback>
           </Avatar>
           {profile.username}
           <IoChevronDown />
