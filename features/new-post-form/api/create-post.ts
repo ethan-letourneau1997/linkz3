@@ -34,12 +34,16 @@ export async function createPost(params: createPostParams) {
     revalidatePath(`/spaces/${communityName}/${communityId}`);
 
     if (type === "link") {
-      const preview = await fetchLinkPreview(content!);
+      const linkPreview = await fetchLinkPreview(content!);
+      const siteName = linkPreview && linkPreview.siteName ? linkPreview.siteName : null
+      const imagePreviewUrl = linkPreview && linkPreview.images && linkPreview.images[0] ? linkPreview.images[0] : null
+      
       await supabase
         .from("link_preview")
         .insert({
           id: data.id,
-          url: preview,
+          url: imagePreviewUrl,
+          website:siteName
         })
         .select()
         .single();
