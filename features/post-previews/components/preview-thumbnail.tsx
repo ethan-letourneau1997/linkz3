@@ -17,7 +17,8 @@ export async function PreviewThumbnail({ post }: PreviewThumbnailProps) {
   if (post.type === "link" && post.content) {
     const thumb = await fetchLinkThumbnail(post.id);
     if (thumb) {
-      return <img src={thumb} />;
+      console.log(thumb.url);
+      return <img src={thumb.url} />;
     }
     return (
       <div className="flex items-center justify-center w-full h-full rounded dark:bg-neutral-700 ">
