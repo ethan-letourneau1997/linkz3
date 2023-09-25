@@ -14,9 +14,11 @@ export function NewPostHeader() {
 
   function handleNavigateToCreate() {
     if (pathname.includes("spaces")) {
-      router.push(`/spaces/${params.spaceId}/${params.spaceName}/create`);
+      router.push(
+        `/spaces/${params.spaceId}/${params.spaceName}/create?type=text`
+      );
     } else {
-      router.push(`/create/post`);
+      router.push(`/create/post?type=text`);
     }
   }
 

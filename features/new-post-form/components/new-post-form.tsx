@@ -1,8 +1,13 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { redirect, usePathname } from "next/navigation";
-import { useState, useTransition } from "react";
+import {
+  redirect,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
+import { useCallback, useState, useTransition } from "react";
 
 import { Card } from "@/components/ui/card";
 import { FilePondFile } from "filepond";
@@ -23,16 +28,37 @@ type NewPostFormProps = {
 export function NewPostForm({ params }: NewPostFormProps) {
   const { spaceId, spaceName } = params;
   const pathname = usePathname();
+  const router = useRouter();
+
+  // set initial tab
+  const searchParams = useSearchParams();
+  const type = searchParams.get("type");
+
+  // set new search params
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
 
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [editorContent, setEditorContent] = useState("");
   const [images, setImages] = useState<FilePondFile[]>([]);
   const [isPending, startTransition] = useTransition();
+  const [tab, setTab] = useState(type || "");
+
+  const onTabChange = (value: string) => {
+    setTab(value);
+    router.push(pathname + "?" + createQueryString("type", value));
+  };
 
   async function handleCreatePost(postType: string) {
     startTransition(async () => {
-      console.log(postType);
       if (postType === "image") {
         await createPost({
           communityId: spaceId,
@@ -89,7 +115,7 @@ export function NewPostForm({ params }: NewPostFormProps) {
 
   return (
     <Card className="w-full max-w-3xl p-5 rounded-md w-3xl md:mt-5">
-      <Tabs defaultValue="text">
+      <Tabs value={tab} onValueChange={onTabChange}>
         <TabsList className="w-full">
           <TabsTrigger className="w-1/3" value="text">
             Text
