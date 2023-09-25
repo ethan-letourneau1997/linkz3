@@ -14,7 +14,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -37,8 +37,11 @@ export function SpaceSelect() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(spaceName);
 
+  const searchParams = useSearchParams();
+  const type = searchParams.get("type");
+
   function handleChange(name: string, id: number) {
-    router.replace(`/spaces/${id}/${name}/create`);
+    router.replace(`/spaces/${id}/${name}/create?type=${type}`);
   }
 
   if (spaces)

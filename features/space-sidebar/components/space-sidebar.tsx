@@ -1,9 +1,12 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { SidebarSubscriberCount } from "./sidebar-subscriber-count";
 import { SidebarSubscriptionButton } from "./sidebar-subscribe-button";
+import { Space } from "@/types";
 import { SpaceSidebarDetails } from "./space-sidebar-details";
 import { SpaceSidebarFallback } from "./space-sidebar-fallback";
 import { SpaceSiderbarAvatar } from "./space-sidebar-avatar";
@@ -18,11 +21,18 @@ export function SpaceSidebar() {
   const spaceId = params.spaceId as string;
   const spaceName = params.spaceName as string;
 
-  const { data: space } = useSWR("space", async () => {
-    const space = await fetchSpaceById(spaceId);
+  const [space, setSpace] = useState<Space | null>(null);
 
-    return space;
-  });
+  // reload when spacename changes
+  useEffect(() => {
+    async function getSpace() {
+      const space = await fetchSpaceById(spaceId);
+      setSpace(space);
+    }
+    if (spaceName) {
+      getSpace();
+    }
+  }, [spaceName]);
 
   const { data: count } = useSWR("user_community", async () => {
     try {
