@@ -20,8 +20,11 @@ export function SidebarSubscriptionButton({
   spaceId,
   spaceName,
 }: SidebarSubscriptionButtonProps) {
-  const [optomisticIsSubscribed, setOptomisticIsSubscribed] =
-    useState(isSubscribed);
+  const [optomisticIsSubscribed, setOptomisticIsSubscribed] = useState(
+    isSubscribed === true ? true : false
+  );
+
+  console.log(isSubscribed);
 
   const { toast } = useToast();
 
@@ -45,7 +48,7 @@ export function SidebarSubscriptionButton({
 
   return (
     <>
-      {optomisticIsSubscribed ? (
+      {optomisticIsSubscribed == true && (
         <Button
           size="sm"
           onClick={handleUnsubscribe}
@@ -55,7 +58,9 @@ export function SidebarSubscriptionButton({
           <span className="block group-hover:hidden"> Subscribed</span>
           <span className="hidden group-hover:block"> Unsubscribe</span>
         </Button>
-      ) : (
+      )}
+
+      {optomisticIsSubscribed == false && (
         <Button
           size="sm"
           onClick={handleSubscribe}

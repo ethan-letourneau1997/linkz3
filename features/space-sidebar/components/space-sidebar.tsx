@@ -7,7 +7,6 @@ import { SidebarSubscriberCount } from "./sidebar-subscriber-count";
 import { SpaceSidebarDetails } from "./space-sidebar-details";
 import { SpaceSidebarFallback } from "./space-sidebar-fallback";
 import { SpaceSiderbarAvatar } from "./space-sidebar-avatar";
-import { checkUserSubscription } from "@/lib/space/check-user-subscription";
 import { fetchSpaceById } from "@/lib/space/fetch-space-by-id";
 import { fetchSpaceSubscriberCount } from "@/lib/space/fetch-space-subscriber-count";
 import { useParams } from "next/navigation";
@@ -35,11 +34,6 @@ export function SpaceSidebar() {
     }
   });
 
-  const { data: subscribed } = useSWR("subscribed", async () => {
-    const data = await checkUserSubscription(spaceId);
-    return data;
-  });
-
   if (space)
     return (
       <div className="px-4 pt-2 pb-3 space-y-3 w-72">
@@ -57,11 +51,7 @@ export function SpaceSidebar() {
         <Separator />
         <div className="flex gap-5">
           <SidebarSubscriberCount count={count || 0} />
-          <HandleSubscription
-            subscribed={subscribed || false}
-            spaceName={spaceName}
-            spaceId={spaceId}
-          />
+          <HandleSubscription spaceName={spaceName} spaceId={spaceId} />
         </div>
       </div>
     );
