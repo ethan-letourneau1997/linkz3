@@ -13,7 +13,7 @@ type PreviewThumbnailProps = {
 
 export async function PreviewThumbnail({ post }: PreviewThumbnailProps) {
   if (post.type === "text") return <TextPreviewThumnail />;
-  // if (post.type === "image") return <TextPreviewThumnail />;
+  if (post.type === "image") return <TextPreviewThumnail />;
 
   if (post.type === "link" && post.content) {
     const linkThumbnail = await fetchLinkThumbnail(post.id);

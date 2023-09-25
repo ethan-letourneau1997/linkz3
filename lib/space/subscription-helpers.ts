@@ -2,14 +2,13 @@
 
 import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
-import { revalidatePath } from "next/cache";
 
 export async function createSubscription(spaceId: number | string) {
   const supabase = createServerActionClient({ cookies });
 
   await supabase.from("user_community").insert({ community_id: spaceId });
 
-  revalidatePath(`/spaces`);
+  // revalidatePath(`/spaces`);
 }
 
 export async function deleteSubscription(spaceId: number | string) {
@@ -20,5 +19,5 @@ export async function deleteSubscription(spaceId: number | string) {
     .delete()
     .match({ community_id: spaceId });
 
-  revalidatePath(`/spaces`);
+
 }

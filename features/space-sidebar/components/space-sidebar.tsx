@@ -1,9 +1,9 @@
 "use client";
 
-import { HandleSubscription } from "./handle-subscription";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { SidebarSubscriberCount } from "./sidebar-subscriber-count";
+import { SidebarSubscriptionButton } from "./sidebar-subscribe-button";
 import { SpaceSidebarDetails } from "./space-sidebar-details";
 import { SpaceSidebarFallback } from "./space-sidebar-fallback";
 import { SpaceSiderbarAvatar } from "./space-sidebar-avatar";
@@ -51,7 +51,7 @@ export function SpaceSidebar() {
         <Separator />
         <div className="flex gap-5">
           <SidebarSubscriberCount count={count || 0} />
-          <HandleSubscription spaceName={spaceName} spaceId={spaceId} />
+          <SidebarSubscriptionButton spaceName={spaceName} spaceId={spaceId} />
         </div>
       </div>
     );

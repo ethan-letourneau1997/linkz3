@@ -4,29 +4,34 @@ import {
   createSubscription,
   deleteSubscription,
 } from "@/lib/space/subscription-helpers";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { checkUserSubscription } from "@/lib/space/check-user-subscription";
 import { useToast } from "@/components/ui/use-toast";
 
 type SidebarSubscriptionButtonProps = {
-  isSubscribed: boolean;
+  // isSubscribed: boolean;
   spaceId: string;
   spaceName: string;
 };
 
 export function SidebarSubscriptionButton({
-  isSubscribed,
   spaceId,
   spaceName,
 }: SidebarSubscriptionButtonProps) {
-  const [optomisticIsSubscribed, setOptomisticIsSubscribed] = useState(
-    isSubscribed === true ? true : false
-  );
-
-  console.log(isSubscribed);
+  const [optomisticIsSubscribed, setOptomisticIsSubscribed] = useState(false);
 
   const { toast } = useToast();
+
+  useEffect(() => {
+    async function checkSubscription() {
+      const data = await checkUserSubscription(spaceId);
+      setOptomisticIsSubscribed(data);
+    }
+
+    checkSubscription();
+  }, []);
 
   function handleSubscribe() {
     setOptomisticIsSubscribed(true);
