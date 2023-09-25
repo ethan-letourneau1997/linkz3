@@ -32,15 +32,36 @@ export function NewPostForm({ params }: NewPostFormProps) {
 
   async function handleCreatePost(postType: string) {
     startTransition(async () => {
-      const postContent = postType === "image" ? undefined : editorContent;
+      console.log(postType);
+      if (postType === "image") {
+        await createPost({
+          communityId: spaceId,
+          communityName: spaceName,
+          title: title,
+          content: undefined,
+          type: postType,
+        });
+      }
 
-      await createPost({
-        communityId: spaceId,
-        communityName: spaceName,
-        title: title,
-        content: postContent,
-        type: postType,
-      });
+      if (postType === "link") {
+        await createPost({
+          communityId: spaceId,
+          communityName: spaceName,
+          title: title,
+          content: link,
+          type: postType,
+        });
+      }
+
+      if (postType === "text") {
+        await createPost({
+          communityId: spaceId,
+          communityName: spaceName,
+          title: title,
+          content: editorContent,
+          type: postType,
+        });
+      }
     });
   }
 

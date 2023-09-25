@@ -10,13 +10,20 @@ export async function getPreviewThumbnail(post: Post) {
     return null;
   }
 
+
   if (post.type === "link") {
     if (post.content) {
-      const link: LinkPreview = await getLinkPreview(post.content);
-
-      if (link.images && link.images[0]) {
-        return link.images[0];
+      try {
+        const link: LinkPreview = await getLinkPreview(post.content);
+        if (link.images && link.images[0]) {
+          return link.images[0];
+        }
+      }catch(e){
+        return null;
       }
+ 
+
+  
     }
   }
 
