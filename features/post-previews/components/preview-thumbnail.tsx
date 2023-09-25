@@ -25,7 +25,8 @@ export async function PreviewThumbnail({ post }: PreviewThumbnailProps) {
             href={post.content}
             className="flex flex-col justify-between w-full h-full rounded "
             style={{
-              backgroundImage: `url(${link.images && link.images[0]})`,
+              // backgroundImage: `url(${link.images && link.images[0]})`,
+              backgroundImage: `url(https://dims.apnews.com/dims4/default/9a6c86e/2147483647/strip/true/crop/5412x3044+0+543/resize/1440x810!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F0b%2Fab%2F4a930117f7629379bc020c15e35e%2F9e010ee35b244e4aa5d72ab468b9abee)`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",

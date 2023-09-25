@@ -8,9 +8,10 @@ type LinkPostContentProps = {
 export async function LinkPostContent({ post }: LinkPostContentProps) {
   const linkPreview = await getPreviewThumbnail(post!);
 
-  return (
-    <div className="mb-2">
-      <img className="w-1/4 rounded" alt="" src={linkPreview} />
-    </div>
-  );
+  if (linkPreview)
+    return (
+      <div className="mb-2">
+        <img className="w-1/4 rounded" alt="" src={linkPreview} />
+      </div>
+    );
 }
