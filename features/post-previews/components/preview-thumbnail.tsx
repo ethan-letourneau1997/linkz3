@@ -17,7 +17,6 @@ export async function PreviewThumbnail({ post }: PreviewThumbnailProps) {
   if (post.type === "link" && post.content) {
     const thumb = await fetchLinkThumbnail(post.id);
     if (thumb) {
-      console.log(thumb.url);
       return <img src={thumb.url} />;
     }
     return (
