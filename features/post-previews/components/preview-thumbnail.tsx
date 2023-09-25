@@ -19,27 +19,28 @@ export async function PreviewThumbnail({ post }: PreviewThumbnailProps) {
       const link: LinkPreview = await getLinkPreview(post.content);
       if (link.images && link.images[0]) {
         return (
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href={post.content}
-            className="flex flex-col justify-between w-full h-full rounded "
-            style={{
-              // backgroundImage: `url(${link.images && link.images[0]})`,
-              backgroundImage: `url(https://dims.apnews.com/dims4/default/9a6c86e/2147483647/strip/true/crop/5412x3044+0+543/resize/1440x810!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F0b%2Fab%2F4a930117f7629379bc020c15e35e%2F9e010ee35b244e4aa5d72ab468b9abee)`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-            }}
-          >
-            <div className="flex justify-end pt-0.5 pr-0.5">
-              <BiLinkExternal />
-            </div>
+          <img src="https://dims.apnews.com/dims4/default/9a6c86e/2147483647/strip/true/crop/5412x3044+0+543/resize/1440x810!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F0b%2Fab%2F4a930117f7629379bc020c15e35e%2F9e010ee35b244e4aa5d72ab468b9abee" />
+          // <a
+          //   target="_blank"
+          //   rel="noopener noreferrer"
+          //   href={post.content}
+          //   className="flex flex-col justify-between w-full h-full rounded "
+          //   style={{
+          //     // backgroundImage: `url(${link.images && link.images[0]})`,
+          //     backgroundImage: `url(https://dims.apnews.com/dims4/default/9a6c86e/2147483647/strip/true/crop/5412x3044+0+543/resize/1440x810!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F0b%2Fab%2F4a930117f7629379bc020c15e35e%2F9e010ee35b244e4aa5d72ab468b9abee)`,
+          //     backgroundSize: "cover",
+          //     backgroundPosition: "center",
+          //     backgroundRepeat: "no-repeat",
+          //   }}
+          // >
+          //   <div className="flex justify-end pt-0.5 pr-0.5">
+          //     <BiLinkExternal />
+          //   </div>
 
-            <div className="w-full text-xs text-center truncate rounded-b dark:bg-neutral-900/70 dark:text-neutral-400">
-              {link.siteName}
-            </div>
-          </a>
+          //   <div className="w-full text-xs text-center truncate rounded-b dark:bg-neutral-900/70 dark:text-neutral-400">
+          //     {link.siteName}
+          //   </div>
+          // </a>
         );
       } else {
         return (

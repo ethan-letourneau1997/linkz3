@@ -11,15 +11,7 @@ const nextConfig = {
       },
     ],
   },
-  // images: {
-  //   remotePatterns: [
-  //     {
-  //       protocol: "https",
-  //       hostname: "mwzpdguznloapmfvlzxt.supabase.co",
-  //       port: "",
-  //     },
-  //   ],
-  // },
+
 };
 
 module.exports = nextConfig;
