@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { checkUserSubscription } from "@/lib/space/check-user-subscription";
+import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 
 type SidebarSubscriptionButtonProps = {
@@ -20,6 +21,8 @@ export function SidebarSubscriptionButton({
   spaceId,
   spaceName,
 }: SidebarSubscriptionButtonProps) {
+  const router = useRouter();
+
   const [optomisticIsSubscribed, setOptomisticIsSubscribed] = useState(false);
 
   const { toast } = useToast();
@@ -40,6 +43,7 @@ export function SidebarSubscriptionButton({
       title: "Subscribed",
       description: `You are now a member of ${spaceName}.`,
     });
+    router.refresh();
   }
 
   function handleUnsubscribe() {
@@ -49,6 +53,7 @@ export function SidebarSubscriptionButton({
       title: "Unsubscribed",
       description: `You are no longer a member of ${spaceName}.`,
     });
+    router.refresh();
   }
 
   return (
