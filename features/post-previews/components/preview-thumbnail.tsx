@@ -15,9 +15,17 @@ export async function PreviewThumbnail({ post }: PreviewThumbnailProps) {
   // if (post.type === "image") return <TextPreviewThumnail />;
 
   if (post.type === "link" && post.content) {
-    return (
-      <img src="https://dims.apnews.com/dims4/default/9a6c86e/2147483647/strip/true/crop/5412x3044+0+543/resize/1440x810!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F0b%2Fab%2F4a930117f7629379bc020c15e35e%2F9e010ee35b244e4aa5d72ab468b9abee" />
-    );
+    try {
+      const link: LinkPreview = await getLinkPreview(post.content);
+      if (link.images && link.images[0]) {
+        const linkPreview = link.images[0];
+        return <img src={linkPreview} />;
+      }
+    } catch (e) {
+      return (
+        <img src="https://dims.apnews.com/dims4/default/9a6c86e/2147483647/strip/true/crop/5412x3044+0+543/resize/1440x810!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F0b%2Fab%2F4a930117f7629379bc020c15e35e%2F9e010ee35b244e4aa5d72ab468b9abee" />
+      );
+    }
   }
 
   if (post.type === "link" && post.content) {
