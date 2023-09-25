@@ -32,7 +32,7 @@ export function SpaceSidebar() {
     if (spaceName) {
       getSpace();
     }
-  }, [spaceName]);
+  }, [spaceName, spaceId]);
 
   const { data: count } = useSWR("user_community", async () => {
     try {
