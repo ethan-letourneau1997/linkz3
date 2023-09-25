@@ -1,8 +1,8 @@
 import { LinkPreview, Post, PostPreview } from "@/types";
 
-import { BiLinkExternal } from "react-icons/bi";
 import { HiOutlineLink } from "react-icons/hi";
 import { RiText } from "react-icons/ri";
+import { fetchLinkThumbnail } from "@/lib/post/fetch-link-thumbnail";
 import { fetchPostImagePreview } from "../api/fetch-post-image-preview";
 import { getLinkPreview } from "link-preview-js";
 
@@ -15,17 +15,15 @@ export async function PreviewThumbnail({ post }: PreviewThumbnailProps) {
   // if (post.type === "image") return <TextPreviewThumnail />;
 
   if (post.type === "link" && post.content) {
-    try {
-      const link: LinkPreview = await getLinkPreview(post.content);
-      if (link.images && link.images[0]) {
-        const linkPreview = link.images[0];
-        return <img src={linkPreview} />;
-      }
-    } catch (e) {
-      return (
-        <img src="https://dims.apnews.com/dims4/default/9a6c86e/2147483647/strip/true/crop/5412x3044+0+543/resize/1440x810!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F0b%2Fab%2F4a930117f7629379bc020c15e35e%2F9e010ee35b244e4aa5d72ab468b9abee" />
-      );
+    const thumb = await fetchLinkThumbnail(post.id);
+    if (thumb) {
+      return <img src={thumb} />;
     }
+    return (
+      <div className="flex items-center justify-center w-full h-full rounded dark:bg-neutral-700 ">
+        <HiOutlineLink />
+      </div>
+    );
   }
 
   if (post.type === "link" && post.content) {

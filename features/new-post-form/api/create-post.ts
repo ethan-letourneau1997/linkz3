@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
+import { fetchLinkPreview } from "@/lib/post/fetch-link-preview";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
@@ -31,6 +32,19 @@ export async function createPost(params: createPostParams) {
 
   if (data) {
     revalidatePath(`/spaces/${communityName}/${communityId}`);
+
+    if (type === "link") {
+      const preview = await fetchLinkPreview(content!);
+      await supabase
+        .from("link_preview")
+        .insert({
+          id: data.id,
+          url: preview,
+        })
+        .select()
+        .single();
+      redirect(`/spaces/${communityId}/${communityName}/post/${data.id}`);
+    }
 
     if (type !== "image") {
       redirect(`/spaces/${communityId}/${communityName}/post/${data.id}`);
